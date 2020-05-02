@@ -15,9 +15,10 @@ var archivo = (evt) =>{
     //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
     Usuarios.archivo(evt);
 }
-var registerUser=() =>{
-    console.log("entra");
-   let nombre = document.getElementById("nombre").value;
+
+$(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
+$("#btnLogn").click(function(){
+    let nombre = document.getElementById("nombre").value;
     let apellido = document.getElementById("apellido").value;
     let nid = document.getElementById("nid").value;
     let telefono = document.getElementById("telefono").value;
@@ -25,8 +26,12 @@ var registerUser=() =>{
     let password = document.getElementById("password").value;
     let roles = document.getElementById("roles");
     let role = roles.options[roles.selectedIndex].text;
-    alert(role);
-}
+    if (role != "seleccione un ROL") {
+    Usuarios.registerUser(nombre,apellido,nid,telefono,email,password,role);
+    return false;//anulamos el evento onclick de nuestro btn y para no generar reenvio de formulario
+    }
+});
+});
 var principal = new Principal();
 //Anonimo
 $().ready(()=>{

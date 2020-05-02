@@ -9,7 +9,7 @@
     overflow: auto;
     will-change: transform;
 }
-#indexMessage{
+.Message{
     color : brown;
 }
 @media(max-width: 1024px){

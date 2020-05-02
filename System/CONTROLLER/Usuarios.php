@@ -20,6 +20,14 @@ class Usuarios extends Controllers
             echo $data;
         }
     }
+    public function registerUser(){
+        $data = $this->model->registerUser($_POST["email"]);
+        if ($data == 1) {//verificacion de email no utilizado
+            echo "EMAIL REGISTRADO";
+        }else{
+echo $data;
+        }
+    }
 public function destroySession(){
     Session::destroy();
     header("Location:".URL);//url es una constante que direccion al index
