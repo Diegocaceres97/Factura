@@ -21,7 +21,17 @@ class Usuarios extends Controllers
         }
     }
     public function registerUser(){
-        $data = $this->model->registerUser($_POST["email"]);
+        $array = array(
+$_POST["nid"],
+$_POST["nombre"],
+$_POST["apellido"],
+$_POST["telefono"],
+$_POST["email"],
+$_POST["password"],
+$_POST["usuario"],
+$_POST["role"],
+        "Imagen");
+        $data = $this->model->registerUser($this->userClass($array));
         if ($data == 1) {//verificacion de email no utilizado
             echo "EMAIL REGISTRADO";
         }else{

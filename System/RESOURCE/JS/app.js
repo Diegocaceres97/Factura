@@ -24,10 +24,11 @@ $("#btnLogn").click(function(){
     let telefono = document.getElementById("telefono").value;
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
+    let user = document.getElementById("usuario").value;
     let roles = document.getElementById("roles");
     let role = roles.options[roles.selectedIndex].text;
     if (role != "seleccione un ROL") {
-    Usuarios.registerUser(nombre,apellido,nid,telefono,email,password,role);
+    Usuarios.registerUser(nombre,apellido,nid,telefono,email,password,user,role);
     return false;//anulamos el evento onclick de nuestro btn y para no generar reenvio de formulario
     }
 });

@@ -20,11 +20,11 @@ if(isset($url[1])){
 }
 spl_autoload_register(function($class){//obtenemos el nombre de clase
     //utilizada
-    if(file_exists(LBS.$class.".php"))//verificamos si el archivo existe
+    if(file_exists(LBS.$class.".php")){//verificamos si el archivo existe
 //Con este metodo solo necesitaremos un require para poder acceder
 //a todos los metodos y controlladores
 require LBS.$class.".php";//invocamos el archivo
-});//con esto invocamos clases
+}});//con esto invocamos clases
 //$obj = new Controllers();
 //echo $controller."-----".$method;
 require 'CONTROLLER/Error.php';

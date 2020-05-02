@@ -103,7 +103,7 @@ class usuarios {
             reader.readAsDataURL(f);//vamos a leer la url de nuestra imagen que cargamos desde la pc
         }
     }
-    registerUser(nombre, apellido, nid, telefono, email, password, role) {
+    registerUser(nombre, apellido, nid, telefono, email, password, user, role) {
        
             if (validarEmail(email)) {
                 if (6 <= password.length) {
@@ -117,6 +117,7 @@ class usuarios {
                     data.append('telefono',telefono);
                     data.append('email',email);
                     data.append('password',password);
+                    data.append('usuario',user);
                     data.append('role',role);
                     $.ajax({
                         url: URL + "Usuarios/registerUser",

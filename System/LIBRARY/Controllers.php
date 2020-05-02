@@ -1,5 +1,5 @@
 <?php
-class Controllers
+class Controllers extends Anonymous
 {
     public function __construct() {
         Session::star();//invocamos a los metodos estaticos que tenemos en Session 
