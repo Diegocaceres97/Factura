@@ -1,0 +1,35 @@
+.btn-floating{
+    background: url(../IMAGES/Iconos/ic_reorder_whites.png) no-repeat;
+}
+.side-nav{
+    top: 0;
+    margin: 0;
+    height: calc(100% + 60%);
+    background-color: #fff;
+    overflow: auto;
+    will-change: transform;
+}
+#indexMessage{
+    color : brown;
+}
+@media(max-width: 1024px){
+.side-nav{
+    display: none;
+}
+.container2{
+    margin: 10px 10px 0px;
+}
+}
+@media(min-width: 800px){
+    .container{
+        max-width: 30%;
+    }
+    .side-nav{
+        max-width: 20%;
+        display: block;
+    }
+    .container2{
+        width: 75%;
+        margin: -270px 290px 0px;
+    }
+}

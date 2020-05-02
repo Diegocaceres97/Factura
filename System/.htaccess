@@ -1,0 +1,14 @@
+#Activar RewriteEngine
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+#Con esta linea de codigo buscaremos las carpetas de nuestro directorio y projecto
+#Via URL dinamica
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+#Con esto buscamos los archivos dentro de las carpetas 
+
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+#Datos que vamos a pasar como parametros en nuestra barra de direccion
+#Del navegador
