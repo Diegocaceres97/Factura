@@ -104,45 +104,60 @@ class usuarios {
         }
     }
     registerUser(nombre, apellido, nid, telefono, email, password, user, role) {
-       
-            if (validarEmail(email)) {
-                if (6 <= password.length) {
-                    var data = new FormData();//creamos una coleccion de objetos para enviarlos al servidor
-                    $.each($('input[type=file')[0].files, (i, file)=>{
-                    data.append('file',file)});//aqui obtenemos la informacion de nuestro input tipo file
-                    //el .append crea es una coleccion de datos
-                    data.append('nombre',nombre);
-                    data.append('apellido',apellido);
-                    data.append('nid',nid);
-                    data.append('telefono',telefono);
-                    data.append('email',email);
-                    data.append('password',password);
-                    data.append('usuario',user);
-                    data.append('role',role);
-                    $.ajax({
-                        url: URL + "Usuarios/registerUser",
-                        data: data,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        type: 'POST',
-                        success: (response) =>{//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
-                            document.getElementById("registerMessage").innerHTML = response;
+
+        if (validarEmail(email)) {
+            if (6 <= password.length) {
+                var data = new FormData();//creamos una coleccion de objetos para enviarlos al servidor
+                $.each($('input[type=file')[0].files, (i, file) => {
+                    data.append('file', file)
+                });//aqui obtenemos la informacion de nuestro input tipo file
+                //el .append crea es una coleccion de datos
+                data.append('nombre', nombre);
+                data.append('apellido', apellido);
+                data.append('nid', nid);
+                data.append('telefono', telefono);
+                data.append('email', email);
+                data.append('password', password);
+                data.append('usuario', user);
+                data.append('role', role);
+                $.ajax({
+                    url: URL + "Usuarios/registerUser",
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
+                        if (response==0) {
+                            restablecerUser();
+                        } else {
+                            document.getElementById("registerMessage").innerHTML = response;    
                         }
-                    });
-                } else {
-                    document.getElementById("password").focus();
-                    document.getElementById("registerMessage").innerHTML = "Introduzca al menos 6 caracteres";
-                }
+                        
+                    }
+                });
             } else {
-                document.getElementById("email").focus();
-                document.getElementById("registerMessage").innerHTML = "ingrese una direccion de correo valida";
+                document.getElementById("password").focus();
+                document.getElementById("registerMessage").innerHTML = "Introduzca al menos 6 caracteres";
             }
-        
+        } else {
+            document.getElementById("email").focus();
+            document.getElementById("registerMessage").innerHTML = "ingrese una direccion de correo valida";
+        }
+
     }
     restablecerUser() {
         document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/default.png", '"title="', , '"/>'].join('');
         this.getRoles();
+        var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este obketo
+        instance.close();
+        document.getElementById("nombre").value="";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
+        document.getElementById("apellido").value="";
+        document.getElementById("nid").value="";
+        document.getElementById("telefono").value="";
+        document.getElementById("email").value="";
+        document.getElementById("password").value="";
+        document.getElementById("usuario").value="";
     }
     sessionClose() {
         document.getElementById('menuNavbar1').style.display = 'none';

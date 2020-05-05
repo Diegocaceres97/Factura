@@ -39,10 +39,12 @@ $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL
     Usuarios.userData(URLactual);//creamos metodo en la clase usuarios
     principal.linkprincipal(URLactual);
-$("#validate").validate();
+    //inicializamos controles que nos proporciona el framework materialize
+/*$("#validate").validate();
 $('.sidenav').sidenav();//inicializamos el side nav para el slide-out movil desplegable
 $('.modal').modal();
-$('select').formSelect();
+$('select').formSelect();*/
+M.AutoInit();//con esta sola linea de codigo inicializamos todo los controles
 switch (URLactual) {
           
     case PATHNAME+"Principal/principal":

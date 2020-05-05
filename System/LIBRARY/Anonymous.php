@@ -4,16 +4,16 @@ class Anonymous
     public function userClass($array){
         return new class($array)
         {
-private $NID;
-private $Nombre;
-private $Apellido;
-private $Telefono;
+public $NID;
+public $Nombre;
+public $Apellido;
+public $Telefono;
 public $Email;
-private $Password;
-private $Usuario;
-private $Roles;
-private $Imagen;
-function __construct($array){
+public $Password;
+public $Usuario;
+public $Roles;
+public $Imagen;
+function __construct($array){//inicializamos
     $this->NID = $array[0];//obtenemos el dato de acuerdo a la posicion del array
 $this->Nombre = $array[1];
 $this->Apellido = $array[2];
