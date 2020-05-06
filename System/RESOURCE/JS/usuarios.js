@@ -55,11 +55,13 @@ class usuarios {
                 if (0 < user.IdUsuario) {
                     document.getElementById('menuNavbar1').style.display = 'block';
                     document.getElementById('menuNavbar2').style.display = 'block';
-                    document.getElementById('name1').innerHTML = user.Nombre + "" + user.Apellido;
+                    document.getElementById('name1').innerHTML = user.Nombre + " " + user.Apellido;
                     document.getElementById('role1').innerHTML = user.Roles;//visualizaremos por medio
                     //de la cabezera el nombre y rol del usuario
-                    document.getElementById('name2').innerHTML = user.Nombre + "" + user.Apellido;
+                    document.getElementById('name2').innerHTML = user.Nombre + " " + user.Apellido;//se visualiza en el panel esto
                     document.getElementById('role2').innerHTML = user.Roles;
+                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                 }
             }
         }
@@ -95,8 +97,8 @@ class usuarios {
         let f = files[0];
         if (f.type.match('image.*')) {
             let reader = new FileReader();
-            reader.onload = ((theFile) => {//con el objeto de arriba invocamos la propiedad con la duncion anonima
-                return (e) => {//esta funcion recivbra un parametro y retornara la funcion 
+            reader.onload = ((theFile) => {//con el objeto de arriba invocamos la propiedad con la funcion anonima
+                return (e) => {//esta funcion recibira un parametro y retornara la funcion 
                     document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
                 };//obtuvimos la direccion de nuestra foto o imagen que hemos cargado del pc (escape) y con la propiedad name obtenemos el nombre de la imagen
             })(f);
@@ -128,12 +130,12 @@ class usuarios {
                     processData: false,
                     type: 'POST',
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
-                        if (response==0) {
+                        if (response == 0) {
                             restablecerUser();
                         } else {
-                            document.getElementById("registerMessage").innerHTML = response;    
+                            document.getElementById("registerMessage").innerHTML = response;
                         }
-                        
+
                     }
                 });
             } else {
@@ -146,18 +148,31 @@ class usuarios {
         }
 
     }
+    getUsers(valor) {
+        var valor = valor != null ? valor : ""; //operador terniario donde deveulve true o false dependiendo el parametro valor que devuelve 
+        $.post(
+            URL + "Usuarios/getUsers",
+            {
+                filter: valor
+            },
+            (response) => {
+                //  $("#resultUser").html(response);
+                console.log(response);
+            }
+        );
+    }
     restablecerUser() {
         document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/default.png", '"title="', , '"/>'].join('');
         this.getRoles();
         var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este obketo
         instance.close();
-        document.getElementById("nombre").value="";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
-        document.getElementById("apellido").value="";
-        document.getElementById("nid").value="";
-        document.getElementById("telefono").value="";
-        document.getElementById("email").value="";
-        document.getElementById("password").value="";
-        document.getElementById("usuario").value="";
+        document.getElementById("nombre").value = "";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
+        document.getElementById("apellido").value = "";
+        document.getElementById("nid").value = "";
+        document.getElementById("telefono").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("usuario").value = "";
     }
     sessionClose() {
         document.getElementById('menuNavbar1').style.display = 'none';

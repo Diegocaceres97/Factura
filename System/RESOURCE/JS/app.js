@@ -33,6 +33,10 @@ $("#btnLogn").click(function(){
     }
 });
 });
+var getUsers = () =>{
+    let valor = document.getElementById("filtrarUser").value;
+    Usuarios.getUsers(valor);
+}
 var principal = new Principal();
 //Anonimo
 $().ready(()=>{

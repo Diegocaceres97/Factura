@@ -11,7 +11,7 @@ parent::__construct();
        // var_dump($response);//averiguaremos que esta obteniendo el array
 if(is_array($response)){
     $response= $response['results'];
-if($pass==$response[0]["Password"]){//devuelve la informacion encriptada de la tabla
+if(password_verify($pass,$response[0]["Password"])){//devuelve la informacion encriptada de la tabla
 //este devuelve un true o false (en este caso es true)
 $data = array(
     "IdUsuario" => $response[0]["IdUsuario"],

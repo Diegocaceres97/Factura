@@ -42,6 +42,10 @@ $_POST["role"],$imagen);
 echo $data;
         }
     }
+    public function getUsers(){
+        $dataFilter = null;
+        $data = $this->model->getUsers($_POST["filter"]);
+    }
 public function destroySession(){
     Session::destroy();
     header("Location:".URL);//url es una constante que direccion al index
