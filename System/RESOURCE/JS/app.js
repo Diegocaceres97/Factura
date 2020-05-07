@@ -37,6 +37,9 @@ var getUsers = () =>{
     let valor = document.getElementById("filtrarUser").value;
     Usuarios.getUsers(valor);
 }
+var dataUser = (data)=>{
+Usuarios.editUser(data);
+}
 var principal = new Principal();
 //Anonimo
 $().ready(()=>{

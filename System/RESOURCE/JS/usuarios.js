@@ -1,6 +1,8 @@
 class usuarios {
     constructor() {
-
+        this.Funcion = 0; //Creamos propiedades
+        this.IdUsuario = 0;
+        this.Imagen = null;
     }
     loginUser(email, pass) {
         //console.log (pass); //PRUEBA
@@ -66,7 +68,7 @@ class usuarios {
             }
         }
     }
-    getRoles() {//utilizamos este metodo para hacer una peticion al servidor para comunicarse con el controlador
+    getRoles(role, funcion) {//utilizamos este metodo para hacer una peticion al servidor para comunicarse con el controlador
         //y este retorna la coleccion de datos del tipo model
         let count = 1;
         $.post(
@@ -78,9 +80,24 @@ class usuarios {
                     //Option es una clase que recibe los dos parametros con lo que recive y el value
                     if (0 < item.results.length) {
                         for (let i = 0; i < item.results.length; i++) {
-                            document.getElementById('roles').options[count] = new Option(item.results[i].Role, item.results[i].IdRole);
-                            count++;
-                            $('select').formSelect();//inicializamos el form select
+                            switch (funcion) {
+                                case 1://nuevo registro
+                                    document.getElementById('roles').options[count] = new Option(item.results[i].Role, item.results[i].IdRole);
+                                    count++;
+                                    $('select').formSelect();//inicializamos el form select
+                                    break;
+
+                                case 2://caso para cuando se vaya a editar
+                                    if (item.results[i].Role == role) {
+                                        document.getElementById('roles').options[count] = new Option(item.results[i].Role, item.results[i].IdRole);
+                                        i++;//i sera la posicion donde se encuentre el rol
+                                        document.getElementById('roles').selectedIndex = i
+                                        i--;
+                                    }
+                                    count++;
+                                    $('select').formSelect();//inicializamos el form select
+                                    break;
+                            }
                         }
 
                     }
@@ -114,6 +131,8 @@ class usuarios {
                     data.append('file', file)
                 });//aqui obtenemos la informacion de nuestro input tipo file
                 //el .append crea es una coleccion de datos
+                var url = this.Funcion == 0 ? "Usuarios/registerUser" : "Usuarios/editUser";//terniaria (comparacion)
+                data.append('idUsuario', this.IdUsuario);
                 data.append('nombre', nombre);
                 data.append('apellido', apellido);
                 data.append('nid', nid);
@@ -122,8 +141,9 @@ class usuarios {
                 data.append('password', password);
                 data.append('usuario', user);
                 data.append('role', role);
+                data.append('imagen', this.Imagen);
                 $.ajax({
-                    url: URL + "Usuarios/registerUser",
+                    url: URL + url,
                     data: data,
                     cache: false,
                     contentType: false,
@@ -133,7 +153,7 @@ class usuarios {
                         if (response == 0) {
                             restablecerUser();
                         } else {
-                            document.getElementById("registerMessage").innerHTML = response;
+                            document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html
                         }
 
                     }
@@ -161,9 +181,28 @@ class usuarios {
             }
         );
     }
+    editUser(data) {//metodo donde obtendremos los datos seleccionados
+        this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
+        this.IdUsuario = data.IdUsuario;
+        this.Imagen = data.Imagen;
+        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', PATHNAME + "RESOURCE/IMAGES/fotos/" + data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
+        document.getElementById("nombre").value = data.Nombre;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
+        document.getElementById("apellido").value = data.Apellido;
+        document.getElementById("nid").value = data.NID;
+        document.getElementById("telefono").value = data.Telefono;
+        document.getElementById("email").value = data.Email;
+        document.getElementById("usuario").value = data.Usuario;
+        document.getElementById("password").value = "*********";
+        document.getElementById("password").disabled = true;
+
+        this.getRoles(data.Roles, 2);
+    }
     restablecerUser() {
+        this.Funcion = 0; //Creamos propiedades
+        this.IdUsuario = 0;
+        this.Imagen = null;
         document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/default.png", '"title="', , '"/>'].join('');
-        this.getRoles();
+        this.getRoles(null, 1);
         var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este obketo
         instance.close();
         document.getElementById("nombre").value = "";//dejaremos las entradas en blanco para cuando acabemos de resgistrar

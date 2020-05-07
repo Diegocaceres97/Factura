@@ -43,11 +43,13 @@ echo $data;
         }
     }
     public function getUsers(){
+        $count = 0;
         $dataFilter = null;
         $data = $this->model->getUsers($_POST["filter"]);
         if (is_array($data)) {
             $array = $data['results'];
             foreach ($array as $key => $value) {
+                $dataUser = json_encode($array[$count]);
                 $dataFilter .= "<tr>".
                 "<td>".$value["NID"]."</td>".
                 "<td>".$value["Nombre"]."</td>".
@@ -57,12 +59,13 @@ echo $data;
                 "<td>".$value["Usuario"]."</td>".
                 "<td>".$value["Roles"]."</td>".
                 "<td>".
-                "<a data-toggle='modal' data-target='#modalEdit' onclick='' class='btn btn-success'>Edit</a>".
+                "<a href='#modal1'  onclick='dataUser(".$dataUser .")' class='btn modal-trigger'>Edit</a>".
                 "</td>".
                 "<td>".
-                "<a data-toggle='modal' data-target='#modalDelete' onclick='' class='btn btn-success'>Delete</a>".
+                "<a data-toggle='modal' data-target='#modalDelete' onclick='' class='btn red lighten-1'>Delete</a>".
                 "</td>". 
                 "</tr>";
+                $count++;
 
             }
             echo $dataFilter;
@@ -70,6 +73,9 @@ echo $data;
             echo $data;
         }
         
+    }
+    public function editUser(){
+        echo $_POST['imagen'];
     }
 public function destroySession(){
     Session::destroy();
