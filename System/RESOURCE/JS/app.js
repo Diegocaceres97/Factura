@@ -57,6 +57,7 @@ switch (URLactual) {
 
         case PATHNAME+"Usuarios/usuarios":
            document.getElementById('files').addEventListener('change',archivo, false);//le agregaremos un evento al imputfile en html usuarios
-            break;
+           getUsers();
+           break;
 }
 });

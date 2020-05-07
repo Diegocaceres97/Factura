@@ -45,6 +45,31 @@ echo $data;
     public function getUsers(){
         $dataFilter = null;
         $data = $this->model->getUsers($_POST["filter"]);
+        if (is_array($data)) {
+            $array = $data['results'];
+            foreach ($array as $key => $value) {
+                $dataFilter .= "<tr>".
+                "<td>".$value["NID"]."</td>".
+                "<td>".$value["Nombre"]."</td>".
+                "<td>".$value["Apellido"]."</td>".
+                "<td>".$value["Email"]."</td>".
+                "<td>".$value["Telefono"]."</td>".
+                "<td>".$value["Usuario"]."</td>".
+                "<td>".$value["Roles"]."</td>".
+                "<td>".
+                "<a data-toggle='modal' data-target='#modalEdit' onclick='' class='btn btn-success'>Edit</a>".
+                "</td>".
+                "<td>".
+                "<a data-toggle='modal' data-target='#modalDelete' onclick='' class='btn btn-success'>Delete</a>".
+                "</td>". 
+                "</tr>";
+
+            }
+            echo $dataFilter;
+        } else {
+            echo $data;
+        }
+        
     }
 public function destroySession(){
     Session::destroy();

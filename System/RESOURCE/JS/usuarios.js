@@ -156,8 +156,8 @@ class usuarios {
                 filter: valor
             },
             (response) => {
-                //  $("#resultUser").html(response);
-                console.log(response);
+                $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
+                //console.log(response);
             }
         );
     }
