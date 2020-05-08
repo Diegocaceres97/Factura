@@ -1,5 +1,6 @@
-class usuarios {
+class usuarios extends Uploadpicture {
     constructor() {
+        super();//con esto invocamos todas las propiedas, objetos y metodos de la clase heredada
         this.Funcion = 0; //Creamos propiedades
         this.IdUsuario = 0;
         this.Imagen = null;
@@ -109,19 +110,7 @@ class usuarios {
         );
 
     }
-    archivo(evt) {
-        let files = evt.target.files;//FileList object
-        let f = files[0];
-        if (f.type.match('image.*')) {
-            let reader = new FileReader();
-            reader.onload = ((theFile) => {//con el objeto de arriba invocamos la propiedad con la funcion anonima
-                return (e) => {//esta funcion recibira un parametro y retornara la funcion 
-                    document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-                };//obtuvimos la direccion de nuestra foto o imagen que hemos cargado del pc (escape) y con la propiedad name obtenemos el nombre de la imagen
-            })(f);
-            reader.readAsDataURL(f);//vamos a leer la url de nuestra imagen que cargamos desde la pc
-        }
-    }
+    
     registerUser(nombre, apellido, nid, telefono, email, password, user, role) {
 
         if (validarEmail(email)) {
@@ -152,6 +141,8 @@ class usuarios {
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
                         if (response == 0) {
                             restablecerUser();
+                            location.reload();//recargamos la pagína para que se vea el registro al instante
+                            alert ("REGISTRO EXITOSO");
                         } else {
                             document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html
                         }
@@ -203,7 +194,7 @@ class usuarios {
         this.Imagen = null;
         document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/default.png", '"title="', , '"/>'].join('');
         this.getRoles(null, 1);
-        var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este obketo
+        var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este objeto
         instance.close();
         document.getElementById("nombre").value = "";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = "";

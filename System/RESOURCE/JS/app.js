@@ -13,7 +13,7 @@ var restablecerUser = () =>{
 }
 var archivo = (evt) =>{
     //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
-    Usuarios.archivo(evt);
+    Usuarios.archivo(evt,"fotos");
 }
 
 $(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar

@@ -2,7 +2,7 @@
 class Usuarios extends Controllers
 {
     function __construct(){
-        parent::__construct();//Se invoca al metodo controlador de la clase controller 
+        parent::__construct();//Se invoca al metodo controlador (__contruct) de la clase controller 
       
     }
     public function usuarios(){
@@ -75,7 +75,19 @@ echo $data;
         
     }
     public function editUser(){
-        echo $_POST['imagen'];
+        $imagen = null;
+        if (isset($_FILES['file'])) {//verificamos si hemos seleccionado alguna imagen
+            $tipo = $_FILES['file']["type"];//para poder actualizarla
+            $archivo = $_FILES['file']["tmp_name"];
+            $imagen= $this->model->cargar_imagen($tipo,$archivo,$_POST['email']);
+        }else{
+        if (isset($_POST['imagen'])) {//comprobamos si esta definida o sea si esta pasando
+            $imagen = $_POST['imagen'];
+        }else{
+$imagen = "default.png";
+        }
+        }
+        echo $imagen;
     }
 public function destroySession(){
     Session::destroy();
