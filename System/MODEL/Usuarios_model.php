@@ -31,14 +31,7 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
             return $response;
         }
     }
-    function cargar_imagen($tipo,$imagen,$email){
-        if (strstr($tipo,"image")) {//verificamos el tipo de archivo que se esta cargando
-            $destino = "./RESOURCE/IMAGES/fotos/".$email.".png";//guardaremos la imagenen este directorio
-            //guardandolo con el nombre del email
-            move_uploaded_file($imagen,$destino);//metodo donde copiaremos la imagen
-            return $email.".png"; 
-        }
-    }
+   
     function getUsers($filter){
         $where = " WHERE NID LIKE :NID OR Nombre LIKE :Nombre OR Apellido LIKE :Apellido";
         $array = array(

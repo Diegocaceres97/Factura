@@ -21,14 +21,14 @@ class Usuarios extends Controllers
         }
     }
     public function registerUser(){
+        $archivo = null;
+        $tipo = null;
+        //si no definimos la variable file quiere decir que estará nombrada o con valor null
         if (isset($_FILES['file'])) {//comprobamos si esta definida para pasar a capturar (imagen)
            $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
-           $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
-           $imagen = $this->model->cargar_imagen($tipo,$archivo,$_POST["email"]); //mandamos la info correspondiente para registrar la imagen en nuestra carpeta
-        } else {
-            $imagen = "default.png";//por si el usuario registrado no carga ninguna foto
-        }
-        
+           $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos 
+        } 
+        $imagen = $this->cargar_imagen($tipo,$archivo,$_POST["email"]); //mandamos la info correspondiente para registrar la imagen en nuestra carpeta
         $array = array(
 $_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],
 password_hash($_POST["password"], PASSWORD_DEFAULT),//encriptamiento de la clave

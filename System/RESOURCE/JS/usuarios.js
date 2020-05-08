@@ -141,7 +141,7 @@ class usuarios extends Uploadpicture {
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
                         if (response == 0) {
                             restablecerUser();
-                            location.reload();//recargamos la pagína para que se vea el registro al instante
+                           // location.reload();//recargamos la pagína para que se vea el registro al instante
                             alert ("REGISTRO EXITOSO");
                         } else {
                             document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html
@@ -168,7 +168,7 @@ class usuarios extends Uploadpicture {
             },
             (response) => {
                 $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
-                //console.log(response);
+                //el resultUser es el BODY de la tabla
             }
         );
     }
@@ -203,6 +203,7 @@ class usuarios extends Uploadpicture {
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
         document.getElementById("usuario").value = "";
+        this.getUsers(null);
     }
     sessionClose() {
         document.getElementById('menuNavbar1').style.display = 'none';
