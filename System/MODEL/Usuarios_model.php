@@ -42,7 +42,25 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
         $columns = "IdUsuario,NID,Nombre,Apellido,Email,Telefono,Usuario,Roles,Imagen";
         return $this->db->select1($columns,"usuarios",$where, $array);
     }
-}
+    function editUser($user,$idUsuario){
+        $where = " WHERE Email = :Email";
+        $param = array('Email' =>$user->Email);
+        $response = $this->db->select1("*","usuarios",$where,$param);
+        if(is_array($response)){
+            
+        }
+    }
+    function getUser($filter){
+        $where = " WHERE IdUsuario = :IdUsuario";
+        $param = array('IdUsuario' =>$filter);
+        $response = $this->db->select1("*","usuarios",$where,$param);
+        if(is_array($response)){
+return $response = $response['results'];
+        }else{
+            return $response;
+        }
+    }
 
+}
 
 ?>

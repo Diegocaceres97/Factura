@@ -4,6 +4,7 @@ class Controllers extends Anonymous
     public function __construct() {
         Session::star();//invocamos a los metodos estaticos que tenemos en Session 
         $this -> view = new Views(); //Instanciamos a view (invocamos)
+        $this->image = new Uploadimage();
         $this->loadClassModels();
     }
     function loadClassModels(){

@@ -28,7 +28,7 @@ class Usuarios extends Controllers
            $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
            $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos 
         } 
-        $imagen = $this->cargar_imagen($tipo,$archivo,$_POST["email"]); //mandamos la info correspondiente para registrar la imagen en nuestra carpeta
+        $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"]); //mandamos la info correspondiente para registrar la imagen en nuestra carpeta
         $array = array(
 $_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],
 password_hash($_POST["password"], PASSWORD_DEFAULT),//encriptamiento de la clave
@@ -75,19 +75,30 @@ echo $data;
         
     }
     public function editUser(){
+        $archivo = null;
+        $tipo = null;
         $imagen = null;
         if (isset($_FILES['file'])) {//verificamos si hemos seleccionado alguna imagen
             $tipo = $_FILES['file']["type"];//para poder actualizarla
             $archivo = $_FILES['file']["tmp_name"];
-            $imagen= $this->model->cargar_imagen($tipo,$archivo,$_POST['email']);
+            $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"]);//solo cargara este metodo si es por HTTP o post
         }else{
         if (isset($_POST['imagen'])) {//comprobamos si esta definida o sea si esta pasando
-            $imagen = $_POST['imagen'];
-        }else{
-$imagen = "default.png";
+            $imagen = $_POST['imagen'].".png";
         }
         }
-        echo $imagen;
+        $response = $this->model->getUser($_POST["idUsuario"]);
+        if(is_array($response)){//verifiamos si es un arreglo el que se ha devuelto
+            $array = array(//este array contendra todas las variables que capturemos con tipo post
+                $_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$response[0]['Password'],$_POST["usuario"],$_POST["role"],$imagen
+                        );
+                    echo $this->model->editUser($this->userClass($array),$_POST["idUsuario"]);//User class retorna la instancia de una clase anonima con toda
+                   //la info del usuario
+                }else{
+
+        }
+        
+    
     }
 public function destroySession(){
     Session::destroy();

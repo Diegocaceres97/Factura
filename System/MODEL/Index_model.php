@@ -11,6 +11,8 @@ parent::__construct();
        // var_dump($response);//averiguaremos que esta obteniendo el array
 if(is_array($response)){
     $response= $response['results'];
+    if(0!=count($response)){
+   
 if(password_verify($pass,$response[0]["Password"])){//devuelve la informacion encriptada de la tabla
 //este devuelve un true o false (en este caso es true)
 $data = array(
@@ -30,6 +32,10 @@ $data = array(
 return $data;
 }
 }else{
+    return "El email no esta registrado";
+}
+}
+else{
     return $response;
 }
     }
