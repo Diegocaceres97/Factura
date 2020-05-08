@@ -47,7 +47,32 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
         $param = array('Email' =>$user->Email);
         $response = $this->db->select1("*","usuarios",$where,$param);
         if(is_array($response)){
-            
+            $response = $response['results'];//este array contiene la información del usuario obtenido por la clausula de arriba
+            $value = "NID = :NID, Nombre = :Nombre,Apellido = :Apellido,Email = :Email,Password = :Password,Telefono = :Telefono,
+            Usuario = :Usuario, Roles = :Roles,Imagen = :Imagen";//cadena de texto que utilizaremos para insertar los datos por medio de la query
+        $where = " WHERE IdUsuario = ".$idUsuario;
+        if(0==count($response)){//verificamos si este arreglo contiene algun registro y los contará dado el caso
+//si devuelve el valor de 0 significa que no esta repetido o con algun registro
+$data = $this->db->update("usuarios",$user,$value,$where);//user tiene el valor de los atributos y lo convertiremos en un array
+if ($data) {
+    return 0;
+}     else{
+    return $data;
+}   
+}else{
+            if ($response[0]['IdUsuario']==$idUsuario) {//si es del mismo usuario el email igual podrá registrar
+                $data = $this->db->update("usuarios",$user,$value,$where);
+                if ($data) {
+                    return 0;
+                }     else{
+                    return $data;
+                }   
+            }else{
+                return "El email ya esta registrado";
+            }
+        }
+        }else{
+            return $response;
         }
     }
     function getUser($filter){

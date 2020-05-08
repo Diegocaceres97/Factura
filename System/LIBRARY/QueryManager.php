@@ -41,6 +41,17 @@ class QueryManager
             //throw $th;
         }
     }
+    function update($table,$param,$value,$where){
+    try {
+        $query ="UPDATE ".$table." SET ".$value.$where;
+            $sth = $this->pdo->prepare($query);
+            $sth->execute((array)$param);
+            return true;
+    } catch (PDOException$e) {
+        return $e->getMessage();
+        //throw $th;
+    }
+    }
 }
 
 
