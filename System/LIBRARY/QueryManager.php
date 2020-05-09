@@ -36,7 +36,7 @@ class QueryManager
             $sth = $this->pdo->prepare($query);
             $sth->execute((array)$param);
             return true;
-        } catch (PDOException$e) {
+        } catch (PDOException $e) {
             return $e->getMessage();
             //throw $th;
         }
@@ -47,10 +47,21 @@ class QueryManager
             $sth = $this->pdo->prepare($query);
             $sth->execute((array)$param);
             return true;
-    } catch (PDOException$e) {
+    } catch (PDOException $e) {
         return $e->getMessage();
         //throw $th;
     }
+    }
+    function delete($table,$where,$param){
+        try {
+            $query ="DELETE FROM ".$table.$where;
+            $sth = $this->pdo->prepare($query);
+            $sth->execute((array)$param);
+            return true;
+        } catch (PDOException $e) {
+            return $e->getMessage();
+            //throw $th;
+        }
     }
 }
 

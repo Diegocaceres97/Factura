@@ -107,7 +107,8 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input placeholder="Usuario" name="usuario" type="text" id="usuario" class="validate" required>
+                            <input placeholder="Usuario" name="usuario" type="text" id="usuario" class="validate"
+                                required>
                             <label class="usuario" for="email">Usuario</label>
                         </div>
                         <div class="input-field col s6">
@@ -121,17 +122,20 @@
             </div>
             <div class="modal-footer">
                 <label id="registerMessage" class="text-left Message"></label>
-                <button class="waves-effect waves-light btn" id="btnLogn">Registra</button>
+                <a href="#!" id="registerClose" class="modal-close waves-effect waves-green btn">Cancelar</a>
+                <a href="#!" id="registerUser" class="waves-effect waves-green btn">Registra</a>
             </div>
         </form>
     </div>
     <div id="modal2" class="modal">
         <div class="modal-content">
-        <h4>Esta seguro de eliminar el usuario?</h4>
-        <p id="userName"></p>
+            <h4>Esta seguro de eliminar el usuario?</h4>
+            <p id="userName"></p>
         </div>
+        <div class="modal-footer">
         <label for="" id="deteUserMessage" class="text-left Message"></label>
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
         <a href="#!" id="deleteUser" class="waves-effect waves-green btn-flat">Aceptar</a>
+    </div>
     </div>
 </div>

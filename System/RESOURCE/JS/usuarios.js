@@ -64,7 +64,7 @@ class usuarios extends Uploadpicture {
                     document.getElementById('name2').innerHTML = user.Nombre + " " + user.Apellido;//se visualiza en el panel esto
                     document.getElementById('role2').innerHTML = user.Roles;
                     document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
-                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS +"usuarios/"+user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                 }
             }
         }
@@ -176,7 +176,7 @@ class usuarios extends Uploadpicture {
         this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
         this.IdUsuario = data.IdUsuario;
         this.Imagen = data.Imagen;
-        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', PATHNAME + "RESOURCE/IMAGES/fotos/" + data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
+        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', PATHNAME + "RESOURCE/IMAGES/fotos/usuarios/" + data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
         document.getElementById("nombre").value = data.Nombre;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = data.Apellido;
         document.getElementById("nid").value = data.NID;
@@ -188,13 +188,31 @@ class usuarios extends Uploadpicture {
 
         this.getRoles(data.Roles, 2);
     }
+    deleteUser(data){
+        $.post(//enviamos los datos por post
+            URL + "Usuarios/deleteUser",
+            {
+                idUsuario:data.IdUsuario,
+                email:data.Email
+            },
+            (response) => {
+                if(response==0){
+                    this.restablecerUser();
+                }else{
+                    document.getElementById("deteUserMessage").innerHTML=response;
+                }
+                console.log(response);
+            }
+        );  
+    }
     restablecerUser() {
         this.Funcion = 0; //Creamos propiedades
         this.IdUsuario = 0;
         this.Imagen = null;
-        document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/default.png", '"title="', , '"/>'].join('');
+        document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/usuarios/default.png", '"title="', , '"/>'].join('');
         this.getRoles(null, 1);
         var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este objeto
+        var instance = M.Modal.getInstance($('#modal2'));
         instance.close();
         document.getElementById("nombre").value = "";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = "";

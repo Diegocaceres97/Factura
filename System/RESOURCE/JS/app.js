@@ -1,4 +1,4 @@
-
+var data_User = null;
 var Usuarios = new usuarios();
 var loginUser =() =>{ //Variable funcion fantasma
     var email = document.getElementById("email").value;
@@ -17,7 +17,7 @@ var archivo = (evt) =>{
 }
 
 $(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
-$("#btnLogn").click(function(){
+$("#registerUser").click(function(){
     let nombre = document.getElementById("nombre").value;
     let apellido = document.getElementById("apellido").value;
     let nid = document.getElementById("nid").value;
@@ -32,6 +32,13 @@ $("#btnLogn").click(function(){
     return false;//anulamos el evento onclick de nuestro btn y para no generar reenvio de formulario
     }
 });
+$("#registerClose").click(function(){
+Usuarios.restablecerUser();
+});
+$("#deleteUser").click(function(){
+    Usuarios.deleteUser(data_User);
+    data_User=null;
+    });
 });
 var getUsers = () =>{
     let valor = document.getElementById("filtrarUser").value;
@@ -42,6 +49,7 @@ Usuarios.editUser(data);
 }
 var deleteUser = (data) =>{
     document.getElementById("userName").innerHTML = data.Email;
+    data_User = data;
 }
 var principal = new Principal();
 //Anonimo
@@ -50,8 +58,8 @@ $().ready(()=>{
     Usuarios.userData(URLactual);//creamos metodo en la clase usuarios
     principal.linkprincipal(URLactual);
     //inicializamos controles que nos proporciona el framework materialize
-/*$("#validate").validate();
-$('.sidenav').sidenav();//inicializamos el side nav para el slide-out movil desplegable
+$("#validate").validate();
+/*$('.sidenav').sidenav();//inicializamos el side nav para el slide-out movil desplegable
 $('.modal').modal();
 $('select').formSelect();*/
 M.AutoInit();//con esta sola linea de codigo inicializamos todo los controles

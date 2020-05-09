@@ -85,6 +85,18 @@ return $response = $response['results'];
             return $response;
         }
     }
+    function deleteUser($idUsuario,$email){
+        $where = " WHERE IdUsuario = :IdUsuario";
+        $data = $this->db->delete('usuarios',$where,array('IdUsuario' => $idUsuario));//lo ultimo de esta linea es como el $param 
+        //solo que no se puso por ahorrar una linea xD
+        if (is_bool($data)) {
+            $archivo = RQ."IMAGES/fotos/usuarios/".$email.".png";//ubicamos el archivo que eliminaremos
+            unlink($archivo);//metodo utilizado para borrar archivos
+            return 0;//devolvemos 0 si lo eliminamos satisfactoriamente
+        }else{
+return $data;
+        }
+    }
 
 }
 
