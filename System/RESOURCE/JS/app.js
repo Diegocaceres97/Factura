@@ -40,6 +40,9 @@ var getUsers = () =>{
 var dataUser = (data)=>{
 Usuarios.editUser(data);
 }
+var deleteUser = (data) =>{
+    document.getElementById("userName").innerHTML = data.Email;
+}
 var principal = new Principal();
 //Anonimo
 $().ready(()=>{

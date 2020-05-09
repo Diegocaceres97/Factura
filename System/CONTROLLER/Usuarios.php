@@ -53,16 +53,12 @@ echo $data;
                 $dataFilter .= "<tr>".
                 "<td>".$value["NID"]."</td>".
                 "<td>".$value["Nombre"]."</td>".
-                "<td>".$value["Apellido"]."</td>".
-                "<td>".$value["Email"]."</td>".
-                "<td>".$value["Telefono"]."</td>".
                 "<td>".$value["Usuario"]."</td>".
                 "<td>".$value["Roles"]."</td>".
                 "<td>".
-                "<a href='#modal1'  onclick='dataUser(".$dataUser .")' class='btn modal-trigger'>Edit</a>".
-                "</td>".
-                "<td>".
-                "<a data-toggle='modal' data-target='#modalDelete' onclick='' class='btn red lighten-1'>Delete</a>".
+                "<a href='#modal1'  onclick='dataUser(".$dataUser .")' class='btn modal-trigger'>Edit</a> | ".
+                
+                "<a href='#modal2' onclick='deleteUser(".$dataUser .")' class='btn red lighten-1 modal-trigger'>Delete</a>".
                 "</td>". 
                 "</tr>";
                 $count++;

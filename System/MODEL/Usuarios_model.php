@@ -17,7 +17,7 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
     //si entra por aca quiere decir que no esta registrado nee la BD ==0
     $value = "(NID,Nombre,Apellido,Email,Password,Telefono,Usuario,Roles,Imagen) VALUES (:NID,:Nombre,:Apellido,:Email,:Password,:Telefono,:Usuario,:Roles,:Imagen)";
     $data = $this->db->insert("usuarios",$user,$value);
-    if ($data==true) {//identificacion de registro satisfactorio
+    if (is_bool($data)) {//identificacion de registro satisfactorio
         return 0;
     }else{
         return $data;
@@ -54,7 +54,7 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
         if(0==count($response)){//verificamos si este arreglo contiene algun registro y los contará dado el caso
 //si devuelve el valor de 0 significa que no esta repetido o con algun registro
 $data = $this->db->update("usuarios",$user,$value,$where);//user tiene el valor de los atributos y lo convertiremos en un array
-if ($data) {
+if (is_bool($data)) {
     return 0;
 }     else{
     return $data;
@@ -62,7 +62,7 @@ if ($data) {
 }else{
             if ($response[0]['IdUsuario']==$idUsuario) {//si es del mismo usuario el email igual podrá registrar
                 $data = $this->db->update("usuarios",$user,$value,$where);
-                if ($data) {
+                if (is_bool($data)) {
                     return 0;
                 }     else{
                     return $data;
