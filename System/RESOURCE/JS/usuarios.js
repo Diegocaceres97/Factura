@@ -63,7 +63,7 @@ class usuarios extends Uploadpicture {
                     //de la cabezera el nombre y rol del usuario
                     document.getElementById('name2').innerHTML = user.Nombre + " " + user.Apellido;//se visualiza en el panel esto
                     document.getElementById('role2').innerHTML = user.Roles;
-                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS +"usuarios/"+ user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                     document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS +"usuarios/"+user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                 }
             }
@@ -141,7 +141,7 @@ class usuarios extends Uploadpicture {
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
                         if (response == 0) {
                             restablecerUser();
-                           // location.reload();//recargamos la pagína para que se vea el registro al instante
+                         //  location.reload();//recargamos la pagína para que se vea el registro al instante
                             alert ("REGISTRO EXITOSO");
                         } else {
                             document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html
@@ -175,8 +175,8 @@ class usuarios extends Uploadpicture {
     editUser(data) {//metodo donde obtendremos los datos seleccionados
         this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
         this.IdUsuario = data.IdUsuario;
-        this.Imagen = data.Imagen;
-        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', PATHNAME + "RESOURCE/IMAGES/fotos/usuarios/" + data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
+        this.Imagen = data.Imagen;       
+        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="',FOTOS+"usuarios/"+ data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
         document.getElementById("nombre").value = data.Nombre;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = data.Apellido;
         document.getElementById("nid").value = data.NID;
@@ -185,7 +185,6 @@ class usuarios extends Uploadpicture {
         document.getElementById("usuario").value = data.Usuario;
         document.getElementById("password").value = "*********";
         document.getElementById("password").disabled = true;
-
         this.getRoles(data.Roles, 2);
     }
     deleteUser(data){
