@@ -80,7 +80,15 @@ echo $data;
             $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"],"usuarios");//solo cargara este metodo si es por HTTP o post
         }else{
         if (isset($_POST['imagen'])) {//comprobamos si esta definida o sea si esta pasando
-            $imagen = $_POST['imagen'].".png";
+            $archivo = $_POST['imagen'];
+            $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"],"usuarios");
+            if ($_POST['imagen'] != $_POST["email"].".png") {//evaluamos si la imagen que obtiene por el post es la misma que al editar el email
+                //del usuario en concreto, si pasa por acá quiere decir que esta actualizando el correo electronico
+            $archivo = RQ."IMAGES/fotos/usuarios/".$archivo;
+            unlink($archivo);//eliminamos el archivo imagen que contenga el nombre anterior del usuario (imagen desactualizada)
+            $archivo = null;
+            } 
+            
         }
         }
         $response = $this->model->getUser($_POST["idUsuario"]);

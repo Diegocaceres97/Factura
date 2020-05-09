@@ -212,8 +212,9 @@ class usuarios extends Uploadpicture {
         document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', URL + "RESOURCE/IMAGES/fotos/usuarios/default.png", '"title="', , '"/>'].join('');
         this.getRoles(null, 1);
         var instance = M.Modal.getInstance($('#modal1'));//instanciacion del modal para cerrarlo en este objeto
-        var instance = M.Modal.getInstance($('#modal2'));
+        var instanced = M.Modal.getInstance($('#modal2'));
         instance.close();
+        instanced.close();
         document.getElementById("nombre").value = "";//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = "";
         document.getElementById("nid").value = "";
