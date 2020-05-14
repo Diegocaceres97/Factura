@@ -40,6 +40,7 @@ class QueryManager
             return $e->getMessage();
             //throw $th;
         }
+        $pdo=null;
     }
     function update($table,$param,$value,$where){
     try {
@@ -51,6 +52,7 @@ class QueryManager
         return $e->getMessage();
         //throw $th;
     }
+    $pdo=null;
     }
     function delete($table,$where,$param){
         try {
@@ -62,7 +64,22 @@ class QueryManager
             return $e->getMessage();
             //throw $th;
         }
+        $pdo=null;
     }
+    function select2($attr,$table,$_pagi_inicial,$_pagi_cuantos,$where,$param){
+        //   echo $param;
+           try {
+               //$columns,$table,$_pagi_inicial,$_pagi_cuantos,$where,$array
+               $query = "SELECT ".$attr." FROM ".$table.$where." LIMIT $_pagi_inicial,$_pagi_cuantos";
+               $sth = $this->pdo->prepare($query);
+               $sth->execute($param);
+               $response = $sth->fetchALL(PDO::FETCH_ASSOC);
+               return array("results" => $response);
+           } catch (PDOException $e) {
+               return $e->getMessage();
+           }
+           $pdo=null;
+       }
 }
 
 

@@ -1,9 +1,9 @@
 var data_User = null;
 var Usuarios = new usuarios();
 var loginUser =() =>{ //Variable funcion fantasma
-    var email = document.getElementById("email").value;
-    var pass = document.getElementById("password").value;
-Usuarios.loginUser(email,pass);
+   
+Usuarios.loginUser();
+
 }
 var sessionClose=() =>{
     Usuarios.sessionClose();
@@ -13,24 +13,14 @@ var restablecerUser = () =>{
 }
 var archivo = (evt) =>{
     //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
-    Usuarios.archivo(evt,"fotos");
+    return Usuarios.archivo(evt,"fotos");
 }
-
+var getRoles = () =>{
+    Usuarios.getRoles(null,1);
+}
 $(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
 $("#registerUser").click(function(){
-    let nombre = document.getElementById("nombre").value;
-    let apellido = document.getElementById("apellido").value;
-    let nid = document.getElementById("nid").value;
-    let telefono = document.getElementById("telefono").value;
-    let email = document.getElementById("email").value;
-    let password = document.getElementById("password").value;
-    let user = document.getElementById("usuario").value;
-    let roles = document.getElementById("roles");
-    let role = roles.options[roles.selectedIndex].text;
-    if (role != "seleccione un ROL") {
-    Usuarios.registerUser(nombre,apellido,nid,telefono,email,password,user,role);
-    return false;//anulamos el evento onclick de nuestro btn y para no generar reenvio de formulario
-    }
+ Usuarios.registerUser();
 });
 $("#registerClose").click(function(){
 Usuarios.restablecerUser();
@@ -40,9 +30,9 @@ $("#deleteUser").click(function(){
     data_User=null;
     });
 });
-var getUsers = () =>{
+var getUsers = (page) =>{
     let valor = document.getElementById("filtrarUser").value;
-    Usuarios.getUsers(valor);
+    Usuarios.getUsers(valor,page);
 }
 var dataUser = (data)=>{
 Usuarios.editUser(data);
@@ -63,15 +53,4 @@ $("#validate").validate();
 $('.modal').modal();
 $('select').formSelect();*/
 M.AutoInit();//con esta sola linea de codigo inicializamos todo los controles
-switch (URLactual) {
-          
-    case PATHNAME+"Principal/principal":
-      
-        break;
-
-        case PATHNAME+"Usuarios/usuarios":
-           document.getElementById('files').addEventListener('change',archivo, false);//le agregaremos un evento al imputfile en html usuarios
-           getUsers();
-           break;
-}
 });

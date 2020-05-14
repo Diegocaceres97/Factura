@@ -32,7 +32,7 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
         }
     }
    
-    function getUsers($filter){
+    function getUsers($filter,$page,$model){
         $where = " WHERE NID LIKE :NID OR Nombre LIKE :Nombre OR Apellido LIKE :Apellido";
         $array = array(
 'NID' => '%'.$filter.'%',//aqui filtraremos el dato dependiendo el dato que pasen
@@ -40,7 +40,7 @@ if (0 == count($response)) {//este metodo devuelve un valor de tipo entero depen
 'Apellido' => '%'.$filter.'%'
         );
         $columns = "IdUsuario,NID,Nombre,Apellido,Email,Telefono,Usuario,Roles,Imagen";
-        return $this->db->select1($columns,"usuarios",$where, $array);
+        return $model->paginador($columns,"usuarios","Users",$page,$where,$array);
     }
     function editUser($user,$idUsuario){
         $where = " WHERE Email = :Email";

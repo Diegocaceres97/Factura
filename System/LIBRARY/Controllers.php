@@ -5,6 +5,7 @@ class Controllers extends Anonymous
         Session::star();//invocamos a los metodos estaticos que tenemos en Session 
         $this -> view = new Views(); //Instanciamos a view (invocamos)
         $this->image = new Uploadimage();
+        $this->page=new Paginador();
         $this->loadClassModels();
     }
     function loadClassModels(){

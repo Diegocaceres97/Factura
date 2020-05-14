@@ -12,6 +12,17 @@
 .Message{
     color : brown;
 }
+.collection .collection-item.avatar:not(.circle-clipper)>.circle, .collection .coletion-item.avatar :not(.circle-clipper)>.circle{
+    width: 72px;
+    height: 42px;
+    padding: 0px;
+}
+.circle{
+    border-radius: 0%;
+}
+td, th{
+padding: 5px;
+}
 @media(max-width: 1024px){
 .side-nav{
     display: none;
@@ -19,7 +30,13 @@
 .container2{
     margin: 10px 10px 0px;
 }
+.collection .collection-item.avatar{
+    min-height: 5opx;
+    padding-left: 0px;
+    max-width: 100%;
 }
+}
+
 @media(min-width: 800px){
     .container{
         max-width: 30%;

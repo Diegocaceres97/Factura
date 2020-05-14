@@ -1,14 +1,14 @@
 <div class="container2">
-
+<!--CONTAINER 2 Y MODAL 2 DE USUARIO REGISTRO/EDIT/ELIMINACION (VISTA)-->
     <h4>Usuarios</h4>
 
     <div class="row">
         <div class="input-field col s0">
-            <a onclick="restablecerUser();" href="#modal1"
+            <a href="#modal1"
                 class="waves-effect waves-light btn modal-trigger">registrar</a>
         </div>
         <div class="input-field col s6">
-            <input type="text" id="filtrarUser" placeholder="Buscar usuario" onkeyup="getUsers()">
+            <input type="text" id="filtrarUser" placeholder="Buscar usuario" onkeyup="getUsers(1)">
             <label for="filtrar">Buscar usuario</label>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th>
-                    NID
+                    Foto
                 </th>
                 <th>
                     Nombre
@@ -34,6 +34,9 @@
         </thead>
         <tbody id="resultUser"></tbody>
     </table>
+    <div id="paginador">
+        
+    </div>
     <!--MODAL ESTRUCTURE-->
     <div id="modal1" class="modal modal-fixed-footer">
         <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">

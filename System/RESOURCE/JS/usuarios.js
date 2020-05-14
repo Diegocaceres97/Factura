@@ -5,23 +5,24 @@ class usuarios extends Uploadpicture {
         this.IdUsuario = 0;
         this.Imagen = null;
     }
-    loginUser(email, pass) {
+    loginUser() {
         //console.log (pass); //PRUEBA
-        if (email == "") {
-            document.getElementById("email").focus();
-            M.toast({ html: 'ingrese el email', classes: 'rounded' }); //Esto esta dotado por el materialize
-        } else {
-            if (pass == "") {
-                document.getElementById("password").focus();
-                M.toast({ html: 'ingrese el password', classes: 'rounded' }); //Esto esta dotado por el materialize
-            } else {
-                if (validarEmail(email)) {
-                    if (6 <= pass.length) {
-                        $.post(//enviamos los datos por POST
-                            "Index/userLogin",//Buscamos el metodo en index y después el metodo
-                            { email, pass },
-                            (response) => {//capturamos la info que devuelva el servidor
-                                console.log(response);//vamos a capturar el mensaje por vista
+
+        if (validarEmail(document.getElementById("email").value)) {
+           
+                $.post(//enviamos los datos por POST
+                    "Index/userLogin",//Buscamos el metodo en index y después el metodo
+                  $('.login').serialize(),//serializamos toda la información del formulario login
+                    (response) => {//capturamos la info que devuelva el servidor
+                        console.log(response);//vamos a capturar el mensaje por vista
+                        if (response == 1) {
+                            document.getElementById("password").focus();
+                            document.getElementById("indexMessage").innerHTML="Ingrese el password";
+                        } else {
+                            if (response == 2) {
+                                document.getElementById("password").focus();
+                            document.getElementById("indexMessage").innerHTML="Introduzca al menos 6 caracteres";
+                            } else {
                                 try {
                                     var item = JSON.parse(response); //lo convertimos en una colecciond de objetos ademas esto es una excepcion
                                     if (0 < item.IdUsuario) {//evaluamos el dato y si id es mayor a 0 significa que hemos iniciado sesion bien
@@ -35,17 +36,15 @@ class usuarios extends Uploadpicture {
                                     document.getElementById("indexMessage").innerHTML = response;
                                 }
                             }
-                        );
-                    } else {
-                        document.getElementById("password").focus();
-                        M.toast({ html: 'introduzca al menos 6 caracteres', classes: 'rounded' });
+                        }
                     }
-                } else {
-                    document.getElementById("email").focus();
-                    M.toast({ html: 'ingrese un email valido', classes: 'rounded' }); //Esto esta dotado por el materialize
-                }
-            }
+                );
+        } else {
+            document.getElementById("email").focus();
+            document.getElementById("indexMessage").innerHTML = 'ingrese una direccion de correco electronica válida';
+           // M.toast({ html: 'ingrese un email valido', classes: 'rounded' }); //Esto esta dotado por el materialize
         }
+
     }
     userData(URLactual) {
         if (PATHNAME == URLactual) {
@@ -63,8 +62,8 @@ class usuarios extends Uploadpicture {
                     //de la cabezera el nombre y rol del usuario
                     document.getElementById('name2').innerHTML = user.Nombre + " " + user.Apellido;//se visualiza en el panel esto
                     document.getElementById('role2').innerHTML = user.Roles;
-                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS +"usuarios/"+ user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
-                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', FOTOS +"usuarios/"+user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                 }
             }
         }
@@ -110,25 +109,27 @@ class usuarios extends Uploadpicture {
         );
 
     }
-    
-    registerUser(nombre, apellido, nid, telefono, email, password, user, role) {
 
-        if (validarEmail(email)) {
-            if (6 <= password.length) {
+    registerUser() {
+let valor = false;
+        if (validarEmail(document.getElementById("email").value)) {
+          
                 var data = new FormData();//creamos una coleccion de objetos para enviarlos al servidor
                 $.each($('input[type=file')[0].files, (i, file) => {
                     data.append('file', file)
                 });//aqui obtenemos la informacion de nuestro input tipo file
                 //el .append crea es una coleccion de datos
                 var url = this.Funcion == 0 ? "Usuarios/registerUser" : "Usuarios/editUser";//terniaria (comparacion)
+                let roles = document.getElementById("roles");
+                let role = roles.options[roles.selectedIndex].text;
                 data.append('idUsuario', this.IdUsuario);
-                data.append('nombre', nombre);
-                data.append('apellido', apellido);
-                data.append('nid', nid);
-                data.append('telefono', telefono);
-                data.append('email', email);
-                data.append('password', password);
-                data.append('usuario', user);
+                data.append('nombre', document.getElementById("nombre").value);
+                data.append('apellido', document.getElementById("apellido").value);
+                data.append('nid', document.getElementById("nid").value);
+                data.append('telefono', document.getElementById("telefono").value);
+                data.append('email', document.getElementById("email").value);
+                data.append('password', document.getElementById("password").value);
+                data.append('usuario', document.getElementById("usuario").value);
                 data.append('role', role);
                 data.append('imagen', this.Imagen);
                 $.ajax({
@@ -141,42 +142,50 @@ class usuarios extends Uploadpicture {
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
                         if (response == 0) {
                             restablecerUser();
-                         //  location.reload();//recargamos la pagína para que se vea el registro al instante
-                            alert ("REGISTRO EXITOSO");
+                            //  location.reload();//recargamos la pagína para que se vea el registro al instante
+                            alert("REGISTRO EXITOSO");
                         } else {
+                            valor=true;
                             document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html
                         }
-
                     }
                 });
-            } else {
-                document.getElementById("password").focus();
-                document.getElementById("registerMessage").innerHTML = "Introduzca al menos 6 caracteres";
-            }
+            
         } else {
             document.getElementById("email").focus();
             document.getElementById("registerMessage").innerHTML = "ingrese una direccion de correo valida";
+        valor=true;
         }
-
+return valor;
     }
-    getUsers(valor) {
+    getUsers(valor, page) {
         var valor = valor != null ? valor : ""; //operador terniario donde deveulve true o false dependiendo el parametro valor que devuelve 
         $.post(
-            URL + "Usuarios/getUsers",
+            URL + "Usuarios/getUsers",//le enviamos los datos al servidor
             {
-                filter: valor
+                filter: valor,
+                page: page
             },
             (response) => {
-                $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
+                // $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
                 //el resultUser es el BODY de la tabla
+                try {
+                    let item = JSON.parse(response);
+                    $("#resultUser").html(item.dataFilter);
+                    $("#paginador").html(item.paginador);
+                    console.log(item);
+                } catch (error) {
+                    $("#paginador").html(response);
+                }
+
             }
         );
     }
     editUser(data) {//metodo donde obtendremos los datos seleccionados
         this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
         this.IdUsuario = data.IdUsuario;
-        this.Imagen = data.Imagen;       
-        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="',FOTOS+"usuarios/"+ data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
+        this.Imagen = data.Imagen;
+        document.getElementById("fotos").innerHTML = ['<img class="responsive-img " src="', URL + FOTOS + "usuarios/" + data.Imagen, '" title="', escape(data.Imagen), '"/>'].join('');
         document.getElementById("nombre").value = data.Nombre;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
         document.getElementById("apellido").value = data.Apellido;
         document.getElementById("nid").value = data.NID;
@@ -187,22 +196,22 @@ class usuarios extends Uploadpicture {
         document.getElementById("password").disabled = true;
         this.getRoles(data.Roles, 2);
     }
-    deleteUser(data){
+    deleteUser(data) {
         $.post(//enviamos los datos por post
             URL + "Usuarios/deleteUser",
             {
-                idUsuario:data.IdUsuario,
-                email:data.Email
+                idUsuario: data.IdUsuario,
+                email: data.Email
             },
             (response) => {
-                if(response==0){
+                if (response == 0) {
                     this.restablecerUser();
-                }else{
-                    document.getElementById("deteUserMessage").innerHTML=response;
+                } else {
+                    document.getElementById("deteUserMessage").innerHTML = response;
                 }
                 console.log(response);
             }
-        );  
+        );
     }
     restablecerUser() {
         this.Funcion = 0; //Creamos propiedades
@@ -221,7 +230,7 @@ class usuarios extends Uploadpicture {
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
         document.getElementById("usuario").value = "";
-        this.getUsers(null);
+        window.location.href = URL + "Usuarios/usuarios";
     }
     sessionClose() {
         document.getElementById('menuNavbar1').style.display = 'none';
