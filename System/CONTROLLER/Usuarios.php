@@ -94,11 +94,10 @@ echo $data;
                     $urlImage = URL."Resource/images/fotos/usuarios/".$value["Imagen"];
                     $dataFilter .= "<tr>".
                     "<td>".
-                    "<ul class='collection'>".
-                    "<li class='collection-item avatar'>". 
-                    "<img claSS='responsive circle' src='".$urlImage."'/>
-                    </li>
-                    </lu>
+                     
+                    "<img width='80' height='60' src='".$urlImage."'/>
+                    
+                    </lu>.
                     </td>".
                     "<td>".$value["Nombre"]."</td>".
                     "<td>".$value["Usuario"]."</td>".
