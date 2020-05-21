@@ -157,13 +157,16 @@ if (strcmp("seleccione un ROL",$_POST["role"])==0) {//comparamos dos cadenas de 
         $tipo = $_FILES['file']["type"];//para poder actualizarla
         $archivo = $_FILES['file']["tmp_name"];
         $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"],"usuarios");//solo cargara este metodo si es por HTTP o post
+        $cam = RQ."IMAGES/fotos/usuarios/".$_POST['imagen'];
+        unlink($cam);//eliminamos la imagen anterior ya que ahora le estoy generando automaticamente un numero para que actualice
+        $cam=null;//instantaneamente al actualizar esta
     }else{
     if (isset($_POST['imagen'])) {//comprobamos si esta definida o sea si esta pasando
         $archivo = $_POST['imagen'];
         $imagen = $this->image->cargar_imagen($tipo,$archivo,$_POST["email"],"usuarios");
         if ($_POST['imagen'] != $_POST["email"].".png") {//evaluamos si la imagen que obtiene por el post es la misma que al editar el email
             //del usuario en concreto, si pasa por acá quiere decir que esta actualizando el correo electronico
-        $archivo = RQ."IMAGES/fotos/usuarios/".$archivo;
+        $archivo = RQ."IMAGES/fotos/usuarios/".$_POST['imagen'];
         unlink($archivo);//eliminamos el archivo imagen que contenga el nombre anterior del usuario (imagen desactualizada)
         $archivo = null;
         } 
@@ -200,7 +203,7 @@ if (strcmp("seleccione un ROL",$_POST["role"])==0) {//comparamos dos cadenas de 
         $user = Session::getSession("User");
         if(null != $user){//verificamos la autorizacion del usuario comenzando por que sea uno
 if ("Admin"==$user["Roles"]) {
-    echo $this->model->deleteUser($_POST["idUsuario"],$_POST["email"]);//mandamos la info al modelo
+    echo $this->model->deleteUser($_POST["idUsuario"],$_POST["Imagen"]);//mandamos la info al modelo
 }else{
     echo "no tiene autorizacion";
 }

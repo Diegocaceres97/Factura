@@ -4,6 +4,8 @@ class usuarios extends Uploadpicture {
         this.Funcion = 0; //Creamos propiedades
         this.IdUsuario = 0;
         this.Imagen = null;
+       // var ima=null;
+
     }
     loginUser() {
         //console.log (pass); //PRUEBA
@@ -47,14 +49,26 @@ class usuarios extends Uploadpicture {
 
     }
     userData(URLactual) {
+        //alert(ima);
         if (PATHNAME == URLactual) {
             localStorage.removeItem("user");//lo eliminara de la memoria local del navegador pq se encuentra en el login
             document.getElementById('menuNavbar1').style.display = 'none';
             document.getElementById('menuNavbar2').style.display = 'none';
         } else {
-            if (null != localStorage.getItem("user")) {//vereificamos si tenemos datos almacenados en nuestro nav
+            if (null != localStorage.getItem("user")) {//vereificamos si tenemos datos almacenados en nuestro nav              
                 let user = JSON.parse(localStorage.getItem("user"));//lo convertimos en un json
                 if (0 < user.IdUsuario) {
+                    if(user.Roles=='Admin'){
+                        document.getElementById('menuNavbar1').style.display = 'block';
+                    document.getElementById('menuNavbar2').style.display = 'block';
+                    document.getElementById('name1').innerHTML = user.Nombre + " " + user.Apellido;
+                    document.getElementById('role1').innerHTML = user.Roles;//visualizaremos por medio
+                    //de la cabezera el nombre y rol del usuario
+                    document.getElementById('name2').innerHTML = user.Nombre + " " + user.Apellido;//se visualiza en el panel esto
+                    document.getElementById('role2').innerHTML = user.Roles;
+                    document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                }else{
                     document.getElementById('menuNavbar1').style.display = 'block';
                     document.getElementById('menuNavbar2').style.display = 'block';
                     document.getElementById('name1').innerHTML = user.Nombre + " " + user.Apellido;
@@ -64,7 +78,11 @@ class usuarios extends Uploadpicture {
                     document.getElementById('role2').innerHTML = user.Roles;
                     document.getElementById("fotoUser").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
                     document.getElementById("fotoUser1").innerHTML = ['<img class="circle responsive-img valign profile-image" src="', URL + FOTOS + "usuarios/" + user.Imagen, '" title="', escape(user.Imagen), '"/>'].join('');
+                    document.getElementById('enlace2').style.display= 'none';
+                    document.getElementById('usuarion2').style.display= 'none';
                 }
+                
+            }
             }
         }
     }
@@ -140,7 +158,7 @@ let valor = false;
                     processData: false,
                     type: 'POST',
                     success: (response) => {//esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
-                        if (response == 0) {
+                        if (response == 0) {                           
                             restablecerUser();
                             //  location.reload();//recargamos la pagína para que se vea el registro al instante
                             alert("REGISTRO EXITOSO");
@@ -197,11 +215,13 @@ return valor;
         this.getRoles(data.Roles, 2);
     }
     deleteUser(data) {
+       // alert(data.Imagen);
         $.post(//enviamos los datos por post
+            
             URL + "Usuarios/deleteUser",
             {
                 idUsuario: data.IdUsuario,
-                email: data.Email
+                Imagen: data.Imagen
             },
             (response) => {
                 if (response == 0) {
