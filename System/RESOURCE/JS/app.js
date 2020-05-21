@@ -1,7 +1,6 @@
 var data_User = null;
 var Usuarios = new usuarios();
-var loginUser =() =>{ //Variable funcion fantasma
-   
+var loginUser =() =>{ //Variable funcion fantasma   
 Usuarios.loginUser();
 
 }
@@ -20,7 +19,7 @@ var getRoles = () =>{
 }
 $(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
 $("#registerUser").click(function(){
- Usuarios.registerUser();
+Usuarios.registerUser();
 });
 $("#registerClose").click(function(){
 Usuarios.restablecerUser();
