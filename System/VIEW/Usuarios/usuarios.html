@@ -1,144 +1,144 @@
 <div class="container2">
-<!--CONTAINER 2 Y MODAL 2 DE USUARIO REGISTRO/EDIT/ELIMINACION (VISTA)-->
-    <h4>Usuarios</h4>
-
-    <div class="row">
-        <div class="input-field col s0">
-            <a href="#modal1"
-                class="waves-effect waves-light btn modal-trigger">registrar</a>
+    <!--CONTAINER 2 Y MODAL 2 DE USUARIO REGISTRO/EDIT/ELIMINACION (VISTA)-->
+        <h4>Usuarios</h4>
+    
+        <div class="row">
+            <div class="input-field col s0">
+                <a href="#modal1"
+                    class="waves-effect waves-light btn modal-trigger">registrar</a>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" id="filtrarUser" placeholder="Buscar usuario" onkeyup="getUsers(1)">
+                <label for="filtrar">Buscar usuario</label>
+            </div>
         </div>
-        <div class="input-field col s6">
-            <input type="text" id="filtrarUser" placeholder="Buscar usuario" onkeyup="getUsers(1)">
-            <label for="filtrar">Buscar usuario</label>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Foto
+                    </th>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Usuario
+                    </th>
+                    <th>
+                        Roles
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="resultUser"></tbody>
+        </table>
+        <div id="paginador">
+            
         </div>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Foto
-                </th>
-                <th>
-                    Nombre
-                </th>
-                <th>
-                    Usuario
-                </th>
-                <th>
-                    Roles
-                </th>
-                <th>
-                    Opciones
-                </th>
-            </tr>
-        </thead>
-        <tbody id="resultUser"></tbody>
-    </table>
-    <div id="paginador">
-        
-    </div>
-    <!--MODAL ESTRUCTURE-->
-    <div id="modal1" class="modal modal-fixed-footer">
-        <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">
-            <div class="modal-content">
-                <center>
-                    <h5>Registrar usuario</h5>
-                </center>
-                <div class="row">
-                    <div class="col s12 m6">
-                        <div class="card">
-                            <div class="card-content white-text">
-                                <center>
-                                    <span class="card-little blue-grey-text">Foto o imagen</span>
-
-                                </center>
-
-                                <center> <output id="fotos"></output></center>
-
-                            </div>
-                            <div class="card-action">
-                                <center>
-                                    <a>
-                                        <div class="file-field input-field">
-                                            <div class="btn waves-effect waves-light">
-                                                <span>Subir</span>
-                                                <input type="file" accept="image/*" id="files" name="files">
-                                                <div class="file-path-wrapper">
-                                                    <input type="text" class="file-path">
+        <!--MODAL ESTRUCTURE-->
+        <div id="modal1" class="modal modal-fixed-footer">
+            <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">
+                <div class="modal-content">
+                    <center>
+                        <h5>Registrar usuario</h5>
+                    </center>
+                    <div class="row">
+                        <div class="col s12 m6">
+                            <div class="card">
+                                <div class="card-content white-text">
+                                    <center>
+                                        <span class="card-little blue-grey-text">Foto o imagen</span>
+    
+                                    </center>
+    
+                                    <center> <output id="fotos"></output></center>
+    
+                                </div>
+                                <div class="card-action">
+                                    <center>
+                                        <a>
+                                            <div class="file-field input-field">
+                                                <div class="btn waves-effect waves-light">
+                                                    <span>Subir</span>
+                                                    <input type="file" accept="image/*" id="files" name="files">
+                                                    <div class="file-path-wrapper">
+                                                        <input type="text" class="file-path">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </center>
+                                        </a>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <div class="imput-field col s6">
+                                <input placeholder="Nombre" name="nombre" type="text" id="nombre" class="validate" required>
+                                <label class="error" for="nombre">Nombre</label>
+                            </div>
+                            <div class="imput-field col s6">
+                                <input placeholder="Apellido" name="apellido" type="text" id="apellido" class="validate"
+                                    required>
+                                <label class="error" for="apellido">Nombre</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="NID" name="nid" type="text" id="nid" class="validate" required>
+                                <label class="error" for="nid">NID</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="# Telefono" name="telefono" type="number" id="telefono" class="validate"
+                                    required>
+                                <label class="error" for="telefono">N# de Telefono</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Email" name="email" type="email" id="email" class="validate" required>
+                                <label class="error" for="email">Email</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Password" name="password" type="password" id="password" class="validate"
+                                    required>
+                                <label class="error" for="password">Contraseña</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Usuario" name="usuario" type="text" id="usuario" class="validate"
+                                    required>
+                                <label class="usuario" for="email">Usuario</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select id="roles">
+    
+                                </select>
+                                <label>Tipos de roles</label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row">
-                        <div class="imput-field col s6">
-                            <input placeholder="Nombre" name="nombre" type="text" id="nombre" class="validate" required>
-                            <label class="error" for="nombre">Nombre</label>
-                        </div>
-                        <div class="imput-field col s6">
-                            <input placeholder="Apellido" name="apellido" type="text" id="apellido" class="validate"
-                                required>
-                            <label class="error" for="apellido">Nombre</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="NID" name="nid" type="text" id="nid" class="validate" required>
-                            <label class="error" for="nid">NID</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input placeholder="# Telefono" name="telefono" type="number" id="telefono" class="validate"
-                                required>
-                            <label class="error" for="telefono">N# de Telefono</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Email" name="email" type="email" id="email" class="validate" required>
-                            <label class="error" for="email">Email</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <input placeholder="Password" name="password" type="password" id="password" class="validate"
-                                required>
-                            <label class="error" for="password">Contraseña</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <input placeholder="Usuario" name="usuario" type="text" id="usuario" class="validate"
-                                required>
-                            <label class="usuario" for="email">Usuario</label>
-                        </div>
-                        <div class="input-field col s6">
-                            <select id="roles">
-
-                            </select>
-                            <label>Tipos de roles</label>
-                        </div>
-                    </div>
+                <div class="modal-footer">
+                    <label id="registerMessage" class="text-left Message"></label>
+                    <a href="#!" id="registerClose" class="modal-close waves-effect waves-green btn">Cancelar</a>
+                    <a href="#!" id="registerUser" class="waves-effect waves-green btn">Registra</a>
                 </div>
+            </form>
+        </div>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <h4>Esta seguro de eliminar el usuario?</h4>
+                <p id="userName"></p>
             </div>
             <div class="modal-footer">
-                <label id="registerMessage" class="text-left Message"></label>
-                <a href="#!" id="registerClose" class="modal-close waves-effect waves-green btn">Cancelar</a>
-                <a href="#!" id="registerUser" class="waves-effect waves-green btn">Registra</a>
-            </div>
-        </form>
-    </div>
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <h4>Esta seguro de eliminar el usuario?</h4>
-            <p id="userName"></p>
+            <label for="" id="deteUserMessage" class="text-left Message"></label>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            <a href="#!" id="deleteUser" class="waves-effect waves-green btn-flat">Aceptar</a>
         </div>
-        <div class="modal-footer">
-        <label for="" id="deteUserMessage" class="text-left Message"></label>
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-        <a href="#!" id="deleteUser" class="waves-effect waves-green btn-flat">Aceptar</a>
+        </div>
     </div>
-    </div>
-</div>

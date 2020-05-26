@@ -1,1 +1,89 @@
-<h2>.</h2>
+<div class="container3">
+    <!--CONTAINER 2 Y MODAL 2 DE USUARIO REGISTRO/EDIT/ELIMINACION (VISTA)-->
+        <h4>Registro de preguntas</h4>
+    
+        <div class="row">
+            <div class="input-field col s0">
+                <a href="#modal2"
+                    class="waves-effect waves-light btn modal-trigger">registrar</a>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th>
+                        Pregunta
+                    </th>
+                    <th>
+                        R1
+                    </th>
+                    <th>
+                        R2
+                    </th>
+                    <th>
+                        R3
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="resultUser"></tbody>
+        </table>
+        <div id="paginador">
+            
+        </div>
+        <!--MODAL ESTRUCTURE-->
+        <div id="modal2" class="modal modal-fixed-footer">
+            <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">
+                <div class="modal-content">
+                    <center>
+                        <h5>Registrar preguntas</h5>
+                    </center>
+                  
+                        
+                                
+                    <div class="row">
+                        <div class="row">
+                            <div class="imput-field col s12">
+                                <input placeholder="Digitar pregunta" name="ask" type="text" id="ask" class="validate" required>
+                                <label class="error" for="ask">Pregunta</label>
+                            </div>
+                            <div class="imput-field col s12">
+                                <input placeholder="Respuesta #1" name="ans" type="text" id="ans" class="validate"
+                                    required>
+                                <label class="error" for="ans">Pregunta uno</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input placeholder="Respuesta #2" name="ansd" type="text" id="ansd" class="validate" required>
+                                <label class="error" for="ansd">Pregunta dos</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input placeholder="Respuesta #3" name="anst" type="text" id="anst" class="validate"
+                                    required>
+                                <label class="error" for="anst">Pregunta tres</label>
+                            </div>
+                            <!-- FALTA HACER UN SELECT COLOCANDO RESPUESTA CORRECTA-->
+                        </div>
+                    </div>
+                </div>
+                        
+                <div class="modal-footer">
+                    <label id="registerMessage" class="text-left Message"></label>
+                    <a href="#!" id="registerClose" class="modal-close waves-effect waves-green btn">Cancelar</a>
+                    <a href="#!" id="registerUser" class="waves-effect waves-green btn">Registra</a>
+                </div>
+            </form>
+        </div>
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <h4>Esta seguro de eliminar el usuario?</h4>
+                <p id="userName"></p>
+            </div>
+            <div class="modal-footer">
+            <label for="" id="deteUserMessage2" class="text-left Message"></label>
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+            <a href="#!" id="deleteUser" class="waves-effect waves-green btn-flat">Aceptar</a>
+        </div>
+        </div>
+    </div>

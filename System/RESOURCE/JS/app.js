@@ -1,5 +1,6 @@
 var data_User = null;
 var Usuarios = new usuarios();
+var principal = new Principal();
 var loginUser =() =>{ //Variable funcion fantasma   
 Usuarios.loginUser();
 
@@ -40,7 +41,7 @@ var deleteUser = (data) =>{
     document.getElementById("userName").innerHTML = data.Email;
     data_User = data;
 }
-var principal = new Principal();
+
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL
