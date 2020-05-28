@@ -4,7 +4,7 @@
     
         <div class="row">
             <div class="input-field col s0">
-                <a href="#modal2"
+                <a href="#modal3"
                     class="waves-effect waves-light btn modal-trigger">registrar</a>
             </div>
         </div>
@@ -26,19 +26,18 @@
                     </th>
                 </tr>
             </thead>
-            <tbody id="resultUser"></tbody>
+            <tbody id="resultP"></tbody>
         </table>
         <div id="paginador">
             
         </div>
         <!--MODAL ESTRUCTURE-->
-        <div id="modal2" class="modal modal-fixed-footer">
-            <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">
+        <div id="modal3" class="modal modal-fixed-footer">
+            <form action="" class="col s12" id="validated" enctype="multipart/form-data" method="POST">
                 <div class="modal-content">
                     <center>
                         <h5>Registrar preguntas</h5>
                     </center>
-                  
                         
                                 
                     <div class="row">
@@ -50,28 +49,35 @@
                             <div class="imput-field col s12">
                                 <input placeholder="Respuesta #1" name="ans" type="text" id="ans" class="validate"
                                     required>
-                                <label class="error" for="ans">Pregunta uno</label>
+                                <label class="error" for="ans">Respuesta uno</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
                                 <input placeholder="Respuesta #2" name="ansd" type="text" id="ansd" class="validate" required>
-                                <label class="error" for="ansd">Pregunta dos</label>
+                                <label class="error" for="ansd">Respuesta dos</label>
                             </div>
                             <div class="input-field col s12">
                                 <input placeholder="Respuesta #3" name="anst" type="text" id="anst" class="validate"
                                     required>
-                                <label class="error" for="anst">Pregunta tres</label>
+                                <label class="error" for="anst">Respuesta  tres</label>
                             </div>
-                            <!-- FALTA HACER UN SELECT COLOCANDO RESPUESTA CORRECTA-->
+                            <div class="input-field col s12">
+                                <select name="seleccion" id="sp">
+                                    <option value="uno">R1</option>
+                                    <option value="uno">R2</option>
+                                    <option value="uno">R3</option>
+                                </select>
+                                <label class="error" for="ansd">Respuesta correcta</label>
+                            </div>
                         </div>
                     </div>
                 </div>
                         
                 <div class="modal-footer">
-                    <label id="registerMessage" class="text-left Message"></label>
-                    <a href="#!" id="registerClose" class="modal-close waves-effect waves-green btn">Cancelar</a>
-                    <a href="#!" id="registerUser" class="waves-effect waves-green btn">Registra</a>
+                    <label id="registerMessageD" class="text-left Message"></label>
+                    <a href="#!" id="registerClosed" class="modal-close waves-effect waves-green btn">Cancelar</a>
+                    <a href="#!" id="registrarpre" class="waves-effect waves-green btn">Registra</a>
                 </div>
             </form>
         </div>

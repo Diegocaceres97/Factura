@@ -15,7 +15,7 @@ class Usuarios_model extends Conexion
 $response = $response['results'];//obtenemos los datos almacenado en el objeto con el nombre re
 if (0 == count($response)) {//este metodo devuelve un valor de tipo entero dependiendo de los datos almacenados en el arreglo
     //si entra por aca quiere decir que no esta registrado nee la BD ==0
-    $value = "(NID,Nombre,Apellido,Email,Password,Telefono,Usuario,Roles,Imagen) VALUES (:NID,:Nombre,:Apellido,:Email,:Password,:Telefono,:Usuario,:Roles,:Imagen)";
+    $value = "(Pregunta,R1,R2,R3,RP) VALUES (:NID,:Nombre,:Apellido,:Email,:Password,:Telefono,:Usuario,:Roles,:Imagen)";
     $data = $this->db->insert("usuarios",$user,$value);
     if (is_bool($data)) {//identificacion de registro satisfactorio
         return 0;

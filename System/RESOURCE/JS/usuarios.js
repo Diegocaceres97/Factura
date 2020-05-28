@@ -10,8 +10,7 @@ class usuarios extends Uploadpicture {
     loginUser() {
         //console.log (pass); //PRUEBA
 
-        if (validarEmail(document.getElementById("email").value)) {
-           
+        if (validarEmail(document.getElementById("email").value)) {          
                 $.post(//enviamos los datos por POST
                     "Index/userLogin",//Buscamos el metodo en index y después el metodo
                   $('.login').serialize(),//serializamos toda la información del formulario login
