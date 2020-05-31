@@ -33,16 +33,71 @@ var data = new FormData();
                         }
                     }
                 });
+
                 return valor;
 }
 reestablerAsk(){
+    this.Funcion = 0;
     var instance = M.Modal.getInstance($('#modal3'));
         instance.close();
 document.getElementById("ask").value="";
 document.getElementById("ans").value="";
 document.getElementById("ansd").value="";
 document.getElementById("anst").value="";
-     //    window.location.href = URL + "Principal/principal";
+window.location.href = URL + "Principal/principal";
 
+}
+getAsk(valor, page) {
+    //alert(valor);
+    var valor = valor != null ? valor : ""; //operador terniario donde deveulve true o false dependiendo el parametro valor que devuelve 
+    $.post(
+        URL + "AskQ/getAsk",//le enviamos los datos al servidor
+        {
+            filter: valor,
+            page: page
+        },
+        (response) => {
+            // $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
+            //el resultUser es el BODY de la tabla
+            try {
+                let item = JSON.parse(response);
+                $("#resultP").html(item.dataFilter);
+                $("#paginadorP").html(item.paginador);
+                console.log(item);
+            } catch (error) {
+                $("#paginadorP").html(response);
+            }
+
+        }
+    );
+}
+deleteAsk(data) {
+    // alert(data.Pregunta);
+     $.post(//enviamos los datos por post       
+         URL + "AskQ/deleteAsk",
+         {
+             pregunta: data.Pregunta
+         },
+         (response) => {
+             if (response == 0) {
+                document.getElementById("deteUserMessageT").innerHTML = response;
+                 this.reestablerAsk();
+             } else {
+                 document.getElementById("deteUserMessageT").innerHTML = response;
+             }
+             console.log(response);
+         }
+     );
+ }
+ editAsk(data) {//metodo donde obtendremos los datos seleccionados
+    this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
+    this.Pregunta = data.Pregunta;
+    document.getElementById("ask").value = data.Pregunta;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
+    document.getElementById("ans").value = data.R1;
+    document.getElementById("ansd").value = data.R2;
+    document.getElementById("anst").value = data.R3;
+    document.getElementById("sp").value=data.RP;
+    $('select').formSelect();
+   // this.getAsk(2);
 }
 }

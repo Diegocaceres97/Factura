@@ -5,7 +5,7 @@ class Principal{
     linkprincipal(link){
         if (link == PATHNAME + "Principal/principal" ||  link == PATHNAME + "Principal/principal/") {
         document.getElementById("enlace1").classList.add('active');
-        
+        getAsk(1);
                     
         }
         if (link == PATHNAME + "Usuarios/usuarios" ||  link == PATHNAME + "Usuarios/usuarios/") {
@@ -13,7 +13,7 @@ class Principal{
             document.getElementById('files').addEventListener('change',archivo, false);//le agregaremos un evento al imputfile en html usuarios
             document.getElementById("fotos").innerHTML = ['<img class="responsive-img" src="', PATHNAME + "RESOURCE/IMAGES/fotos/usuarios/default.png", '"title="', , '"/>'].join('');
             getRoles();
-            getUsers(1);//al invocarlo por primera vez entrará en la página 1
+            getUsers(1);//al invocarlo por primera vez entrará en la página 1         
             }                     
     }
 }

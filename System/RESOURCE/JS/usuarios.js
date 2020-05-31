@@ -129,8 +129,7 @@ class usuarios extends Uploadpicture {
 
     registerUser() {
 let valor = false;
-        if (validarEmail(document.getElementById("email").value)) {
-          
+        if (validarEmail(document.getElementById("email").value)) {         
                 var data = new FormData();//creamos una coleccion de objetos para enviarlos al servidor
                 $.each($('input[type=file')[0].files, (i, file) => {
                     data.append('file', file)
@@ -176,7 +175,9 @@ let valor = false;
 return valor;
     }
     getUsers(valor, page) {
+       // alert(valor);
         var valor = valor != null ? valor : ""; //operador terniario donde deveulve true o false dependiendo el parametro valor que devuelve 
+        
         $.post(
             URL + "Usuarios/getUsers",//le enviamos los datos al servidor
             {

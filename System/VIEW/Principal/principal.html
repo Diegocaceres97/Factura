@@ -7,6 +7,10 @@
                 <a href="#modal3"
                     class="waves-effect waves-light btn modal-trigger">registrar</a>
             </div>
+            <div class="input-field col s6">
+                <input type="text" id="filtrarAsk" placeholder="Buscar pregunta" onkeyup="getAsk(1)">
+                <label for="filtrar">Buscar pregunta</label>
+            </div>
         </div>
         <table class="table">
             <thead>
@@ -28,7 +32,7 @@
             </thead>
             <tbody id="resultP"></tbody>
         </table>
-        <div id="paginador">
+        <div id="paginadorP">
             
         </div>
         <!--MODAL ESTRUCTURE-->
@@ -42,11 +46,11 @@
                                 
                     <div class="row">
                         <div class="row">
-                            <div class="imput-field col s12">
-                                <input placeholder="Digitar pregunta" name="ask" type="text" id="ask" class="validate" required>
+                            <div class="input-field col s12">
+                                <input placeholder="Digite su Pregunta" name="ask" type="text" id="ask" class="validate" required>
                                 <label class="error" for="ask">Pregunta</label>
                             </div>
-                            <div class="imput-field col s12">
+                            <div class="input-field col s12">
                                 <input placeholder="Respuesta #1" name="ans" type="text" id="ans" class="validate"
                                     required>
                                 <label class="error" for="ans">Respuesta uno</label>
@@ -64,9 +68,9 @@
                             </div>
                             <div class="input-field col s12">
                                 <select name="seleccion" id="sp">
-                                    <option value="uno">R1</option>
-                                    <option value="uno">R2</option>
-                                    <option value="uno">R3</option>
+                                    <option value="R1" name="R1">R1</option>
+                                    <option value="R2" name="R2">R2</option>
+                                    <option value="R3" name="R3">R3</option>
                                 </select>
                                 <label class="error" for="ansd">Respuesta correcta</label>
                             </div>
@@ -80,16 +84,16 @@
                     <a href="#!" id="registrarpre" class="waves-effect waves-green btn">Registra</a>
                 </div>
             </form>
-        </div>
-        <div id="modal3" class="modal">
+        </div>        
+        <div id="modal9" class="modal">
             <div class="modal-content">
-                <h4>Esta seguro de eliminar el usuario?</h4>
-                <p id="userName"></p>
+                <h4>Esta seguro de eliminar la pregunta?</h4>
+                <p id="userAsk"></p>
             </div>
             <div class="modal-footer">
-            <label for="" id="deteUserMessage2" class="text-left Message"></label>
+            <label for="" id="deteUserMessageT" class="text-left Message"></label>
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-            <a href="#!" id="deleteUser" class="waves-effect waves-green btn-flat">Aceptar</a>
+            <a href="#!" id="deleteAsk" class="waves-effect waves-green btn-flat">Aceptar</a>
         </div>
         </div>
     </div>

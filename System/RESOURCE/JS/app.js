@@ -1,4 +1,5 @@
 var data_User = null;
+var data_Ask=null;
 var Usuarios = new usuarios();
 var Ask = new Ans_Ask();
 var principal = new Principal();
@@ -36,6 +37,10 @@ $("#registrarpre").click(function(){
     $("#registerClosed").click(function(){
         Ask.reestablerAsk();
         });
+        $("#deleteAsk").click(function(){
+            Ask.deleteAsk(data_Ask);
+            data_Ask=null;
+            });
 });
 var getUsers = (page) =>{
     let valor = document.getElementById("filtrarUser").value;
@@ -48,9 +53,21 @@ var deleteUser = (data) =>{
     document.getElementById("userName").innerHTML = data.Email;
     data_User = data;
 }
+var deleteAsk = (data) =>{
+    document.getElementById("userAsk").innerHTML = data.Pregunta;
+    data_Ask = data;
+}
 var reestablerAsk = () =>{
     Ask.reestablerAsk();
 }
+
+var getAsk = (page) =>{
+    let valor = document.getElementById("filtrarAsk").value;
+    Ask.getAsk(valor,page);
+}
+var dataAsk = (data)=>{
+    Ask.editAsk(data);
+    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL
