@@ -159,7 +159,7 @@ let valor = false;
                         if (response == 0) {                           
                             restablecerUser();
                             //  location.reload();//recargamos la pagína para que se vea el registro al instante
-                            alert("REGISTRO EXITOSO");
+                            alert("PROCESO EXITOSO");
                         } else {
                             valor=true;
                             document.getElementById("registerMessage").innerHTML = response;//se envia la respuesta al label html

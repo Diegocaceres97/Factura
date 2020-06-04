@@ -174,6 +174,7 @@ if (strcmp("seleccione un ROL",$_POST["role"])==0) {//comparamos dos cadenas de 
     }
     }
     $response = $this->model->getUser($_POST["idUsuario"]);
+   //echo $response;
     if(is_array($response)){//verifiamos si es un arreglo el que se ha devuelto
         $array = array(//este array contendra todas las variables que capturemos con tipo post
             $_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$response[0]['Password'],$_POST["usuario"],$_POST["role"],$imagen

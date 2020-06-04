@@ -1,20 +1,21 @@
 class Ans_Ask{
     constructor() { 
         this.Funcion = 0; //Creamos propiedades    
-
+        this.Pregunta=null;
     }
 registerAsk(){  
     let valor = false;
-alert("Entra por acá");
+//alert(this.Pregunta);
 var data = new FormData();
-                var url = this.Funcion == 0 ? "AskQ/registerA" : "AskQ/editA";//terniaria (comparacion)
+                var url = this.Funcion == 0 ? "AskQ/registerA" : "AskQ/editAsk";//terniaria (comparacion)
                 let roles = document.getElementById("sp");
                 let role = roles.options[roles.selectedIndex].text;
-                data.append('ask', document.getElementById("ask").value);
+                data.append('ask',document.getElementById("ask").value);
                 data.append('ans', document.getElementById("ans").value);
                 data.append('ansd', document.getElementById("ansd").value);
                 data.append('anst', document.getElementById("anst").value);      
-                data.append('sp', role);    
+                data.append('sp', role); 
+                data.append('pv',this.Pregunta);
                 $.ajax({
                     url: URL + url,
                     data: data,
@@ -26,7 +27,7 @@ var data = new FormData();
                         if (response == 0) {                                                     
                             //  location.reload();//recargamos la pagína para que se vea el registro al instante
                             reestablerAsk();
-                            alert("REGISTRO EXITOSO");
+                            alert("PROCESO EXITOSO");
                         } else {
                             valor=true;
                             document.getElementById("registerMessageD").innerHTML = response;//se envia la respuesta al label html
@@ -38,6 +39,7 @@ var data = new FormData();
 }
 reestablerAsk(){
     this.Funcion = 0;
+   // preguntavieja = null;
     var instance = M.Modal.getInstance($('#modal3'));
         instance.close();
 document.getElementById("ask").value="";
@@ -91,13 +93,13 @@ deleteAsk(data) {
  }
  editAsk(data) {//metodo donde obtendremos los datos seleccionados
     this.Funcion = 1;//con esto capturaremos la informacion necesaria para registrar usuario
-    this.Pregunta = data.Pregunta;
+    this.Pregunta = data.IdPregunta;
+   // preguntavieja = document.getElementById("ask").value;
     document.getElementById("ask").value = data.Pregunta;//dejaremos las entradas en blanco para cuando acabemos de resgistrar
     document.getElementById("ans").value = data.R1;
     document.getElementById("ansd").value = data.R2;
     document.getElementById("anst").value = data.R3;
     document.getElementById("sp").value=data.RP;
     $('select').formSelect();
-   // this.getAsk(2);
 }
 }

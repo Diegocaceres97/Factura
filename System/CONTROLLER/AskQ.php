@@ -59,36 +59,7 @@ echo "no tiene autorizacion";
 }
     
 }
-public function editAsk(){
-    $user = Session::getSession("User");
-    if(null != $user){//verificamos la autorizacion del usuario comenzando por que sea uno
-if ("Admin"==$user["Roles"]) {
-if(empty($_POST["ask"])){
-echo "el campo nid es obligario";
-}else{
-    if(empty($_POST["ans"])){
-        echo "el campo nombre es obligario";
-}else{
-    if(empty($_POST["ansd"])){
-        echo "el campo apellido es obligario";
-}else{
-    if(empty($_POST["anst"])){
-        echo "el campo telefono es obligario";
-}
-$response = $this->model->getAsk($_POST["ask"]);
-if(is_array($response)){//verifiamos si es un arreglo el que se ha devuelto
-    $array = array(//este array contendra todas las variables que capturemos con tipo post
-        $_POST["ask"],$_POST["ans"],$_POST["ansd"],$_POST["anst"],$_POST["sp"]);
-                
-            echo $this->model->editAsk($this->superClass($array),$_POST["ask"]);//User class retorna la instancia de una clase anonima con toda
-           //la info del usuario
-        }
-}} }}else {
-echo "No tiene autorizacion";
-}    
-  /*  */
-}
-}
+
 /*function getAsk(){
     $data = $this->model->getAsk();//Obtenemos el resultado de la funcion en el model usuarios
     if(is_array($data)){
@@ -97,5 +68,35 @@ echo "No tiene autorizacion";
         echo $data;
     }
 }*/
+public function editAsk(){
+    $user = Session::getSession("User");
+    if(null != $user){//verificamos la autorizacion del usuario comenzando por que sea uno
+if ("Admin"==$user["Roles"]) {
+if(empty($_POST["ask"])){
+echo "el campo ask es obligario";
+}else{
+    if(empty($_POST["ans"])){
+        echo "el campo respuesta uno es obligario";
+}else{
+    if(empty($_POST["ansd"])){
+        echo "el campo respuesta dos es obligario";
+}else{
+    if(empty($_POST["anst"])){
+        echo "el campo respuesta tres es obligario";
+}
+$response = $this->model->getAsks($_POST["pv"]);
+//echo $response;
+if(is_array($response)){//verifiamos si es un arreglo el que se ha devuelto
+    $array = array(//este array contendra todas las variables que capturemos con tipo post
+        $_POST["ask"],$_POST["ans"],$_POST["ansd"],$_POST["anst"],$_POST["sp"]);
+         echo $this->model->editAsk($array,$_POST["pv"]);//User class retorna la instancia de una clase anonima con toda
+           //la info del usuario
+        }
+}} }}else {
+echo "No tiene autorizacion";
+}    
+  /*  */
+}
+}
 }
 ?>
