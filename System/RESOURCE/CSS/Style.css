@@ -32,6 +32,10 @@ padding: 1px;
 .side-nav{
     display: none;
 }
+.container .ro .card{
+    width: 300px;
+    margin: 3% 7% 0%;
+}
 .container2{
     margin: 10px 10px 0px;
 }
@@ -48,9 +52,11 @@ padding: 1px;
 }
 }
 
+
 @media(min-width: 800px){
-    .container{
-        max-width: 30%;
+    .container .ro .card {
+       text-align: left;
+       margin: 1% 25% 30%;
     }
     .side-nav{
         max-width: 20%;
@@ -72,4 +78,3 @@ padding: 1px;
 .modal-footer{
     margin-top: -15px;
 }
-

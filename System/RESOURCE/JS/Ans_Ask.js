@@ -102,4 +102,5 @@ deleteAsk(data) {
     document.getElementById("sp").value=data.RP;
     $('select').formSelect();
 }
+
 }

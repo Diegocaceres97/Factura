@@ -3,7 +3,7 @@ class Views
 {
     function render($controller,$view){
        //echo $controller;
-       if($controller != "Preguntas"){
+       if($controller != "question"){
         $controllers = get_class($controller);
        }else{
         $controllers = $controller;

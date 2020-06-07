@@ -9,7 +9,8 @@ class Principal extends Controllers{
             if ("Admin"==$user["Roles"]) {
             $this->view->render($this,"principal"); //invocamos el objeto render desde controllers
             }else{
-                $this->view->render("Preguntas","preguntas");
+                //$this->view->render("Preguntas","preguntas");
+                $this->view->render("question","Question");
             }
         } else {//asi evitamos que entre despés de salido
             header("Location:".URL);
