@@ -10,6 +10,13 @@ class Ans_Ask {
     var url = this.Funcion == 0 ? "AskQ/registerA" : "AskQ/editAsk"; //terniaria (comparacion)
     let roles = document.getElementById("sp");
     let role = roles.options[roles.selectedIndex].text;
+    if(role=="R1"){
+      role=0;
+    }else if(role=="R2"){
+      role=1;
+    }else if(role=="R3"){
+      role=2;
+    }
     data.append("ask", document.getElementById("ask").value);
     data.append("ans", document.getElementById("ans").value);
     data.append("ansd", document.getElementById("ansd").value);
