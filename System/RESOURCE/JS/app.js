@@ -65,6 +65,7 @@ var getAsk = (page) =>{
     let valor = document.getElementById("filtrarAsk").value;
     Ask.getAsk(valor,page);
 }
+
 var dataAsk = (data)=>{
     Ask.editAsk(data);
     }

@@ -65,7 +65,7 @@ class QueryManager
             //throw $th;
         }
         $pdo=null;
-    }
+    }  
     function select2($attr,$table,$_pagi_inicial,$_pagi_cuantos,$where,$param){
         //   echo $param;
            try {
@@ -81,5 +81,4 @@ class QueryManager
            $pdo=null;
        }
 }
-
 ?>

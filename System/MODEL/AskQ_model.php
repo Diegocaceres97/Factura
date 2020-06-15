@@ -17,6 +17,7 @@ function getAsk($filter,$page,$model){
     $columns = "IdPregunta,Pregunta,R1,R2,R3,RP";
     return $model->paginador($columns,"pregresp","Ask",$page,$where,$array);
 }
+
 function getAsks($filter){
     $where = " WHERE IdPregunta LIKE :pv";
     $param = array('pv' =>$filter);

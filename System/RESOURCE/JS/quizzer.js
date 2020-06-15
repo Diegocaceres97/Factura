@@ -1,55 +1,57 @@
-// inicializamos un array de arrays con la preguntas del juego. 
-var pregunta= [
-	"¿Que se utiliza para estilizar un sitio WEBBBB?",
-		"Javascript",
-		"CSS",
-		"PHP",
-		"AngularJS",
-		1
-];
-var questions = [
-	[
-		"¿Que se utiliza para estilizar un sitio web?",
-		"Javascript",
-		"CSS",
-		"PHP",
-		"AngularJS",
-		1
-	],
-	[
-		"¿Qué tipo de lenguaje es PHP?",
-		"Interpretado",
-		"Compilado",
-		"Los 2 anteriores",
-		"Ninguno de los anteriores",
-		0
-	],
-	[
-		"¿jQuery es una biblioteca para qué lenguaje?",
-		"Python",
-		"PHP",
-		"Java",
-		"Ninguno de los anteriores",
-		3
-	],
-	[
-		"¿Cómo se marca el inicio de código PHP?",
-		"&lt;?php",
-		"&lt;?",
-		"Los 2 anteriores",
-		"Ninguno de los anteriores",
-		2
-	],
-	[
-		"¿Quién diseño Javascript?",
-		"Mark Zuckerberg",
-		"Bill Gates",
-		"Brendan Eich",
-		"Rasmus Lerdorf",
-		2
-	],
-];
-questions.push(pregunta);
+
+questions =[];
+valor=null;
+page=0;
+$.post(
+	URL + "AskQ/getAsk", //le enviamos los datos al servidor
+	{
+	  filter: valor,
+	  page: page,
+	},
+	(response) => {
+	  // $("#resultUser").html(response);//el dato que capturemos del servidor lo mandaremos a resultuser
+	  //el resultUser es el BODY de la tabla
+	  try {
+		let item = JSON.parse(response);
+		
+		  var res = [];
+		  //convertimos de formato JSON a formato array JS
+		  for (var i in item) {
+			res.push(item[i]);//pasamos el JSON {} a un array (objeto) nativo de JS
+		  }
+		  var q = [];//array de apoyo
+		  
+		  var qs=0;
+		  var tt=0;
+		  //delete res['IdPregunta'];
+		  //recorremos el array recien convertido
+			//var h = res[t];lo recorremos uno por uno en la posicion indicada en una nueva variable que almacenara solo el subarray
+			//que es la pregunta independiente
+			//delete h["IdPregunta"];//borramos de esa pregunta (subarray) el elemento key que se llame IdPregunta con su valor 
+
+			for(var y=0;y<res.length;y++){
+				var g=res[y];
+			q.push(g["Pregunta"], g["R1"], g["R2"],g["R3"],g["RP"]);//puchamos al array de apoyo
+			}
+			tt=q.length/5;
+			var ui=0;
+			for(var r=0;r<tt;r++){
+				console.log(ui);
+			ui = qs*5;
+			questions.push(q.slice(ui,ui+5));
+		   qs++;				   
+			}
+			console.log(questions);
+			console.log(uestions);
+		
+		
+	  } catch (error) {
+		
+	  }
+	}
+  );
+
+//questions.push(pregunta);
 // Aquí utilizamos UnderscoreJS para generar un template de pregunta.
 var questionTemplate = _.template(" \
 	<div class='card question'><span class='question'><%= question %></span> \
@@ -65,10 +67,6 @@ var questionTemplate = _.template(" \
         <li> \
           <input type='radio' name='question[<%= index %>]' value='2' id='q<%= index %>o3'> \
           <label for='q<%= index %>o3'><%= c %></label> \
-        </li> \
-        <li> \
-          <input type='radio' name='question[<%= index %>]' value='3' id='q<%= index %>o4'> \
-          <label for='q<%= index %>o4'><%= d %></label> \
         </li> \
       </ul> \
     </div> \
@@ -106,6 +104,7 @@ $(function() {
 
 	//  La función start se ejecuta cuando el jugador hace click en comenzar.
 	function start() {
+	
 		$('div.start').fadeOut(200, function() {
 			moveToNextQuestion();
 		});
@@ -114,6 +113,7 @@ $(function() {
 	// Esta es una de las funciones clave del juego, encargada de generar las preguntas. 
 	function generateCards() {
 		$('.questions').html('');
+		
 		for (var i = 0; i < questions.length; i++) {
 			var q = questions[i];
 			var html = questionTemplate({
@@ -121,8 +121,7 @@ $(function() {
 				index: i,
 				a: q[1],
 				b: q[2],
-				c: q[3],
-				d: q[4]
+				c: q[3]
 			});
 			$('.questions').append(html);
 		};
@@ -182,7 +181,7 @@ $(function() {
 	// Esta función se ejecuta cuando el jugador escoge una respuesta.
 	function optionSelected() {
 		var selected = parseInt(this.value);
-		var correct = questions[currentQuestion-1][5];
+		var correct = questions[currentQuestion-1][4];
 
 		if (selected == correct) {
 			points += pointsPerQuestion;
@@ -225,9 +224,9 @@ $(function() {
 		$('p.final_points').html(points + ' puntos');
 		$('.question.card:visible').hide();
 		$('.finish.card').show();
-	}
-
-	// 24
+	}	// 24
 	restart();
 
 });
+
+

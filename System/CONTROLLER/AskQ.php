@@ -14,6 +14,13 @@ public function getAsk(){
     if(null != $user){
         $count = 0;
         $dataFilter = null;
+        if($_POST["page"]==0){
+            $data = $this->model->getAsk($_POST["filter"],$_POST["page"],$this->page);
+            if (is_array($data)) {
+                $array = $data['results'];
+                echo $array=json_encode($array);
+            }
+        }else{
         $data = $this->model->getAsk($_POST["filter"],$_POST["page"],$this->page);
         if (is_array($data)) {
             $array = $data['results'];
@@ -44,15 +51,24 @@ public function getAsk(){
         }
         
     }
-    
 }
+}
+public function otro(){
+    echo "llego";
+    $response = $this->model->getAsks($_POST["filter"]);
+    if(is_array($data)){
+        return $data;
+    }else{
+        return "error";
+    }
+}
+
 public function deleteAsk(){
     $user = Session::getSession("User");
     if(null != $user){//verificamos la autorizacion del usuario comenzando por que sea uno
 if ("Admin"==$user["Roles"]) {
     //echo "Hola".$_POST["ask"];
 echo $this->model->deleteAsk($_POST["pregunta"]);//mandamos la info al modelo
-
 }else{
 echo "no tiene autorizacion";
 }
