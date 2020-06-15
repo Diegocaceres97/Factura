@@ -127,7 +127,15 @@ class Ans_Ask {
     document.getElementById("ans").value = data.R1;
     document.getElementById("ansd").value = data.R2;
     document.getElementById("anst").value = data.R3;
-    document.getElementById("sp").value = data.RP;
+    if(data.RP=="0"){
+      document.getElementById("sp").value ="R1";
+    }
+    if(data.RP=="1"){
+      document.getElementById("sp").value ="R2";
+    }
+    if(data.RP=="2"){
+      document.getElementById("sp").value ="R3";
+    }
     $("select").formSelect();
   }
   getAskD() {
