@@ -86,8 +86,10 @@ echo $data;
         if(null != $user){
             $count = 0;
             $dataFilter = null;
+            //obtenemos los usuarios solicitados por medio del metodo alojado en el modelo y mandandole estos 3 parametros
             $data = $this->model->getUsers($_POST["filter"],$_POST["page"],$this->page);
             if (is_array($data)) {
+                //manejamos los datos devueltos
                 $array = $data['results'];
                 foreach ($array as $key => $value) {
                     $dataUser = json_encode($array[$count]);
@@ -105,7 +107,7 @@ echo $data;
                     "<td>".
                     "<a href='#modal1'  onclick='dataUser(".$dataUser .")' class='btn modal-trigger'>Edit</a> | ".
                     
-                    "<a href='#modal2' onclick='deleteUser(".$dataUser .")' class='btn red lighten-1 modal-trigger'>Delete</a>".
+                    "<a href='#modal2' onclick='deleteUser(".$dataUser .")' class='btn red lighten-1 modal-trigger' >Delete</a>".
                     "</td>". 
                     "</tr>";
                     $count++;

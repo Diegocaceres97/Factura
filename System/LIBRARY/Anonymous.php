@@ -1,4 +1,5 @@
 <?php
+declare (strict_types=1);//con el valor de 1 indicamos que esta propiedad sera estricta
 class Anonymous
 {
     public function userClass($array){
@@ -26,6 +27,46 @@ $this->Imagen = $array[8];
 }
         };
         
+    }
+    public function clientesClass(array $array){//especificamos que parametro recibira (tipo) 
+return new class($array){
+    var $NID;
+    var $Nombre;
+    var $Apellido;
+    var $Email;
+    var $Direccion;
+    var $Telefono;
+    var $Creditos;
+    function __construct($array){ //metodo constructor de la clase anonima para poder iniciar estos atributos/propiedades
+        $this->NID = $array[0];
+        $this->Nombre = $array[1];
+        $this->Apellido = $array[2];
+        if(is_numeric($array[3])){
+            $this->Telefono = $array[3];
+        }
+        $this->Email = $array[4];
+        $this->Direccion = $array[5];
+        $this->Creditos = $array[6];
+    }
+};
+    }
+    public function reportClientesClass(array $array){
+    return new class($array){
+var $Deuda;
+var $FechaDeuda;
+var $Pago;
+var $FechaPago;
+var $Ticket;
+var $IdCliente;
+function __construct($array){
+    $this->Deuda = $array[0];
+    $this->FechaDeuda = $array[1];
+    $this->Pago = $array[2];
+    $this->FechaPago = $array[3];
+    $this->Ticket = $array[4];
+    $this->IdCliente = $array[5];
+}
+    };
     }
     
 }

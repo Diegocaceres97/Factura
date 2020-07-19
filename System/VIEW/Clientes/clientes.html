@@ -1,0 +1,160 @@
+<div class="container4" id="c2">
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3">
+          <a href="#test1">Usuarios</a>
+        </li>
+        <li class="tab col s3">
+          <a href="#test2">Historial</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col s12" id="test1">
+        <div class="row">
+            <div class="input-field col s0">
+                <a href="#modal1" class="waves-effect waves-light btn modal-trigger">Registrar</a>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" placeholder="Buscar cliente" id="filtrarCliente" onkeyup="">
+                <label for="filtrarCliente">Buscar Cliente</label>
+            </div>
+        </div>
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">
+                    <img src="../RESOURCE/IMAGES/Iconos/clientes2.png" alt="" class="responsive">Clientes
+                </div>
+                <div class="collapsible-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Foto
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Apellido
+                                </th>
+                                <th>
+                                    Opciones
+                                </th>
+                            </tr>
+                            <tbody id="resultCliente">
+
+                            </tbody>
+                        </thead>
+                    </table>
+                    <div id="paginadorCliente">
+
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header">
+                    <img src="../RESOURCE/IMAGES/Iconos/reporte.png" alt="" class="responsive">Reportes
+                </div>
+                <div class="collapsible-body">
+
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="col s12" id="test2"></div>
+  </div>
+</div>
+<!--Modal estructure-->
+    <div id="modal1" class="modal modal-fixed-footer">
+        <form action="" class="col s12" id="validate" enctype="multipart/form-data" method="POST">
+            <div class="modal-content">
+                <center>
+                    <h5 style="text-decoration-color: black;font-weight:bold;">REGISTRAR Cliente</h5>
+                </center>
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="card"  style="margin: 5% 30% 12%;" >
+                            <div class="card-content white-text" >
+                                <center>
+                                    <span class="card-little blue-grey-text">Foto o imagen</span>
+
+                                </center>
+
+                                <center> <output id="fotoCliente"></output></center>
+
+                            </div>
+                            <div class="card-action">
+                                <center style="margin-bottom: -10%;">
+                                    <a>
+                                        <div class="file-field input-field " >
+                                            <div class="btn waves-effect waves-light" style="margin: -6% 30% 0% ; width: 40% ;"  >
+                                                
+                                                <span >Subir</span>
+                                            
+                                                <input type="file" accept="image/*" id="files" name="files">
+                                                <div class="file-path-wrapper">
+                                                    <input type="text" class="file-path">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                   
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Nombre" name="nombre" type="text" id="nombre" class="validate" required>
+                            <label class="error" for="nombre">Nombre</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Apellido" name="apellido" type="text" id="apellido" class="validate" required>
+                            <label class="error" for="apellido">Apellido</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="NID" name="nid" type="text" id="nid" class="validate" required>
+                            <label class="error" for="nid">NID</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="# Telefono" name="telefono" type="number" id="telefono" class="validate"
+                                required>
+                            <label class="error" for="telefono">N# de Telefono</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input placeholder="Email" name="email" type="email" id="email" class="validate" required>
+                            <label class="error" for="email">Email</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input placeholder="Direccion" name="direccion" type="text" id="direccion" class="validate"
+                                required>
+                            <label class="error" for="direccion">Direccin</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <select id="creditos">
+
+                            </select>
+                            <label >creditos</label>
+                        </div>
+                    </div>
+                   <input type="text" class="textError" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <label id="clienteMessage" class="text-left Message"></label>
+                <a id="clienteClose" class="modal-close waves-effect waves-green btn orange">Cancelar</a>
+                <a id="registerCliente" class="waves-effect waves-green btn">Registra</a>
+            </div>
+        </form>
+    </div>

@@ -7,9 +7,6 @@ class Principal {
     ) {
       document.getElementById("enlace1").classList.add("active");
       let user = JSON.parse(localStorage.getItem("user"));
-      if (user.Roles == "Admin") {
-        getAsk(1);
-      }
     }
 
     if (
@@ -29,6 +26,19 @@ class Principal {
       ].join("");
       getRoles();
       getUsers(1); //al invocarlo por primera vez entrará en la página 1
+    }
+    if(link == PATHNAME + "Clientes/clientes" || link==PATHNAME+"Clientes/clientes/"){
+      document.getElementById("fotoCliente").innerHTML = [
+        '<img class="responsive-img" src="',
+        PATHNAME + "RESOURCE/IMAGES/fotos/clientes/default.png",
+        '"title="',
+        ,
+        '"/>',
+      ].join("");
+      getCreditos();
+      document
+        .getElementById("files")
+        .addEventListener("change", fotoCliente, false);
     }
   }
 }

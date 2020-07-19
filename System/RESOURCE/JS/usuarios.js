@@ -39,6 +39,7 @@ class usuarios extends Uploadpicture {
                 }
               } catch (error) {
                 document.getElementById("indexMessage").innerHTML = response;
+               
               }
             }
           }
@@ -184,7 +185,7 @@ class usuarios extends Uploadpicture {
       data.append("usuario", document.getElementById("usuario").value);
       data.append("role", role);
       data.append("imagen", this.Imagen);
-      $.ajax({
+      $.ajax({//enviamos la información al servidor via ajax
         url: URL + url,
         data: data,
         cache: false,

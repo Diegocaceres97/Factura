@@ -28,6 +28,12 @@
 td, th{
 padding: 1px;
 }
+.textError{
+    visibility: hidden;
+    margin-left: -200px;
+    height: 0px;
+    width: 0px;
+}
 @media(max-width: 1024px){
 .side-nav{
     display: none;
@@ -50,6 +56,10 @@ padding: 1px;
 .otro{
     margin: 10px 10px 0px;
 }
+#c1 .card{
+    width: 45vw;
+    margin-left: 10px;
+}
 }
 
 
@@ -70,11 +80,22 @@ padding: 1px;
         width: 75%;
         margin: -395px 290px 0px;
     }
+    .container4{
+        width: 75%;
+        margin: -490px 290px 0px;
+    }
     .otro{
         width: 75%;
         margin: -300px 702px 0px;
+    }
+    #c1 .card{
+        width: 85%;
+    }
+    #c1{
+        margin:-500px 270px 0px 360px;
     }
 }
 .modal-footer{
     margin-top: -15px;
 }
+

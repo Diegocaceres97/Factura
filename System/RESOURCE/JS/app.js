@@ -1,7 +1,7 @@
 var data_User = null;
-var data_Ask=null;
+
 var Usuarios = new usuarios();
-var Ask = new Ans_Ask();
+
 var principal = new Principal();
 var loginUser =() =>{ //Variable funcion fantasma   
 Usuarios.loginUser();
@@ -31,16 +31,6 @@ $("#deleteUser").click(function(){
     Usuarios.deleteUser(data_User);
     data_User=null;
     });
-$("#registrarpre").click(function(){
-    Ask.registerAsk();
-    });
-    $("#registerClosed").click(function(){
-        Ask.reestablerAsk();
-        });
-        $("#deleteAsk").click(function(){
-            Ask.deleteAsk(data_Ask);
-            data_Ask=null;
-            });
 });
 var getUsers = (page) =>{
     let valor = document.getElementById("filtrarUser").value;
@@ -53,22 +43,25 @@ var deleteUser = (data) =>{
     document.getElementById("userName").innerHTML = data.Email;
     data_User = data;
 }
-var deleteAsk = (data) =>{
-    document.getElementById("userAsk").innerHTML = data.Pregunta;
-    data_Ask = data;
+
+//Clientes
+var cliente = new Clientes();
+$(function(){
+$("#registerCliente").click(function(){//capturamos el evento click del elemento
+ return cliente.registerCliente();   
+});
+$("#clienteClose").click(function(){//capturamos el evento click del elemento
+    return cliente.restablecerClientes();   
+   });
+});
+var getCreditos = () =>{
+    cliente.getCreditos();
 }
-var reestablerAsk = () =>{
-    Ask.reestablerAsk();
+var fotoCliente = (evt) =>{
+    //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
+     cliente.archivo(evt,"fotoCliente");
 }
 
-var getAsk = (page) =>{
-    let valor = document.getElementById("filtrarAsk").value;
-    Ask.getAsk(valor,page);
-}
-
-var dataAsk = (data)=>{
-    Ask.editAsk(data);
-    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL
