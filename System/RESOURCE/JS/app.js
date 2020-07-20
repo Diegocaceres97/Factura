@@ -61,7 +61,9 @@ var fotoCliente = (evt) =>{
     //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
      cliente.archivo(evt,"fotoCliente");
 }
-
+var getClientes = (page) =>{
+    cliente.getClientes(page);
+}
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL

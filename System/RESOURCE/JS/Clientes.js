@@ -83,4 +83,21 @@ $('select').formSelect();//inicializamos nuestro control de tipo select
       }
     );
   }
+  getClientes(page){
+    $.post(
+      URL + "Clientes/getClientes",
+      {search:$("#filtrarCliente").val(),page:page},
+      (response)=>{
+        console.log(response);
+        try {
+          let item=JSON.parse(response);
+          $("#resultCliente").html(item.dataFilter);//nombre de las propiedades item de Clientes.php obtenidas en la funcion
+          $("#paginadorCliente").html(item.paginador);
+          console.log(item);
+        } catch (error) {
+          $("#paginadorCliente").html(response);
+        }
+      }
+    );
+  }
 }

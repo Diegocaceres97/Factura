@@ -41,9 +41,18 @@ class Clientes extends Controllers
                                 $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
                             }
                             $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
-                            $array = array($_POST["nombre"],$_POST["apellido"],$_POST["nid"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
+                            $array1 = array($_POST["nombre"],$_POST["apellido"],$_POST["nid"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
                             $_POST["creditos"],"imagen");
-                        var_dump($this->clientesClass($array));//le pasamos la funcion a la clase en Anon
+                            $array2 = array("$0","--/--/--","$0","--/--/--","0",0);
+                            $data = $this->model->registerCliente($this->clientesClass($array1),
+                            $this->reportClientesClass($array2));
+                       // var_dump($this->clientesClass($array));//le pasamos la funcion a la clase en Anon
+                       if ($data==1) {
+                           echo "el email ".$_POST["email"]." ya esta registrado";
+                       } else {
+                           echo $data;
+                       }
+                       
                         }
                         }
             }
@@ -65,6 +74,47 @@ echo json_encode($data);
 }else{
 echo $data;//este seria el error
 }}
+}
+public function getClientes(){
+    // $urlImage = URL."Resource/images/fotos/clientes/".$value["Email"].".png";
+    $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        $count = 0;
+        $dataFilter = null;
+        //obtenemos los usuarios solicitados por medio del metodo alojado en el modelo y mandandole estos 3 parametros
+        $data = $this->model->getClientes($_POST["search"],$_POST["page"],$this->page);
+        if (is_array($data)) {
+            //manejamos los datos devueltos
+            $array = $data['results'];
+            foreach ($array as $key => $value) {
+                $dataCliente = json_encode($array[$count]);
+                $urlImage = URL."Resource/images/fotos/clientes/".$value["Email"].".png";
+                $dataFilter .= "<tr>".
+                "<td>".
+                 
+                "<img width='80' height='60'  src='".$urlImage."'/>".
+                "</td>".
+                "<td>".$value["Nombre"]."</td>".
+                "<td>".$value["Apellido"]."</td>".
+                "<td>".
+                "<a href='#modal1'  onclick='dataUser(".$dataCliente .")' class='btn modal-trigger'>Edit</a> | ".
+                
+                "<a href='#modal2' onclick='deleteUser(".$dataCliente .")' class='btn red lighten-1 modal-trigger' >Delete</a>".
+                "</td>". 
+                "</tr>";
+                $count++;
+
+            }
+            $paginador = "<p>Resultados " .$data["pagi_info"]."</p><p>".$data["pagi_navegacion"]."</p>";
+            echo json_encode( array(//lo convertimos a json para que el codigo por el lado del cliente capture esta info y verla en vista usuario
+                "dataFilter" => $dataFilter,
+                "paginador" => $paginador
+            ));
+        } else {
+            echo $data;
+        }
+        
+    }
 }
 }
 ?>

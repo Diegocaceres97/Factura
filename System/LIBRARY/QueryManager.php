@@ -35,6 +35,7 @@ class QueryManager
             $query ="INSERT INTO ".$table.$value;
             $sth = $this->pdo->prepare($query);
             $sth->execute((array)$param);
+           // $lastId = $this->pdo->lastInsertId();//Obtenemos la ultima id Auto incrementable colocada
             return true;
         } catch (PDOException $e) {
             return $e->getMessage();

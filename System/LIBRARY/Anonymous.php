@@ -30,7 +30,7 @@ $this->Imagen = $array[8];
     }
     public function clientesClass(array $array){//especificamos que parametro recibira (tipo) 
 return new class($array){
-    var $NID;
+    var $NID;//Referencia a las tabla de la base de datos
     var $Nombre;
     var $Apellido;
     var $Email;
@@ -57,14 +57,14 @@ var $FechaDeuda;
 var $Pago;
 var $FechaPago;
 var $Ticket;
-var $IdCliente;
+var $IdClientes;
 function __construct($array){
     $this->Deuda = $array[0];
     $this->FechaDeuda = $array[1];
     $this->Pago = $array[2];
     $this->FechaPago = $array[3];
     $this->Ticket = $array[4];
-    $this->IdCliente = $array[5];
+    $this->IdClientes = $array[5];
 }
     };
     }

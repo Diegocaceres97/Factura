@@ -97,10 +97,8 @@ echo $data;
                     $dataFilter .= "<tr>".
                     "<td>".
                      
-                    "<img width='80' height='60' src='".$urlImage."'/>
-                    
-                    </lu>.
-                    </td>".
+                    "<img width='80' height='60' src='".$urlImage."'/>".
+                    "</td>".
                     "<td>".$value["Nombre"]."</td>".
                     "<td>".$value["Usuario"]."</td>".
                     "<td>".$value["Roles"]."</td>".
