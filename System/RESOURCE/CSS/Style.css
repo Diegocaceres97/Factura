@@ -60,6 +60,12 @@ padding: 1px;
     width: 45vw;
     margin-left: 10px;
 }
+.container5 .row .card {
+    display: none;
+   }
+   #filterClientes{
+       margin-left: 110px;
+   }
 }
 
 
@@ -84,6 +90,16 @@ padding: 1px;
         width: 75%;
         margin: -490px 290px 0px;
     }
+    .container5{
+        width: 75%;
+        margin: -520px 350px 0px;
+    }
+    .container5 h5{
+        margin: -520px 350px 0px;
+    }
+   .container5 .row .card {
+    width: 22vw;
+   }
     .otro{
         width: 75%;
         margin: -300px 702px 0px;

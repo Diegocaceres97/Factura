@@ -8,7 +8,7 @@ class Clientes extends Controllers
     }
     public function clientes(){
         if (null!=Session::getSession("User")) {//verificamos si se esta logueado
-            $this->view->render($this,"clientes");
+            $this->view->render($this,"clientes",null);
         } else {
             header("Location:".URL);
         }
@@ -41,7 +41,7 @@ class Clientes extends Controllers
                                 $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
                             }
                             $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
-                            $array1 = array($_POST["nombre"],$_POST["apellido"],$_POST["nid"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
+                            $array1 = array($_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
                             $_POST["creditos"],"imagen");
                             $array2 = array("$0","--/--/--","$0","--/--/--","0",0);
                             $data = $this->model->registerCliente($this->clientesClass($array1),
@@ -89,6 +89,13 @@ public function getClientes(){
             foreach ($array as $key => $value) {
                 $dataCliente = json_encode($array[$count]);
                 $urlImage = URL."Resource/images/fotos/clientes/".$value["Email"].".png";
+                $url=URL."Clientes/reportes/?email=".$value["Email"];
+                if ("Admin"==$user["Roles"]) {
+                    $botonReporte="<a href='".$url."' class='btn green lighten-1 modal-trigger'>Reportes</a>";
+                } else {
+                    $botonReporte="";
+                }
+                
                 $dataFilter .= "<tr>".
                 "<td>".
                  
@@ -98,9 +105,8 @@ public function getClientes(){
                 "<td>".$value["Apellido"]."</td>".
                 "<td>".
                 "<a href='#modal1'  onclick='dataUser(".$dataCliente .")' class='btn modal-trigger'>Edit</a> | ".
-                
-                "<a href='#modal2' onclick='deleteUser(".$dataCliente .")' class='btn red lighten-1 modal-trigger' >Delete</a>".
-                "</td>". 
+                $botonReporte
+                ."</td>". 
                 "</tr>";
                 $count++;
 
@@ -114,6 +120,35 @@ public function getClientes(){
             echo $data;
         }
         
+    }
+}
+public function reportes(){
+    $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        if ("Admin"==$user["Roles"]) {
+            //echo $email;
+        $this->view->render($this,"reportes", null);
+        //otra forma de pasar datos desde el servidor y url:
+            //$this->view->render($this,"reportes", $_GET["email"]);
+        }else{
+            header("Location:".URL."Clientes/clientes");
+        }
+    }
+}
+public function getReporteCliente(){
+    $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        if ("Admin"==$user["Roles"]) {
+            //verificamos si el dato obtenido es valido
+        if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+echo "bien";
+        }else{
+            echo json_encode( array(
+                "data" => 0,
+
+            ));
+        }
+        }
     }
 }
 }

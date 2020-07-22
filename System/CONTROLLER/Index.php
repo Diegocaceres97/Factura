@@ -10,7 +10,7 @@ class Index extends Controllers
       if (null != $user) {//con esto evitamos que cuando se inicia sesion y le de atras
         header("Location:".URL."Principal/principal");     //vuelva al index 
       } else {
-        $this ->view-> render($this,"index");//Invocamos el metodo render donde lo tenemos referenciado ya 
+        $this ->view-> render($this,"index",null);//Invocamos el metodo render donde lo tenemos referenciado ya 
         //en el controllers.php de library
       }       
     }

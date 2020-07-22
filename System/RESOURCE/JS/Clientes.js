@@ -100,4 +100,13 @@ $('select').formSelect();//inicializamos nuestro control de tipo select
       }
     );
   }
+  getReporteCliente(email){
+    $.post(
+      URL + "Clientes/getReporteCliente",
+      {email: email},
+      (response)=>{
+        console.log(response);
+      }
+    );
+  }
 }

@@ -7,7 +7,7 @@ class Usuarios extends Controllers
     }
     public function usuarios(){
         if (null != Session::getSession("User")){//comprobara si ha destruido datos de sesion
-            $this->view->render($this,"usuarios"); //invocamos el objeto render desde controllers
+            $this->view->render($this,"usuarios",null); //invocamos el objeto render desde controllers
         } else {//asi evitamos que entre despés de salido
             header("Location:".URL);
         }       

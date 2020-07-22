@@ -7,7 +7,7 @@ class Principal extends Controllers{
         if (null != Session::getSession("User")){//comprobara si ha destruido datos de sesion
             $user = Session::getSession("User");
             if ("Admin"==$user["Roles"]) {
-            $this->view->render($this,"principal"); //invocamos el objeto render desde controllers
+            $this->view->render($this,"principal",null); //invocamos el objeto render desde controllers
             }
         } else {//asi evitamos que entre despés de salido
             header("Location:".URL);

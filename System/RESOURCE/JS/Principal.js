@@ -43,6 +43,14 @@ class Principal {
               .addEventListener("change", fotoCliente, false);
               getClientes(1);
           break;
+          case "Clientesreportes":
+          var email = getParameterByName('email');
+          if (email!=null) {
+            new Clientes().getReporteCliente(email);
+          }else{
+            window.location.href= URL + "Clientes/clientes";
+          }
+          break;
       default:
         break;
     }
