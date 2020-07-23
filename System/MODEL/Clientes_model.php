@@ -60,6 +60,45 @@ if (is_array($response)) {
                     //el porque de no colocar en el segundo clientes la c inicial en minuscula es pq llamamos
                     //al metodo pero como ya tiene el get, no es necesario volver a colocar
     }
+    function getReporteCliente($email){
+        $where = " WHERE Email = :Email";
+        $param = array('Email' =>$email);
+        $response1 = $this->db->select1("*","clientes",$where,$param);
+   if(is_array($response1)){
+$response1=$response1["results"];
+if(0 != count($response1)){
+$where = " WHERE IdClientes = :IdClientes";
+$response2 = $this->db->select1("*","reportes_clientes",$where,array('IdClientes' => $response1[0]["IdClientes"]));
+if (is_array($response2)) {
+    $response2 = $response2['results'];
+    if (0!= count($response2)) {//verificamos si tiene datos
+        return array(
+            "Nombre" => $response1[0]["Nombre"],
+            "Apellido" => $response1[0]["Apellido"],
+            "Email" => $response1[0]["Email"],
+            "IdReportes" => $response2[0]["IdReportes"],
+            "Deuda" => $response2[0]["Deuda"],
+            "FechaDeuda" => $response2[0]["FechaDeuda"],
+            "Pago" => $response2[0]["Pago"],
+            "FechaPago" => $response2[0]["FechaPago"],
+            "Ticket" => $response2[0]["Ticket"],
+            "IdClientes" => $response2[0]["IdClientes"]
+        );
+    } else {
+        return 0;
+    }
+    
+} else {
+    return $response2;
+}
+ 
+}else{
+return 0;
+}
+   }else{
+    return $response1;
+   }
+    }
 }
 
 ?>

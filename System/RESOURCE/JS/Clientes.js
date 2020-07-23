@@ -101,11 +101,32 @@ $('select').formSelect();//inicializamos nuestro control de tipo select
     );
   }
   getReporteCliente(email){
-    $.post(
+    $.post(//Mandamos por post al backend  o parte del servidor
       URL + "Clientes/getReporteCliente",
       {email: email},
       (response)=>{
         console.log(response);
+        try {
+          let item = JSON.parse(response);
+          console.log(item);
+          if (0!=item.data) {
+            $("#ClienteNombre").html(item.array.Nombre);
+            $("#clienteApellido").html(item.array.Apellido);
+            document.getElementById("clienteReporte").innerHTML = ['<img class="responsive-img valign profile-image img" src="',URL + FOTOS +
+          "clientes/"+item.array.Email+".png", '"title="', escape(item.array.Email), '"/>'].join('');
+          $("#deuda").html(item.array.Deuda);
+          $("#fechadeuda").html(item.array.FechaDeuda);
+          $("#pago").html(item.array.Pago);
+          $("#fechapago").html(item.array.FechaPago);
+          $("#ticket").html(item.array.Ticket);
+          $("#clienteNombres").html("Cliente: " + item.array.Nombre+" "+item.array.Apellido);
+          $("#deudas").html(item.array.Deuda);
+          } else {
+            window.location.href= URL + "Clientes/clientes";
+          }
+        } catch (error) {
+          $("#reporteClienteMessage").html(response);
+        }
       }
     );
   }

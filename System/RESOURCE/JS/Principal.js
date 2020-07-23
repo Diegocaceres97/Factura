@@ -45,9 +45,12 @@ class Principal {
           break;
           case "Clientesreportes":
           var email = getParameterByName('email');
-          if (email!=null) {
+          if (email!=null) {//todas estas son validaciones que brindan de mas seguridadd al proyecto
+            if (validarEmail(email)) {
             new Clientes().getReporteCliente(email);
-          }else{
+            }else{
+              window.location.href= URL + "Clientes/clientes";
+          }}else{
             window.location.href= URL + "Clientes/clientes";
           }
           break;

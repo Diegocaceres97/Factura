@@ -36,6 +36,8 @@ class Clientes extends Controllers
                             if(empty($_POST["direccion"])){
                                 echo "el campo direccion es obligario";
                         }else{
+                            $archivo = null;
+                            $tipo = null;
                             if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
                                 $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
                                 $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
@@ -141,7 +143,19 @@ public function getReporteCliente(){
         if ("Admin"==$user["Roles"]) {
             //verificamos si el dato obtenido es valido
         if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
-echo "bien";
+$data = $this->model->getReporteCliente($_POST["email"]);
+if (is_array($data)) {
+    echo json_encode(array(//convertimos este array en un JSON
+        "array" => $data,
+        "data" => 1 //indicamos que tenemos registros por eso el 1
+    ));
+} else {
+    echo json_encode( array(
+        "data" => 0,
+
+    ));
+}
+
         }else{
             echo json_encode( array(
                 "data" => 0,

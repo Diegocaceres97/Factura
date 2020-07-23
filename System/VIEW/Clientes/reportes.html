@@ -5,10 +5,10 @@
     </center>
     <div class="row">
       <div class="col s3 m3">
-        <div class="card" >
+        <div class="card">
           <div class="card-content white-text">
             <center>
-              <span class="card-title blue-grey-text" >Foto</span>
+              <span class="card-title blue-grey-text">Foto</span>
               <output id="clienteReporte"> </output>
             </center>
           </div>
@@ -30,7 +30,7 @@
             <tr>
               <td>
                 <!--<?php echo $models ?>-->
-               <!-- <label id="ClienteNombre"></label>-->
+                <label id="ClienteNombre"></label>
               </td>
               <td>
                 <label id="clienteApellido"></label>
@@ -44,19 +44,30 @@
           <tbody>
             <tr>
               <td>
-                <div class="input-field col s12">
-                  <div class="row">
-                    <div class="input-field col s12">
-                      
-                      <input
-                        type="text"
-                        id="filterClientes"
-                        placeholder="Buscar cliente"
-                      />
-                    
+                <form method="POST" id="validate" class="col s12">
+                  <div class="input-field col s12">
+                    <div class="row">
+                      <div class="input-field col s12">
+                        <input
+                          type="text"
+                          class="validate"
+                          id="pagos"
+                          placeholder="Monto a pagar"
+                          required
+                        />
+                        <label for="nombre" class="error">Pago</label>
+                      </div>
+                      <div class="input-field col s12">
+                        <button
+                          type="submit"
+                          class="waves-effect waves-light btn-small light-green darken-3"
+                        >
+                          Cobrar
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </form>
               </td>
             </tr>
           </tbody>
@@ -64,34 +75,63 @@
       </div>
     </div>
     <div class="row">
+      <a
+        class="waves-effect waves-light orange darken-2 btn-small"
+        onclick="printThisDiv('imprimirticket')"
+      >
+        Ticket</a
+      >
+      <a class="btn-flat disabled">Deuda: <label id="deudas"></label></a>
+      <div id="imprimirticket">
+        
         <ul class="collapsible">
-            <li>
-                <div class="collapsible-header">
-                    <img src="http://localhost/Factura/System/RESOURCE/IMAGES/Iconos/clientes1.png" alt="clientes_reportes"
-                     class="responsive">Clientes
-                </div>
-                <div class="collapsible-bod">
-<table class="table">
-    <thead>
-        <tr>
-            <th>Deuda</th>
-            <th>Fecha deuda</th>
-            <th>Pago</th>
-            <th>Fecha Pago</th>
-            <th>Ticket</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
-</table>
-<div id="paginadorCliente">
-
-</div>
-                </div>
-            </li>
+          <li>
+            <div class="collapsible-header">
+              <img
+                src="http://localhost/Factura/System/RESOURCE/IMAGES/Iconos/clientes1.png"
+                alt="clientes_reportes"
+                class="responsive"
+              /> <label style="font-size: 15px" id="clienteNombres"></label>
+            </div>
+            <div class="collapsible-bod">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Deuda</th>
+                    <th>Fecha deuda</th>
+                    <th>Pago</th>
+                    <th>Fecha Pago</th>
+                    <th>Ticket</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p id="deuda"></p>
+                    </td>
+                    <td>
+                      <p id="fechadeuda"></p>
+                    </td>
+                    <td>
+                      <p id="pago"></p>
+                    </td>
+                    <td>
+                      <p id="fechapago"></p>
+                    </td>
+                    <td>
+                      <p id="ticket"></p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="paginadorCliente"></div>
+            </div>
+          </li>
         </ul>
+      </div>
     </div>
     <div class="modal-footer">
-        <label id="reporteClienteMessage" class="text-left Message"></label>
+      <label id="reporteClienteMessage" class="text-left Message"></label>
     </div>
   </div>
 </div>
