@@ -70,6 +70,13 @@ padding: 1px;
    #filterClientes{
        margin-left: 110px;
    }
+   #pagoM{
+ margin-left: 145px;    
+}
+#logo{
+
+    font-size: 15px;
+}
 }
 
 
@@ -95,7 +102,7 @@ padding: 1px;
         margin: -490px 290px 0px;
     }
     .container5{
-        width: 75%;
+        width: 73vw;
         margin: -520px 350px 0px;
     }
     .container5 h5{
@@ -116,6 +123,9 @@ padding: 1px;
     }
     #imprimirticket{
         margin-left: -44px;
+    }
+    #reporT{
+margin-left: 20px;
     }
 }
 .modal-footer{
