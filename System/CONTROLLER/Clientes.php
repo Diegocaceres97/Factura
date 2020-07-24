@@ -45,7 +45,7 @@ class Clientes extends Controllers
                             $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
                             $array1 = array($_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
                             $_POST["creditos"],"imagen");
-                            $array2 = array("$0","--/--/--","$0","--/--/--","0",0);
+                            $array2 = array($_POST["creditos"],"--/--/--","$0","--/--/--","0",0);
                             $data = $this->model->registerCliente($this->clientesClass($array1),
                             $this->reportClientesClass($array2));
                        // var_dump($this->clientesClass($array));//le pasamos la funcion a la clase en Anon
@@ -164,6 +164,48 @@ if (is_array($data)) {
         }
         }
     }
+}
+public function setPagos(){
+    $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        date_default_timezone_set('UTC');
+        if ("Admin"==$user["Roles"]) {
+        $pago = (float) $_POST["pagos"];
+        if(is_float($pago) && 0 < $pago){
+           // $pago = number_format($pago); //lo asignamos para que sea en millares
+       // $array=json_decode($_POST["report"],true);
+        //$array = $array["array"];
+        $array = Session::getSession("reportCliente");
+        $deuda = str_replace("$","",$array["Deuda"]);
+        $deuda = str_replace(",","",$deuda);
+        
+      //  $deuda = (float)$deuda;
+        //$deuda = number_format($deuda);
+        if ($deuda==0) {
+            echo "El cliente no contiene deuda";
+        } else {
+            if ($deuda < $pago) {
+            echo "Se ha sobrepasado del pago de la Deuda";
+            } else {
+              $deuda =$deuda - $pago;
+              $pago = number_format($pago);
+              $arrayReport = array(
+                  "$".number_format($deuda),
+                  date("d-m-y"),
+                  "$".$pago,
+                  date("d-m-y"),
+                  $array["Ticket"],
+                  $array["IdClientes"]
+              );
+              echo $this->model->setPagos($this->reportClientesClass($arrayReport),
+              $array["IdReportes"]);
+            }
+            
+        }
+        }else{
+            echo "el dato ingresado no es correcto";
+        }
+        }}
 }
 }
 ?>

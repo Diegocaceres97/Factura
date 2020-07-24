@@ -72,7 +72,7 @@ $response2 = $this->db->select1("*","reportes_clientes",$where,array('IdClientes
 if (is_array($response2)) {
     $response2 = $response2['results'];
     if (0!= count($response2)) {//verificamos si tiene datos
-        return array(
+        $data= array(
             "Nombre" => $response1[0]["Nombre"],
             "Apellido" => $response1[0]["Apellido"],
             "Email" => $response1[0]["Email"],
@@ -84,6 +84,9 @@ if (is_array($response2)) {
             "Ticket" => $response2[0]["Ticket"],
             "IdClientes" => $response2[0]["IdClientes"]
         );
+        Session::setSession("reportCliente",$data);//almacenamos la info por el lado del servidor 
+        //por medio de la sesión (que es estatica)
+        return $data;
     } else {
         return 0;
     }
@@ -99,6 +102,18 @@ return 0;
     return $response1;
    }
     }
+public function setPagos($model,$idReporte){
+    $value = "Deuda = :Deuda, FechaDeuda = :FechaDeuda, Pago = :Pago,
+    FechaPago = :FechaPago, Ticket = :Ticket,IdClientes = :IdClientes";
+    $where = " WHERE IdReportes = ".$idReporte;
+    $data = $this->db->update("reportes_clientes",$model,$value,$where);
+    if (is_bool($data)) {
+        return 0;
+    } else {
+        return $data;
+    }
+    
+   // echo var_dump($model);
 }
-
+}
 ?>

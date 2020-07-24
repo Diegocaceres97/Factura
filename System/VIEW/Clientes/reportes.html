@@ -61,10 +61,14 @@
                         <button
                           type="submit"
                           class="waves-effect waves-light btn-small light-green darken-3"
-                        >
+                          onclick="return cliente.setPagos();"
+                        > <!--Con el return evitamos el reenvio de datos-->
                           Cobrar
                         </button>
                       </div>
+                    </div>
+                    <div class="row">
+                      <label class="text-left Message" id="pagoCliente" ></label>
                     </div>
                   </div>
                 </form>
@@ -88,7 +92,7 @@
           <li>
             <div class="collapsible-header">
               <img
-                src="http://localhost/Factura/System/RESOURCE/IMAGES/Iconos/clientes1.png"
+                src="http://localhost/Factura/System/RESOURCE/IMAGES/Iconos/clientes2.png"
                 alt="clientes_reportes"
                 class="responsive"
               /> <label style="font-size: 15px" id="clienteNombres"></label>

@@ -45,6 +45,10 @@ padding: 1px;
 .container2{
     margin: 10px 10px 0px;
 }
+#c1 .row .card{
+    margin-top: 20px;
+    width: 40vw;
+}
 .container3{
     margin: 10px 10px 0px;
 }
@@ -109,6 +113,9 @@ padding: 1px;
     }
     #c1{
         margin:-500px 270px 0px 360px;
+    }
+    #imprimirticket{
+        margin-left: -44px;
     }
 }
 .modal-footer{

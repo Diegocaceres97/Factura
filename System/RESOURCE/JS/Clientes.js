@@ -121,6 +121,7 @@ $('select').formSelect();//inicializamos nuestro control de tipo select
           $("#ticket").html(item.array.Ticket);
           $("#clienteNombres").html("Cliente: " + item.array.Nombre+" "+item.array.Apellido);
           $("#deudas").html(item.array.Deuda);
+          localStorage.setItem("reportCliente", response);
           } else {
             window.location.href= URL + "Clientes/clientes";
           }
@@ -129,5 +130,25 @@ $('select').formSelect();//inicializamos nuestro control de tipo select
         }
       }
     );
+  }
+  setPagos(){
+    if (null != localStorage.getItem("reportCliente")) {
+    $.post(
+      URL + "Clientes/setPagos",
+      {pagos:$("#pagos").val()
+    },
+(response)=>{
+  console.log(response);
+  if (response==0) {
+    let cliente = JSON.parse(localStorage.getItem("reportCliente"));
+    
+    this.getReporteCliente(cliente.array.Email);
+  } else {
+    $("#pagoCliente").html(response);
+  }
+}
+    );
+}
+    return false;
   }
 }
