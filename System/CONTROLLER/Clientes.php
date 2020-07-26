@@ -38,13 +38,9 @@ class Clientes extends Controllers
                         }else{
                             $archivo = null;
                             $tipo = null;
-                            if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
-                                $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
-                                $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
-                            }
-                            $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
+                            
                             $array1 = array($_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
-                            $_POST["creditos"],"imagen");
+                            $_POST["creditos"]);
                             $array2 = array($_POST["creditos"],"--/--/--","$0","--/--/--","0",0);
                             $data = $this->model->registerCliente($this->clientesClass($array1),
                             $this->reportClientesClass($array2));
@@ -52,7 +48,16 @@ class Clientes extends Controllers
                        if ($data==1) {
                            echo "el email ".$_POST["email"]." ya esta registrado";
                        } else {
+                           if ($data == 0) {
+                            if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
+                                $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
+                                $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
+                            }
+                            $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
+                            echo 0;
+                           }else{
                            echo $data;
+                           }
                        }
                        
                         }
@@ -106,7 +111,7 @@ public function getClientes(){
                 "<td>".$value["Nombre"]."</td>".
                 "<td>".$value["Apellido"]."</td>".
                 "<td>".
-                "<a href='#modal1'  onclick='dataUser(".$dataCliente .")' class='btn modal-trigger'>Edit</a> | ".
+                "<a href='#modal1'  onclick='dataCliente(".$dataCliente .")' class='btn modal-trigger'>Edit</a> | ".
                 $botonReporte
                 ."</td>". 
                 "</tr>";
@@ -191,14 +196,23 @@ public function setPagos(){
               $pago = number_format($pago);
               $arrayReport = array(
                   "$".number_format($deuda),
-                  date("d-m-y"),
+                  date("d-m-Y"),
                   "$".$pago,
-                  date("d-m-y"),
+                  date("d-m-Y"),
                   $array["Ticket"],
                   $array["IdClientes"]
               );
+              $ticket = array(
+                  "Cliente" ,
+                  "$".number_format($deuda),
+                  date("d-m-Y"),
+                  "$".$pago,
+                  date("d-m-Y"),
+                  $array["Ticket"],
+                  $array["Email"]
+              );
               echo $this->model->setPagos($this->reportClientesClass($arrayReport),
-              $array["IdReportes"]);
+              $this->ticketClass($ticket),$array["IdReportes"]);
             }
             
         }
@@ -206,6 +220,66 @@ public function setPagos(){
             echo "el dato ingresado no es correcto";
         }
         }}
+}
+public function editCliente(){
+    $user = Session::getSession("User");
+    if (null!=$user) {
+        if ("Admin"==$user["Roles"]) {
+            if(empty($_POST["nombre"])){
+                echo "el campo nombre es obligario";
+        }else{
+            if(empty($_POST["apellido"])){
+                echo "el campo apellido es obligario";
+        }else{
+            if(empty($_POST["nid"])){
+                echo "el campo nid es obligario";
+                    }else{
+                        if(empty($_POST["telefono"])){
+                            echo "el campo telefono es obligario";
+                    }else{
+                        if(empty($_POST["email"])){
+                            echo "el campo email es obligario";
+                    }else{
+                        if(empty($_POST["direccion"])){
+                            echo "el campo direccion es obligario";
+                    }else{
+                        $array1 = array($_POST["nid"],$_POST["nombre"],$_POST["apellido"],$_POST["telefono"],$_POST["email"],$_POST["direccion"],
+                        $_POST["creditos"]);
+                       $data = $this->model->editCliente($_POST["idCliente"],$this->clientesClass($array1));
+                       if ($data==1) {
+                           echo "el email ".$_POST["email"]." ya esta registrado";
+                       } else {
+                           return $data;
+                       }
+                       
+                        /* $archivo = null;
+                        $tipo = null;
+                        if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
+                            $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
+                            $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
+                        }
+                        $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
+                        
+                        $array2 = array($_POST["creditos"],"--/--/--","$0","--/--/--","0",0);
+                        $data = $this->model->registerCliente($this->clientesClass($array1),
+                        $this->reportClientesClass($array2));
+                   // var_dump($this->clientesClass($array));//le pasamos la funcion a la clase en Anon
+                   if ($data==1) {
+                       echo "el email ".$_POST["email"]." ya esta registrado";
+                   } else {
+                       echo $data;
+                   }*/
+                   
+                    }
+                    }
+        }
+        }
+    }
+}
+} else {
+        echo "No tiene autorizacion";
+    }
+}
 }
 }
 ?>

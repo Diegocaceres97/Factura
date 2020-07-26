@@ -51,11 +51,11 @@ $("#registerCliente").click(function(){//capturamos el evento click del elemento
  return cliente.registerCliente();   
 });
 $("#clienteClose").click(function(){//capturamos el evento click del elemento
-    return cliente.restablecerClientes();   
+    return cliente.restablecerClientes(1);   
    });
 });
 var getCreditos = () =>{
-    cliente.getCreditos();
+    cliente.getCreditos(null,1);
 }
 var fotoCliente = (evt) =>{
     //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
@@ -63,6 +63,9 @@ var fotoCliente = (evt) =>{
 }
 var getClientes = (page) =>{
     cliente.getClientes(page);
+}
+var dataCliente=(data)=>{
+    cliente.getCliente(data);
 }
 //Anonimo
 $().ready(()=>{

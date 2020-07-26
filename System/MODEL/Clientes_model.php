@@ -76,6 +76,7 @@ if (is_array($response2)) {
             "Nombre" => $response1[0]["Nombre"],
             "Apellido" => $response1[0]["Apellido"],
             "Email" => $response1[0]["Email"],
+            "Creditos" => $response1[0]["Creditos"],
             "IdReportes" => $response2[0]["IdReportes"],
             "Deuda" => $response2[0]["Deuda"],
             "FechaDeuda" => $response2[0]["FechaDeuda"],
@@ -102,18 +103,62 @@ return 0;
     return $response1;
    }
     }
-public function setPagos($model,$idReporte){
-    $value = "Deuda = :Deuda, FechaDeuda = :FechaDeuda, Pago = :Pago,
-    FechaPago = :FechaPago, Ticket = :Ticket,IdClientes = :IdClientes";
-    $where = " WHERE IdReportes = ".$idReporte;
-    $data = $this->db->update("reportes_clientes",$model,$value,$where);
-    if (is_bool($data)) {
-        return 0;
+public function setPagos($model1,$model2,$idReporte){
+    $Ticket=Codigo::Ticket($this->db,"ticket");//ejecuta la funcion estatica de una
+    if (is_numeric($Ticket)) {
+        $value = "Deuda = :Deuda, FechaDeuda = :FechaDeuda, Pago = :Pago,
+        FechaPago = :FechaPago, Ticket = :Ticket,IdClientes = :IdClientes";
+        $where = " WHERE IdReportes = ".$idReporte;
+        $model1->Ticket = (string)$Ticket;//inicializamos este dato almacenado en el objeto que contiene el # de ticket
+       //este dato esta en la clase anonima guardada también como Ticket (act)
+        $data = $this->db->update("reportes_clientes",$model1,$value,$where);
+        if (is_bool($data)) {
+           $value = "(Propietario,Deuda,FechaDeuda,Pago,FechaPago,Ticket,Email) VALUES
+           (:Propietario,:Deuda,:FechaDeuda,:Pago,:FechaPago,:Ticket,:Email)";
+           $model2->Ticket=(string)$Ticket;
+           $data= $this->db->insert("ticket",$model2,$value);
+           if (is_bool($data)) {
+               return 0;
+           } else {
+               return $data;
+           }
+           
+        } else {
+            return $data;
+        }
     } else {
-        return $data;
+       return $Ticket;
     }
     
+    
+    
    // echo var_dump($model);
+}
+public function editCliente($idCliente,$cliente){
+    $where = " WHERE Email= :Email";
+    $response = $this->db->select1("*","clientes",$where,array('Email' => $cliente->Email));
+    if (is_array($response)) {
+        $response = $response['results'];
+        $value = "NID = :NID,Nombre = :Nombre,Apellido = :Apellido,Email = :Email,Telefono = :Telefono,
+        Direccion = :Direccion,Creditos = :Creditos";
+        $where = " WHERE IdClientes =".$idCliente;
+        
+        if (0==count($response)) {
+            echo "exito";
+        } else {
+            
+if ($response[0]['IdClientes'] ==$idCliente) {
+    echo "exito";
+}else{
+    return 1;
+}
+        }
+         
+         
+    } else {
+        return $response;
+    }
+    
 }
 }
 ?>

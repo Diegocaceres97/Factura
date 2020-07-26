@@ -68,6 +68,26 @@ function __construct($array){
 }
     };
     }
+    public function ticketClass(array $array){
+        return new class($array){
+            var $Propietario;
+            var $Deuda;
+            var $FechaDeuda;
+            var $Pago;
+            var $FechaPago;
+            var $Ticket;
+            var $Email;
+            function __construct($array){
+                $this->Propietario = $array[0];
+                $this->Deuda = $array[1];
+                $this->FechaDeuda = $array[2];
+                $this->Pago = $array[3];
+                $this->FechaPago = $array[4];
+                $this->Ticket = $array[5];
+                $this->Email = $array[6];
+            }
+        };
+    }
     
 }
 ?>
