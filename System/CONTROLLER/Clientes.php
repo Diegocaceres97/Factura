@@ -249,7 +249,19 @@ public function editCliente(){
                        if ($data==1) {
                            echo "el email ".$_POST["email"]." ya esta registrado";
                        } else {
-                           return $data;
+                           if ($data==0) {
+                            $archivo = null;
+                            $tipo = null;
+                            if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
+                                $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
+                                $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
+                            }
+                            $this->image->cargar_imagenSC($tipo,$archivo,$_POST["email"],"clientes");
+                           } else {
+                            return $data;
+                           }
+                           
+                           
                        }
                        
                         /* $archivo = null;
@@ -279,6 +291,49 @@ public function editCliente(){
 } else {
         echo "No tiene autorizacion";
     }
+}
+}
+public function getTickets(){//recordemos que todo esto que capturemos se enviará al JS por medio del JSON
+    $user = Session::getSession("User");
+    if (null!=$user) {
+        if ("Admin"==$user["Roles"]) {
+            $dataFilter = null;
+            $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+            if (is_array($data)) {
+                foreach ($data['results'] as $key => $value) {
+                   $dataFilter .="<tr>" .
+                   "<td>".$value["Deuda"]."</td>".
+                   "<td>".$value["FechaDeuda"]."</td>".
+                   "<td>".$value["Pago"]."</td>".
+                   "<td>".$value["FechaPago"]."</td>".
+                   "<td>".$value["Ticket"]."</td>".
+                   "</td>".
+                   "</tr>";
+                }
+                $paginador = "</p> <p>Resultados " .$data["pagi_info"]."</p><p>".$data["pagi_navegacion"]."</p>";
+                echo json_encode( array(//lo convertimos a json para que el codigo por el lado del cliente capture esta info y verla en vista usuario
+                    "dataFilter" => $dataFilter,
+                    "paginador" => $paginador
+                ));
+            } else {
+                return $data;
+            }
+            
+        }
+    }
+}
+public function exportarExcel(){
+    $user = Session::getSession("User");
+    if (null!=$user) {
+        if ("Admin"==$user["Roles"]) {
+            $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+            if (is_array($data)) {
+                $this->export->exportarExcel($data['results'],"TicketClientes.xls","Ticket");
+            } else {
+                return $data;
+            }
+            
+        }
 }
 }
 }

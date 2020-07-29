@@ -144,11 +144,22 @@ public function editCliente($idCliente,$cliente){
         $where = " WHERE IdClientes =".$idCliente;
         
         if (0==count($response)) {
-            echo "exito";
+           $data = $this->db->update("clientes",$cliente,$value,$where);
+           if (is_bool($data)) {
+               return 0;
+           } else {
+               return $data;
+           }
+           
         } else {
             
 if ($response[0]['IdClientes'] ==$idCliente) {
-    echo "exito";
+    $data = $this->db->update("clientes",$cliente,$value,$where);
+    if (is_bool($data)) {
+        return 0;
+    } else {
+        return $data;
+    }
 }else{
     return 1;
 }
@@ -159,6 +170,14 @@ if ($response[0]['IdClientes'] ==$idCliente) {
         return $response;
     }
     
+}
+public function getTickets($filter,$page,$model){
+    $where = " WHERE Propietario = :Propietario AND Email LIKE :Email";
+    $array = array(
+        'Propietario' => "Cliente",
+        'Email' => '%'.$filter.'%'
+    );
+    return $model->paginador("*","ticket","Tickets",$page,$where,$array);
 }
 }
 ?>

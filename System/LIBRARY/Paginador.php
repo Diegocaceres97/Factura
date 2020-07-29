@@ -28,7 +28,7 @@ $_pagi_actual=$page;
 }
 //consultando la bd y la tabla
 
-$response = $this->db->select1($columns,$table,null,null);
+$response = $this->db->select1($columns,$table,$where,$array);
 if (is_array($response)) {
     $_pagi_result = $response["results"];
 } else {

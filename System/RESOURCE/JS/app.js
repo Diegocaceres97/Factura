@@ -3,6 +3,7 @@ var data_User = null;
 var Usuarios = new usuarios();
 
 var principal = new Principal();
+
 var loginUser =() =>{ //Variable funcion fantasma   
 Usuarios.loginUser();
 
@@ -45,6 +46,7 @@ var deleteUser = (data) =>{
 }
 
 //Clientes
+var pageTickets = 0;
 var cliente = new Clientes();
 $(function(){
 $("#registerCliente").click(function(){//capturamos el evento click del elemento
@@ -66,6 +68,13 @@ var getClientes = (page) =>{
 }
 var dataCliente=(data)=>{
     cliente.getCliente(data);
+}
+var getTickets = (page) =>{
+    pageTickets = page;
+    cliente.getTickets(page);
+}
+var exportarExcel = ()=>{
+    cliente.exportarExcel(pageTickets);
 }
 //Anonimo
 $().ready(()=>{

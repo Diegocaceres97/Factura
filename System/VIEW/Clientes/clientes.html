@@ -6,7 +6,7 @@
           <a href="#test1">Usuarios</a>
         </li>
         <li class="tab col s3">
-          <a href="#test2">Historial</a>
+          <a href="#test2" onclick="cliente.getTickets(1)">Historial</a>
         </li>
       </ul>
     </div>
@@ -63,7 +63,52 @@
         </ul>
     </div>
 
-    <div class="col s12" id="test2"></div>
+    <div class="col s12" id="test2">
+    <div class="row">
+        <div class="input-field col s6">
+<input type="text" id="searchTicket" placeholder="Buscar Ticket" onkeyup="getTickets(1)">
+<label for="searchTicket">Buscar ticket</label>
+</div>
+    </div>
+    <button class="waves-effect waves-light btn-small amber darken-3" onclick="exportarExcel()">Export</button>
+    <ul class="collapsible">
+<li>
+    <div class="collapsible-header">
+        <img src="../RESOURCE/IMAGES/Iconos/clientes2.png" alt="" class="responsive"><label
+        style="font-size: 15px;">Ticket</label>
+    </div>
+    <div class="collapsible-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Deuda
+                    </th>
+                    <th>
+                        Fecha Deuda
+                    </th>
+                    <th>
+                        Pago
+                    </th>
+                    <th>
+                        Fecha Pago
+                    </th>
+                    <th>
+                        Ticket
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="resultTicket">
+
+            </tbody>
+        </table>
+        <div id="paginadorTicket">
+
+        </div>
+    </div>
+</li>
+    </ul>
+</div>
   </div>
 </div>
 <!--Modal estructure-->

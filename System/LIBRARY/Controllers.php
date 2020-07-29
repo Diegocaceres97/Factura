@@ -6,6 +6,7 @@ class Controllers extends Anonymous
         $this -> view = new Views(); //Instanciamos a view (invocamos)
         $this->image = new Uploadimage();
         $this->page=new Paginador();
+        $this->export=new ExportData();
         $this->loadClassModels();
     }
     function loadClassModels(){

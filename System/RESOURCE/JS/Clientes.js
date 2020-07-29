@@ -85,7 +85,7 @@ class Clientes extends Uploadpicture {
     $.post(URL + "Clientes/getCreditos", {}, (response) => {
       try {
         let item = JSON.parse(response); //convertimos el tipo Json en una coleccion de objetos
-        console.log(item);
+      //  console.log(item);
         if (0 < item.results.length) {
           for (let i = 0; i < item.results.length; i++) {
             switch (funcion) {
@@ -123,12 +123,12 @@ class Clientes extends Uploadpicture {
       URL + "Clientes/getClientes",
       { search: $("#filtrarCliente").val(), page: page },
       (response) => {
-        console.log(response);
+        //console.log(response);
         try {
           let item = JSON.parse(response);
           $("#resultCliente").html(item.dataFilter); //nombre de las propiedades item de Clientes.php obtenidas en la funcion
           $("#paginadorCliente").html(item.paginador);
-          console.log(item);
+          //console.log(item);
         } catch (error) {
           $("#paginadorCliente").html(response);
         }
@@ -144,7 +144,7 @@ class Clientes extends Uploadpicture {
         //console.log(response);
         try {
           let item = JSON.parse(response);
-          console.log(item);
+          //console.log(item);
           if (0 != item.data) {
             $("#ClienteNombre").html(item.array.Nombre);
             $("#clienteApellido").html(item.array.Apellido);
@@ -188,7 +188,7 @@ class Clientes extends Uploadpicture {
         URL + "Clientes/setPagos",
         { pagos: $("#pagos").val() },
         (response) => {
-          console.log(response);
+         // console.log(response);
           if (response == 0) {
             let cliente = JSON.parse(localStorage.getItem("reportCliente"));
 
@@ -218,7 +218,34 @@ class Clientes extends Uploadpicture {
     document.getElementById("telefono").value = data.Telefono;
     document.getElementById("email").value = data.Email;
     document.getElementById("direccion").value = data.Direccion;
-    console.log(data);
+    //console.log(data);
     this.getCreditos(data.Creditos, 2);
   }
-}
+  getTickets(page){
+    $.post(
+      URL + "Clientes/getTickets",
+      { search: $("#searchTicket").val(), page: page },
+      (response) => {
+        console.log(response);
+        try {
+          let item = JSON.parse(response);
+          $("#resultTicket").html(item.dataFilter);
+          $("#paginadorTicket").html(item.paginador);
+          console.log(item);
+        } catch (error) {
+          $("#paginadorTicket").html(response);
+        }
+      }
+    );
+    }
+    exportarExcel(page){
+      $.post(
+        URL + "Clientes/exportarExcel",
+        { search: $("#searchTicket").val(), page: page },
+        (response) => {
+          console.log(response);
+        }
+      );
+    }
+  }
+
