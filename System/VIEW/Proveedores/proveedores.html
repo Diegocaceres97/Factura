@@ -1,0 +1,104 @@
+<div class="container4" id="c2">
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s3">
+            <a href="#test1">Proveedores</a>
+          </li>
+          <li class="tab col s3">
+            <a href="#test2" onclick="">Historial</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col s12" id="test1">
+          <div class="row">
+              <div class="input-field col s0">
+                  <a href="registrar" onclick="cliente.restablecerClientes(2); " class="waves-effect waves-light btn">Registrar</a>
+              </div>
+              <div class="input-field col s6">
+                  <input type="text" placeholder="Buscar Proveedor" id="filtrarCliente" onkeyup="getClientes(1);"> <!--Con esto indicamos que andamos en la primera pagina-->
+                  <label for="filtrarCliente">Buscar Proveedores</label>
+              </div>
+          </div>
+          <button class="waves-effect waves-light btn-small grey darken-3" onclick="">Export</button>
+          <ul class="collapsible">
+              <li>
+                  <div class="collapsible-header">
+                      <img src="../RESOURCE/IMAGES/Iconos/prove2.png" alt="" class="responsive">Proveedores
+                  </div>
+                  <div class="collapsible-body">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th>
+                                      Foto
+                                  </th>
+                                  <th>
+                                     Proveedores
+                                  </th>
+                                  <th>
+                                      Opciones
+                                  </th>
+                              </tr>
+                              <tbody id="resultCliente">
+  
+                              </tbody>
+                          </thead>
+                      </table>
+                      <div id="paginadorCliente">
+  
+                      </div>
+                  </div>
+              </li>
+          
+          </ul>
+      </div>
+  
+      <div class="col s12" id="test2">
+      <div class="row">
+          <div class="input-field col s6">
+  <input type="text" id="searchTicket" placeholder="Buscar Ticket" onkeyup="getTickets(1)">
+  <label for="searchTicket">Buscar ticket</label>
+  </div>
+      </div>
+      <button class="waves-effect waves-light btn-small amber darken-3" onclick="">Export</button>
+      <ul class="collapsible">
+  <li>
+      <div class="collapsible-header">
+          <img src="../RESOURCE/IMAGES/Iconos/prove.png" alt="" class="responsive"><label
+          style="font-size: 15px;">Ticket</label>
+      </div>
+      <div class="collapsible-body">
+          <table class="table">
+              <thead>
+                  <tr>
+                      <th>
+                          Deuda
+                      </th>
+                      <th>
+                          Fecha Deuda
+                      </th>
+                      <th>
+                          Pago
+                      </th>
+                      <th>
+                          Fecha Pago
+                      </th>
+                      <th>
+                          Ticket
+                      </th>
+                  </tr>
+              </thead>
+              <tbody id="resultTicket">
+  
+              </tbody>
+          </table>
+          <div id="paginadorTicket">
+  
+          </div>
+      </div>
+  </li>
+      </ul>
+  </div>
+    </div>
+  </div>

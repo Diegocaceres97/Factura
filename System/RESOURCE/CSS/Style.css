@@ -77,6 +77,20 @@ padding: 1px;
 
     font-size: 15px;
 }
+.container6 .row .card {
+    margin-left: 10px;
+    width: 55vw;
+    height: 40vh;
+   }
+   .container6 #contenidofoto {
+   margin-left: 85px;
+}
+.container6 .card-action #boton{
+   text-align: center;
+   align-content: center;
+   justify-content: center;
+   justify-items: center;
+}
 }
 
 
@@ -110,6 +124,16 @@ padding: 1px;
     }
    .container5 .row .card {
     width: 22vw;
+   }
+   .container6{
+    margin: -520px 350px 0px;
+   }
+   .container6 .row .card {
+    width: 22vw;
+    height: 36vh;
+   }
+   .container6 .row .row{
+    margin-left: 150px;
    }
     .otro{
         width: 75%;

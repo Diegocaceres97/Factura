@@ -28,7 +28,7 @@ $this->Imagen = $array[8];
         };
         
     }
-    public function clientesClass(array $array){//especificamos que parametro recibira (tipo) 
+    public function clientesClass(array $array){//especificamos que parametro recibira (tipo)
 return new class($array){
     var $NID;//Referencia a las tabla de la base de datos
     var $Nombre;

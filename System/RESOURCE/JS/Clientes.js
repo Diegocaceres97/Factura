@@ -238,10 +238,10 @@ class Clientes extends Uploadpicture {
       }
     );
     }
-    exportarExcel(page){
+    exportarExcel(page,valor){
       $.post(
         URL + "Clientes/exportarExcel",
-        { search: $("#searchTicket").val(), page: page },
+        { search: $("#searchTicket").val(), page: page, valor:valor },
         (response) => {
           console.log(response);
         }

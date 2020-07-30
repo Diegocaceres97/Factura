@@ -47,6 +47,7 @@ var deleteUser = (data) =>{
 
 //Clientes
 var pageTickets = 0;
+var pageClientes = 0;
 var cliente = new Clientes();
 $(function(){
 $("#registerCliente").click(function(){//capturamos el evento click del elemento
@@ -64,6 +65,7 @@ var fotoCliente = (evt) =>{
      cliente.archivo(evt,"fotoCliente");
 }
 var getClientes = (page) =>{
+    pageClientes = page;
     cliente.getClientes(page);
 }
 var dataCliente=(data)=>{
@@ -73,8 +75,11 @@ var getTickets = (page) =>{
     pageTickets = page;
     cliente.getTickets(page);
 }
-var exportarExcel = ()=>{
-    cliente.exportarExcel(pageTickets);
+var exportarTicketClientes = ()=>{
+    cliente.exportarExcel(pageTickets,1);
+}
+var exportarClientes = ()=>{
+    cliente.exportarExcel(pageClientes,2);
 }
 //Anonimo
 $().ready(()=>{

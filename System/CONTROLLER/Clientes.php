@@ -326,9 +326,21 @@ public function exportarExcel(){
     $user = Session::getSession("User");
     if (null!=$user) {
         if ("Admin"==$user["Roles"]) {
-            $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+            $archivo = null;
+            $title=null;
+            $data=null;
+            if (1==$_POST["valor"]) {
+                $archivo="TicketClientes.xls";
+                $title = 'Ticket';
+                $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+            }else{
+                $archivo="Clientes.xls";
+                $title = 'Clientes';
+                $data = $this->model->getClientes($_POST["search"],$_POST["page"],$this->page);
+            }
+           
             if (is_array($data)) {
-                $this->export->exportarExcel($data['results'],"TicketClientes.xls","Ticket");
+                $this->export->exportarExcel($data['results'],$archivo,$title);
             } else {
                 return $data;
             }

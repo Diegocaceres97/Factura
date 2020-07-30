@@ -1,0 +1,71 @@
+<div class="container6">
+    <form method="post" enctype="multipart/form-data">
+    <div class="modal-content">
+        <center>
+            <h5>Registrar proveedores</h5>
+        </center>
+        <div class="row">
+            <div class="col s9 m4" id="contenidofoto">
+<div class="card">
+    <div class="card-content white-text">
+    <center>
+        <span class="card-title blue-grey-text">Foto o imagen</span>
+        <output id="clienteRegistrar">
+            <img class="responsive-img" src="~/images/fotos/Proveedores/">
+        </output>
+    </center>
+    </div>
+<div class="card-action">
+    <center>
+    <a>
+        
+<div class="file-field input-field" id="boton">
+    <div class="btn waves-effect waves-light">
+        
+        <span>Subir</span>
+    
+        <input asp-for="Input.AvatarImage" accept="image/*" type="file" id="files">
+        <div class="file-path-wrapper">
+            <input class="file-path" type="text">
+        </div>
+    </div>
+<br />
+</div>
+
+    </a>
+</center>
+</div>
+            </div>
+        </div>
+        
+        <div class="row" >
+                   
+            <div class="row">
+              <div class="input-field col s6">
+                    <input type="text" placeholder="Proveedor" id="Proveedor" required>
+                    <label asp-for="Proveedor"></label>
+                </div>
+                <div class="input-field col s6">
+                    <input type="text" placeholder="N# de Telefono" id="telefono" required>
+                    <label for="telefono"></label>
+                </div>
+                    <div class="input-field col s6">
+                    <input type="email" placeholder="Email" id="email" required>
+                    <label for="email"></label>
+                </div>
+                    <div class="input-field col s6">
+                    <input type="password" placeholder="Direccion" id="direccion" required>
+                    <label for="direccion"></label>
+                    </div>
+                <div class="input-field col s6">
+<button type="submit" class="waves-effect waves-light btn">Registrar</button>
+            </div>
+        </div>
+           </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <label id="MessageProveedor" class="red-text text-darken-4"></label>
+</div>
+</div>
