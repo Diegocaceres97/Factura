@@ -28,9 +28,34 @@ class Proveedores extends Uploadpicture{
             type: "POST",
             success: (response) => {
               //esta propiedad contendra la funcion que va obtener la info que devuelva el servidor
+              if (response==0) {
+                this.restablecerProveedores();
+              } else {
+                document.getElementById("MessageProveedor").innerHTML=response;
+              }
             console.log(response);
             },
           });
           return false;
+    }
+    getProveedores(page) {
+      $.post(
+        URL + "Proveedores/getProveedores",
+        { search: $("#searchProveedores").val(), page: page },
+        (response) => {
+          //console.log(response);
+          try {
+            let item = JSON.parse(response);
+            $("#resultProveedores").html(item.dataFilter); //nombre de las propiedades item de Clientes.php obtenidas en la funcion
+            $("#paginadorProveedores").html(item.paginador);
+            //console.log(item);
+          } catch (error) {
+            $("#paginadorProveedores").html(response);
+          }
+        }
+      );
+    }
+    restablecerProveedores(){
+      window.location.href = URL + "Proveedores/proveedores";
     }
 }

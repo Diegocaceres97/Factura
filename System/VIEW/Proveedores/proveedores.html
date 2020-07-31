@@ -16,8 +16,8 @@
                   <a href="registrar" onclick="cliente.restablecerClientes(2); " class="waves-effect waves-light btn">Registrar</a>
               </div>
               <div class="input-field col s6">
-                  <input type="text" placeholder="Buscar Proveedor" id="filtrarCliente" onkeyup="getClientes(1);"> <!--Con esto indicamos que andamos en la primera pagina-->
-                  <label for="filtrarCliente">Buscar Proveedores</label>
+                  <input type="text" placeholder="Buscar Proveedor" id="searchProveedores" onkeyup="getProveedores(1);"> <!--Con esto indicamos que andamos en la primera pagina-->
+                  <label for="searchProveedores">Buscar Proveedores</label>
               </div>
           </div>
           <button class="waves-effect waves-light btn-small grey darken-3" onclick="">Export</button>
@@ -40,12 +40,12 @@
                                       Opciones
                                   </th>
                               </tr>
-                              <tbody id="resultCliente">
+                              <tbody id="resultProveedores">
   
                               </tbody>
                           </thead>
                       </table>
-                      <div id="paginadorCliente">
+                      <div id="paginadorProveedores">
   
                       </div>
                   </div>

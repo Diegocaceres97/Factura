@@ -88,6 +88,37 @@ function __construct($array){
             }
         };
     }
-    
+    public function proveedorClass(array $array){
+    return new class($array){
+        var $Proveedor;
+        var $Telefono;
+        var $Email;
+        var $Direccion;
+    function __construct($array){
+        $this->Proveedor=$array[0];
+        $this->Telefono=$array[1];
+        $this->Email=$array[2];
+        $this->Direccion=$array[3];
+    }
+    };
+    }
+    public function reportProveedores(array $array){
+        return new class($array){
+            var $Deuda;
+            var $FechaDeuda;
+            var $Pago;
+            var $FechaPago;
+            var $Ticket;
+            var $IdProveedor;
+        function __construct($array){
+            $this->Deuda = $array[0];
+            $this->FechaDeuda = $array[1];
+            $this->Pago = $array[2];
+            $this->FechaPago = $array[3];
+            $this->Ticket = $array[4];
+            $this->IdProveedor = $array[5];
+        }
+        };
+}
 }
 ?>
