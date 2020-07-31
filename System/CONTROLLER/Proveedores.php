@@ -20,6 +20,9 @@ class Proveedores extends Controllers
             header("Location:".URL);
         }
     }
+    public function registerProve(){
+        echo $_POST["proveedor"];
+    }
 }
 
 ?>

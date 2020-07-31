@@ -90,6 +90,7 @@ padding: 1px;
    align-content: center;
    justify-content: center;
    justify-items: center;
+   margin-top: -65px;
 }
 }
 
@@ -127,6 +128,7 @@ padding: 1px;
    }
    .container6{
     margin: -520px 350px 0px;
+    width: 70vw;
    }
    .container6 .row .card {
     width: 22vw;
@@ -151,6 +153,16 @@ padding: 1px;
     #reporT{
 margin-left: 20px;
     }
+    .container6 .row .card {
+        margin-left: 10px;
+        width: 20vw;
+        height: 65vh;
+       }
+    .container6 .card-action #boton{
+        margin-top: 35px;
+     }
+    
+     
 }
 .modal-footer{
     margin-top: -15px;

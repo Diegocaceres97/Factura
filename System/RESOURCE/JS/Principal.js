@@ -54,7 +54,10 @@ class Principal {
             window.location.href= URL + "Clientes/clientes";
           }
           break;
-      default:
+      case "Proveedoresregistrar":
+        document
+        .getElementById("files")
+        .addEventListener("change", fotoProveedor, false);
         break;
     }
    

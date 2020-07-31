@@ -81,6 +81,17 @@ var exportarTicketClientes = ()=>{
 var exportarClientes = ()=>{
     cliente.exportarExcel(pageClientes,2);
 }
+//Proveedores
+var proveedores = new Proveedores();
+$(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
+    $("#registerProve").click(function(){
+    return proveedores.registerProve();
+    });
+    });
+    var fotoProveedor = (evt) =>{
+        //obtenemos los elementos que hemos obtenido del imput file en la clase usuario
+         proveedores.archivo(evt,"fotoProveedor");
+    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL
