@@ -48,10 +48,51 @@ class Proveedores_model extends Conexion
             'Proveedor' => '%'.$filter.'%',//aqui filtraremos el dato dependiendo el dato que pasen
             'Email' => '%'.$filter.'%'
                     );
-                    //$columns = "IdClientes,NID,Nombre,Apellido,Email,Telefono,Direccion,Creditos";
-                    return $model->paginador($columns,"proveedores","Proveedores",$page,$where,$array);
+                    $columns = "IdProveedor,Proveedor,Telefono,Email,Direccion";
+                    return $model->paginador($columns,"proveedores","Proveedor",$page,$where,$array);
                     //el porque de no colocar en el segundo clientes la c inicial en minuscula es pq llamamos
                     //al metodo pero como ya tiene el get, no es necesario volver a colocar
+    }
+    public function dataProveedor($email){
+        $where = " WHERE Email = :Email";
+        $param = array('Email' =>$email);
+        $response1 = $this->db->select1("*","proveedores",$where,$param);
+        if(is_array($response1)){
+return json_encode($response1);
+        }else{
+            return $response1;
+        }
+    }
+    public function editProve($model,$idProveedor){//el modelo contiene la clase anonima
+        $where = " WHERE Email = :Email";
+        $response = $this->db->select1("*","proveedores",$where,array('Email' => $model->Email));
+        if (is_array($response)) {
+        $response = $response["results"];
+        $value = "Proveedor = :Proveedor,Telefono = :Telefono,Email = :Email,Direccion = :Direccion";
+        $where=" WHERE IdProveedor = ".$idProveedor;
+        if (0==count($response)) {
+            $data = $this->db->update("proveedores",$model,$value,$where);
+            if (is_bool($data)) {
+                return 0;
+            } else {
+                return $data;
+            }
+         } else{
+             if ($response[0]['IdProveedor'] == $idProveedor) {
+                $data = $this->db->update("proveedores",$model,$value,$where);
+                if(is_bool($data)){
+                return 0;
+                }else{
+return $data;
+                }
+             } else {
+                return 1;
+             }
+             
+         }
+        }else{
+            return $response;
+        }
     }
 }
 ?>

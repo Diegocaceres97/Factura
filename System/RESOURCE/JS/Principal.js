@@ -55,11 +55,18 @@ class Principal {
           }
           break;
       case "Proveedoresregistrar":
+        var email = getParameterByName('email');
+        if(email!=null && email!=""){
+          dataProveedor(email);
+        }
         document
         .getElementById("files")
         .addEventListener("change", fotoProveedor, false);
         break;
-    }
+        case "Proveedoresproveedores":
+        getProveedores(1);
+          break;
+      }
    
   }
 }
