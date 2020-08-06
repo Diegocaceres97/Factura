@@ -86,7 +86,7 @@ class Proveedores extends Controllers
                 foreach ($array as $key => $value) {
                     //$dataCliente = json_encode($array[$count]);
                     $urlImage = URL."Resource/images/fotos/Proveedores/".$value["Email"].".png";
-                    $url=URL."Clientes/reportes/?email=".$value["Email"];
+                    $url=URL."Proveedores/reportes/?email=".$value["Email"];
                     if ("Admin"==$user["Roles"]) {
                         $botonReporte="<a href='".$url."' class='btn green lighten-1 modal-trigger'>Reportes</a>";
                     } else {
@@ -185,6 +185,42 @@ echo 1;
         } 
     }
     }
-}
+    public function reportes(){
+        $user = Session::getSession("User");
+        if (null!=$user) {
+            if ("Admin"==$user["Roles"]) {
+                $this->view->render($this,"reportes",null);
+            }else{
+                header("Location:".URL."Proveedores/proveedores");
+            }
+    }}
+    public function getReporteProve(){
+        $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+        if(null != $user){
+            if ("Admin"==$user["Roles"]) {
+                //verificamos si el dato obtenido es valido
+            if(filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)){
+    $data = $this->model->getReporteProve($_POST["email"]);
+    if (is_array($data)) {
+        echo json_encode(array(//convertimos este array en un JSON
+            "array" => $data,
+            "data" => 1 //indicamos que tenemos registros por eso el 1
+        ));
+    } else {
+        echo json_encode( array(
+            "data" => 0,
+    
+        ));
+    }
 
+}else{
+    echo json_encode( array(
+        "data" => 0,
+
+    ));
+}
+}
+}
+    }
+}
 ?>

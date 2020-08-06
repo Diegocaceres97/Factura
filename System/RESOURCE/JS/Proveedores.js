@@ -56,6 +56,9 @@ class Proveedores extends Uploadpicture{
       );
     }
     restablecerProveedores(){
+      this.Funcion = 0;
+        this.IdProveedor = 0;
+        this.Imagen = null;
       window.location.href = URL + "Proveedores/proveedores";
     }
     dataProveedor(email){
@@ -95,5 +98,51 @@ class Proveedores extends Uploadpicture{
           console.log(response);
         }
         );
+    }
+    getReportePro(email){
+      $.post(
+        //Mandamos por post al backend  o parte del servidor
+        URL + "Proveedores/getReporteProve",
+        { email: email },
+        (response) => {
+         console.log(response);
+          /* try {
+            let item = JSON.parse(response);
+            //console.log(item);
+            if (0 != item.data) {
+              $("#proveedorNombre").html(item.array.Nombre);
+              document.getElementById("proveedorReporte").innerHTML = [
+                '<img class="responsive-img valign profile-image img" src="',
+                URL + FOTOS + "clientes/" + item.array.Email + ".png",
+                '"title="',
+                escape(item.array.Email),
+                '"/>',
+              ].join("");
+              $("#deuda").html(item.array.Deuda);
+              $("#fechadeuda").html(item.array.FechaDeuda);
+              $("#pago").html(item.array.Pago);
+              $("#fechapago").html(item.array.FechaPago);
+              $("#ticket").html(item.array.Ticket);
+              $("#proveedorNombre").html(
+                "Proveedor: " + item.array.Nombre
+              );
+              $("#deudas").html(item.array.Deuda);
+              let credito = parseFloat(item.array.Creditos.replace("$", ""));
+              if (credito > 0) {
+                document.getElementById("creditoCliente").innerHTML =
+                  "<span>Credito: <span class='green-text text-darken-3'>Activo</span></span>";
+              } else {
+                document.getElementById("creditoCliente").innerHTML =
+                  "<span>Credito: <span class='red-text text-darken-3'>No activo</span></span>";
+              }
+              localStorage.setItem("reportCliente", response);
+            } else {
+              window.location.href = URL + "Clientes/clientes";
+            }
+          } catch (error) {
+            $("#reporteProveedorMessage").html(response);
+          }*/
+        }
+      );
     }
 }

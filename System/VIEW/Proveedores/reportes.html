@@ -1,0 +1,137 @@
+<div class="container5">
+    <div class="modal-content">
+      <center>
+        <h5>Reportes Proveedores</h5>
+      </center>
+      <div class="row">
+        <div class="col s3 m3">
+          <div class="card">
+            <div class="card-content white-text">
+              <center>
+                <span class="card-title blue-grey-text">Foto</span>
+                <output id="proveedorReporte"> </output>
+              </center>
+            </div>
+          </div>
+        </div>
+        <div class="col s6 m6" id="reporT">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>
+                  Proveedor
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <!--<?php echo $models ?>-->
+                  <label id="proveedorNombre"></label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col s6 m6" id="pagoM">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>
+                  <form method="POST" id="validate" class="col s12">
+                    <div class="input-field col s12">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <input
+                            type="number"
+                            class="validate"
+                            id="pagos"
+                            placeholder="Monto a pagar"
+                            required
+                          />
+                          <label class="error">Pago</label>
+                        </div>
+                        <div class="input-field col s12">
+                          <button
+                            type="submit"
+                            class="waves-effect waves-light btn-small light-green darken-3"
+                            onclick="return proveedor.setPagos();"
+                          > <!--Con el return evitamos el reenvio de datos-->
+                            Pagar
+                          </button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <label class="text-left Message" id="pagoProveedor" ></label>
+                      </div>
+                    </div>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <a
+          class="waves-effect waves-light orange darken-2 btn-small"
+          onclick="printThisDiv('imprimirticket')"
+        >
+          Ticket</a
+        >
+        <span>Deuda: <span id="deudas" class="green-text text-darken-3"></span></span>
+       
+        <div id="imprimirticket">
+          
+          <ul class="collapsible">
+            <li>
+              <div class="collapsible-header">
+                <img
+                  src="http://localhost/Factura/System/RESOURCE/IMAGES/Iconos/clientes2.png"
+                  alt="clientes_reportes"
+                  class="responsive"
+                /> <label style="font-size: 15px" id="proveedorNombres"></label>
+              </div>
+              <div class="collapsible-bod">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Deuda</th>
+                      <th>Fecha deuda</th>
+                      <th>Pago</th>
+                      <th>Fecha Pago</th>
+                      <th>Ticket</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <p id="deuda"></p>
+                      </td>
+                      <td>
+                        <p id="fechadeuda"></p>
+                      </td>
+                      <td>
+                        <p id="pago"></p>
+                      </td>
+                      <td>
+                        <p id="fechapago"></p>
+                      </td>
+                      <td>
+                        <p id="ticket"></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="paginadorCliente"></div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <label id="reporteProveedorMessage" class="text-left Message"></label>
+      </div>
+    </div>
+  </div>
+  

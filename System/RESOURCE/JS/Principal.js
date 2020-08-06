@@ -66,6 +66,17 @@ class Principal {
         case "Proveedoresproveedores":
         getProveedores(1);
           break;
+          case "Proveedoresreportes":
+          var email = getParameterByName('email');
+          if (email!=null) {//todas estas son validaciones que brindan de mas seguridadd al proyecto
+            if (validarEmail(email)) {
+            new Proveedores().getReportePro(email);
+            }else{
+              window.location.href= URL + "Proveedor/proveedor";
+          }}else{
+            window.location.href= URL + "Proveedor/proveedor";
+          }
+          break;
       }
    
   }

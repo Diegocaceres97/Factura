@@ -94,5 +94,45 @@ return $data;
             return $response;
         }
     }
-}
+    public function getReporteProve($email){
+        $where = " WHERE Email = :Email";
+        $response1 = $this->db->select1("*","proveedores",$where,array('Email'=>$email));
+        if(is_array($response1)){
+            $response1=$response1["results"];
+            if(0 != count($response1)){
+                $where = " WHERE IdProveedor = :IdProveedor";
+                $response2 = $this->db->select1("*","reportes_proveedores",$where,array('IdProveedor' => $response1[0]["IdProveedor"]));
+                if (is_array($response2)) {
+                    $response2 = $response2['results'];
+                    if (0!= count($response2)) {//verificamos si tiene datos
+                        $data= array(
+                            "Proveedor" => $response1[0]["Proveedor"],
+                            "Email" => $response1[0]["Email"],
+                            "IdReportes" => $response2[0]["IdReportes"],
+                            "Deuda" => $response2[0]["Deuda"],
+                            "FechaDeuda" => $response2[0]["FechaDeuda"],
+                            "Pago" => $response2[0]["Pago"],
+                            "FechaPago" => $response2[0]["FechaPago"],
+                            "Ticket" => $response2[0]["Ticket"],
+                            "IdProveedor" => $response2[0]["IdProveedor"]
+                        );
+                        Session::setSession("reportProveedor",$data);//almacenamos la info por el lado del servidor 
+                        //por medio de la sesión (que es estatica)
+                        return $data;
+                    } else {
+                        return 0;
+                    }
+                    
+                } else {
+                    return $response2;
+                }
+            }else{
+                return 0;
+            }
+        }else{
+            return $response1;
+        }
+    }
+    }
+
 ?>
