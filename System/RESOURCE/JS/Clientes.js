@@ -193,6 +193,13 @@ class Clientes extends Uploadpicture {
             let cliente = JSON.parse(localStorage.getItem("reportCliente"));
 
             this.getReporteCliente(cliente.array.Email);
+            swal({
+              title: "¡EXITO!",
+              text: "El pago fue exitoso",
+              icon: "success",
+              button: "Aceptar",
+            });
+            //location.reload();
           } else {
             $("#pagoCliente").html(response);
           }
@@ -243,7 +250,13 @@ class Clientes extends Uploadpicture {
         URL + "Clientes/exportarExcel",
         { search: $("#searchTicket").val(), page: page, valor:valor },
         (response) => {
-          console.log(response);
+          //console.log(response);
+          swal({
+            title: "¡EXITO!",
+            text: "Proceso exitoso!",
+            icon: "success",
+            button: "Aceptar",
+          });
         }
       );
     }

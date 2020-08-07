@@ -183,7 +183,7 @@ public function setPagos(){
         $array = Session::getSession("reportCliente");
         $deuda = str_replace("$","",$array["Deuda"]);
         $deuda = str_replace(",","",$deuda);
-        
+        $fechaDeuda = $array["FechaDeuda"];
       //  $deuda = (float)$deuda;
         //$deuda = number_format($deuda);
         if ($deuda==0) {
@@ -196,7 +196,7 @@ public function setPagos(){
               $pago = number_format($pago);
               $arrayReport = array(
                   "$".number_format($deuda),
-                  date("d-m-Y"),
+                  $fechaDeuda,
                   "$".$pago,
                   date("d-m-Y"),
                   $array["Ticket"],
@@ -205,13 +205,13 @@ public function setPagos(){
               $ticket = array(
                   "Cliente" ,
                   "$".number_format($deuda),
-                  date("d-m-Y"),
+                  $fechaDeuda,
                   "$".$pago,
                   date("d-m-Y"),
                   $array["Ticket"],
                   $array["Email"]
               );
-              echo $this->model->setPagos($this->reportClientesClass($arrayReport),
+              $this->model->setPagos($this->reportClientesClass($arrayReport),
               $this->ticketClass($ticket),$array["IdReportes"]);
             }
             

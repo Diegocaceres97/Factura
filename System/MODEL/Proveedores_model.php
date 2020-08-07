@@ -133,6 +133,9 @@ return $data;
             return $response1;
         }
     }
+    public function setPagos($model1,$model2,$idReporte){
+        echo $Ticket=Codigo::Ticket($this->db,"ticket");
+    }
     }
 
 ?>

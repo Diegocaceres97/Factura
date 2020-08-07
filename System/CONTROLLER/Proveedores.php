@@ -222,5 +222,56 @@ echo 1;
 }
 }
     }
+    public function setPagos(){
+        $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        date_default_timezone_set('UTC');
+        if ("Admin"==$user["Roles"]) {
+        $pago = (float) $_POST["pagos"];
+        if(is_float($pago) && 0 < $pago){
+           // $pago = number_format($pago); //lo asignamos para que sea en millares
+       // $array=json_decode($_POST["report"],true);
+        //$array = $array["array"];
+        $array = Session::getSession("reportProveedor");
+        $deuda = str_replace("$","",$array["Deuda"]);
+        $deuda = str_replace(",","",$deuda);
+        
+      //  $deuda = (float)$deuda;
+        //$deuda = number_format($deuda);
+        if ($deuda==0) {
+            echo "El sistema no contiene deuda";
+        } else {
+            if ($deuda < $pago) {
+            echo "Se ha sobrepasado del pago de la Deuda";
+            } else {
+              $deuda =$deuda - $pago;
+              $pago = number_format($pago);
+              $arrayReport = array(
+                  "$".number_format($deuda),
+                  date("d-m-Y"),        
+                  "$".$pago,
+                  date("d-m-Y"),
+                  $array["Ticket"],
+                  $array["IdProveedor"]
+              );
+              $ticket = array(
+                  "Proveedor" ,
+                  "$".number_format($deuda),
+                  date("d-m-Y"),
+                  "$".$pago,
+                  date("d-m-Y"),
+                  $array["Ticket"],
+                  $array["Email"]
+              );
+              echo $this->model->setPagos($this->reportProveedores($arrayReport),
+              $this->ticketClass($ticket),$array["IdProveedor"]);
+            }
+            
+        }
+        }else{
+            echo "el dato ingresado no es correcto";
+        }
+        }}
+    }
 }
 ?>

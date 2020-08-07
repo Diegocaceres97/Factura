@@ -106,14 +106,14 @@ class Proveedores extends Uploadpicture{
         { email: email },
         (response) => {
          console.log(response);
-          /* try {
+           try {
             let item = JSON.parse(response);
             //console.log(item);
             if (0 != item.data) {
               $("#proveedorNombre").html(item.array.Nombre);
               document.getElementById("proveedorReporte").innerHTML = [
                 '<img class="responsive-img valign profile-image img" src="',
-                URL + FOTOS + "clientes/" + item.array.Email + ".png",
+                URL + FOTOS + "proveedores/" + item.array.Email + ".png",
                 '"title="',
                 escape(item.array.Email),
                 '"/>',
@@ -124,25 +124,36 @@ class Proveedores extends Uploadpicture{
               $("#fechapago").html(item.array.FechaPago);
               $("#ticket").html(item.array.Ticket);
               $("#proveedorNombre").html(
-                "Proveedor: " + item.array.Nombre
+                "Proveedor: " + item.array.Proveedor
               );
               $("#deudas").html(item.array.Deuda);
-              let credito = parseFloat(item.array.Creditos.replace("$", ""));
-              if (credito > 0) {
-                document.getElementById("creditoCliente").innerHTML =
-                  "<span>Credito: <span class='green-text text-darken-3'>Activo</span></span>";
-              } else {
-                document.getElementById("creditoCliente").innerHTML =
-                  "<span>Credito: <span class='red-text text-darken-3'>No activo</span></span>";
-              }
-              localStorage.setItem("reportCliente", response);
+              localStorage.setItem("reportProveedor", response);
             } else {
-              window.location.href = URL + "Clientes/clientes";
+              window.location.href = URL + "Proveedores/proveedor";
             }
           } catch (error) {
             $("#reporteProveedorMessage").html(response);
-          }*/
+          }
         }
       );
+    }
+    setPagos(){
+     
+       $.post(
+         URL + "Proveedores/setPagos",
+         {
+           pagos: $("#pagos").val()
+         },
+         (response) =>{
+           console.log(response);
+           /*if (response==0) {
+             let proveedor = JSON.parse(localStorage.getItem("reportProveedor"));
+          this.getReportePro(Proveedor.array.Email);
+            } else {
+             $("#pagoProveedor").html(response);
+           }*/
+         }
+       );
+     return false;
     }
 }
