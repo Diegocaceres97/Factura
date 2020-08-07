@@ -43,7 +43,7 @@ class Proveedores extends Uploadpicture{
         URL + "Proveedores/getProveedores",
         { search: $("#searchProveedores").val(), page: page },
         (response) => {
-          console.log(response);
+          //console.log(response);
           try {
             let item = JSON.parse(response);
             $("#resultProveedores").html(item.dataFilter); //nombre de las propiedades item de Clientes.php obtenidas en la funcion
@@ -146,14 +146,52 @@ class Proveedores extends Uploadpicture{
          },
          (response) =>{
            console.log(response);
-           /*if (response==0) {
+           if (response==0) {
              let proveedor = JSON.parse(localStorage.getItem("reportProveedor"));
-          this.getReportePro(Proveedor.array.Email);
-            } else {
+          this.getReportePro(proveedor.array.Email);
+          swal({
+            title: "¡EXITO!",
+            text: "El pago fue exitoso",
+            icon: "success",
+            button: "Aceptar",
+          });   
+        } else {
              $("#pagoProveedor").html(response);
-           }*/
+           }
          }
        );
      return false;
     }
+    getTickets(page){
+      $.post(
+        URL + "Proveedores/getTickets",
+        { search: $("#searchTicket").val(), page: page },
+        (response) => {
+         // console.log(response);
+          try {
+            let item = JSON.parse(response);
+            $("#resultTicketP").html(item.dataFilter);
+            $("#paginadorTicketP").html(item.paginador);
+            console.log(item);
+          } catch (error) {
+            $("#paginadorTicketP").html(response);
+          }
+        }
+      );
+      }
+      exportarExcel(page,valor){
+        $.post(
+          URL + "Proveedores/exportarExcel",
+          { search: $("#searchTicket").val(), page: page, valor:valor },
+          (response) => {
+            //console.log(response);
+            swal({
+              title: "¡EXITO!",
+              text: "Proceso exitoso!",
+              icon: "success",
+              button: "Aceptar",
+            });
+          }
+        );
+      }
 }

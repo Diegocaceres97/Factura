@@ -49,7 +49,7 @@ class Proveedores_model extends Conexion
             'Email' => '%'.$filter.'%'
                     );
                     $columns = "IdProveedor,Proveedor,Telefono,Email,Direccion";
-                    return $model->paginador($columns,"proveedores","Proveedor",$page,$where,$array);
+                    return $model->paginador($columns,"proveedores","Proveedores",$page,$where,$array);
                     //el porque de no colocar en el segundo clientes la c inicial en minuscula es pq llamamos
                     //al metodo pero como ya tiene el get, no es necesario volver a colocar
     }
@@ -134,7 +134,40 @@ return $data;
         }
     }
     public function setPagos($model1,$model2,$idReporte){
-        echo $Ticket=Codigo::Ticket($this->db,"ticket");
+         $Ticket=Codigo::Ticket($this->db,"ticket");
+         if (is_numeric($Ticket)) {
+            $value = "Deuda = :Deuda, FechaDeuda = :FechaDeuda, Pago = :Pago,
+        FechaPago = :FechaPago, Ticket = :Ticket,IdProveedor = :IdProveedor";
+        $where = " WHERE IdReportes = ".$idReporte;
+        $model1->Ticket = (string)$Ticket;//inicializamos este dato almacenado en el objeto que contiene el # de ticket
+       //este dato esta en la clase anonima guardada también como Ticket (act)
+        $data = $this->db->update("reportes_proveedores",$model1,$value,$where);
+        if (is_bool($data)) {
+            $value = "(Propietario,Deuda,FechaDeuda,Pago,FechaPago,Ticket,Email) VALUES
+            (:Propietario,:Deuda,:FechaDeuda,:Pago,:FechaPago,:Ticket,:Email)";
+            $model2->Ticket=(string)$Ticket;
+            $data= $this->db->insert("ticket",$model2,$value);
+            if (is_bool($data)) {
+                return 0;
+            } else {
+                return $data;
+            }
+            
+         } else {
+             return $data;
+         }
+    } else {
+             return $Ticket;
+         }
+         
+    }
+    public function getTickets($filter,$page,$model){
+        $where = " WHERE Propietario = :Propietario AND Email LIKE :Email";
+        $array = array(
+            'Propietario' => "Proveedor",
+            'Email' => '%'.$filter.'%'
+        );
+        return $model->paginador("*","ticket","Ptickets",$page,$where,$array);//el enlcce get lo crea dentro del paginador (class)
     }
     }
 

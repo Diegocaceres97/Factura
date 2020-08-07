@@ -6,7 +6,7 @@ public function __construct(){
 public function paginador($columns,$table,$method,$page,$where,$array){
 $_pagi_enlace=null;
 //cantidad de resultados por pagina
-$_pagi_cuantos=6;
+$_pagi_cuantos=5;
 //cantidad de enlaces que se mostraran como maximo en la barra de navegación
 $_pagi_nav_num_enlaces= 3;
 //Decidimos si queremos que se muestren los errores en mysql

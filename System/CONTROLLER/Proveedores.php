@@ -235,7 +235,7 @@ echo 1;
         $array = Session::getSession("reportProveedor");
         $deuda = str_replace("$","",$array["Deuda"]);
         $deuda = str_replace(",","",$deuda);
-        
+        $fechaDeuda = $array["FechaDeuda"];
       //  $deuda = (float)$deuda;
         //$deuda = number_format($deuda);
         if ($deuda==0) {
@@ -248,7 +248,7 @@ echo 1;
               $pago = number_format($pago);
               $arrayReport = array(
                   "$".number_format($deuda),
-                  date("d-m-Y"),        
+                  $fechaDeuda,        
                   "$".$pago,
                   date("d-m-Y"),
                   $array["Ticket"],
@@ -257,7 +257,7 @@ echo 1;
               $ticket = array(
                   "Proveedor" ,
                   "$".number_format($deuda),
-                  date("d-m-Y"),
+                  $fechaDeuda,
                   "$".$pago,
                   date("d-m-Y"),
                   $array["Ticket"],
@@ -272,6 +272,57 @@ echo 1;
             echo "el dato ingresado no es correcto";
         }
         }}
+    }
+    public function getTickets(){//recordemos que todo esto que capturemos se enviará al JS por medio del JSON
+        $user = Session::getSession("User");
+        if (null!=$user) {
+            if ("Admin"==$user["Roles"]) {
+                $dataFilter = null;
+                $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+                if (is_array($data)) {
+                    foreach ($data['results'] as $key => $value) {
+                       $dataFilter .="<tr>" .
+                       "<td>".$value["Deuda"]."</td>".
+                       "<td>".$value["FechaDeuda"]."</td>".
+                       "<td>".$value["Pago"]."</td>".
+                       "<td>".$value["FechaPago"]."</td>".
+                       "<td>".$value["Ticket"]."</td>".
+                       "</td>".
+                       "</tr>";
+                    }
+                    $paginador = "</p> <p>Resultados " .$data["pagi_info"]."</p><p>".$data["pagi_navegacion"]."</p>";
+                    echo json_encode( array(//lo convertimos a json para que el codigo por el lado del cliente capture esta info y verla en vista usuario
+                        "dataFilter" => $dataFilter,
+                        "paginador" => $paginador
+                    ));
+                } else {
+                    return $data;
+                }
+                
+            }
+        }
+    }
+    public function exportarExcel(){
+        $user = Session::getSession("User");
+        if (null!=$user) {
+            if ("Admin"==$user["Roles"]) {
+                $archivo = null;
+                $title=null;
+                $data=null;
+                if (1==$_POST["valor"]) {
+                    $archivo="TicketProveedores.xls";
+                    $title = 'Ticket';
+                    $data = $this->model->getTickets($_POST["search"],$_POST["page"],$this->page);
+                }
+               
+                if (is_array($data)) {
+                    $this->export->exportarExcel($data['results'],$archivo,$title);
+                } else {
+                    return $data;
+                }
+                
+            }
+    }
     }
 }
 ?>

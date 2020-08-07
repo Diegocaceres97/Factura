@@ -6,14 +6,14 @@
             <a href="#test1">Proveedores</a>
           </li>
           <li class="tab col s3">
-            <a href="#test2" onclick="">Historial</a>
+            <a href="#test2" onclick="proveedores.getTickets(1)">Historial</a>
           </li>
         </ul>
       </div>
       <div class="col s12" id="test1">
           <div class="row">
               <div class="input-field col s0">
-                  <a href="registrar" onclick="cliente.restablecerClientes(2); " class="waves-effect waves-light btn">Registrar</a>
+                  <a href="registrar" onclick="proveedores.restablecerClientes(2); " class="waves-effect waves-light btn">Registrar</a>
               </div>
               <div class="input-field col s6">
                   <input type="text" placeholder="Buscar Proveedor" id="searchProveedores" onkeyup="getProveedores(1);"> <!--Con esto indicamos que andamos en la primera pagina-->
@@ -57,15 +57,15 @@
       <div class="col s12" id="test2">
       <div class="row">
           <div class="input-field col s6">
-  <input type="text" id="searchTicket" placeholder="Buscar Ticket" onkeyup="getTickets(1)">
+  <input type="text" id="searchTicket" placeholder="Buscar Ticket" onkeyup="getPTickets(1)">
   <label for="searchTicket">Buscar ticket</label>
   </div>
       </div>
-      <button class="waves-effect waves-light btn-small amber darken-3" onclick="">Export</button>
+      <button class="waves-effect waves-light btn-small amber darken-3" onclick="exportarTicketProveedores()">Export</button>
       <ul class="collapsible">
   <li>
       <div class="collapsible-header">
-          <img src="../RESOURCE/IMAGES/Iconos/prove.png" alt="" class="responsive"><label
+          <img src="../RESOURCE/IMAGES/Iconos/clientes2.png" alt="" class="responsive"><label
           style="font-size: 15px;">Ticket</label>
       </div>
       <div class="collapsible-body">
@@ -89,11 +89,11 @@
                       </th>
                   </tr>
               </thead>
-              <tbody id="resultTicket">
+              <tbody id="resultTicketP">
   
               </tbody>
           </table>
-          <div id="paginadorTicket">
+          <div id="paginadorTicketP">
   
           </div>
       </div>

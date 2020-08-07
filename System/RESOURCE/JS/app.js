@@ -82,6 +82,8 @@ var exportarClientes = ()=>{
     cliente.exportarExcel(pageClientes,2);
 }
 //Proveedores
+var pageTicketsp = 0;
+var pageProveedor = 0;
 var proveedores = new Proveedores();
 $(function(){//capturamos la funcion del evento Usuarios.html al momento de registrar
     $("#registerProve").click(function(){
@@ -93,10 +95,18 @@ $(function(){//capturamos la funcion del evento Usuarios.html al momento de regi
          proveedores.archivo(evt,"fotoProveedor");
     }
     var getProveedores =(page)=>{
+        pageProveedor = page;
         proveedores.getProveedores(page);
     }
     var dataProveedor = (email)=>{
         proveedores.dataProveedor(email);
+    }
+    var getPtickets = (page) =>{
+        pageTicketsp = page;
+        proveedores.getTickets(page);
+    }
+    var exportarTicketProveedores = () =>{
+        proveedores.exportarExcel(pageTicketsp,1);
     }
 //Anonimo
 $().ready(()=>{
