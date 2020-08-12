@@ -1,5 +1,5 @@
 <div class="container6">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" id="validate" enctype="multipart/form-data">
       <div class="modal-content">
         <center>
           <h5>Compra de productos</h5>
@@ -38,8 +38,79 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="row">
+              <div class="input-field col s6">
+<input type="text" name="Descripcion" id="Descripcion" placeholder="Descripcion" required>
+<label for="Descripcion" class="error">Descripcion</label>
+              </div>
+              <div class="input-field col s6">
+                <input type="number" min="1" value="1" name="Cantidad" id="Cantidad" placeholder="Cantidad" required>
+                <label for="Cantidad" class="error">Cantidad</label>
+                              </div>
+                              
+              <div class="input-field col s6">
+                <input type="text" name="Precio" id="Precio" placeholder="Precio" required>
+                <label for="Precio" class="error">Precio</label>
+                              </div>
+                              
+              <div class="input-field col s6">
+                <input type="text" name="Proveedor" id="Proveedor" placeholder="Proveedor" required disabled>
+                <label for="Proveedor" class="error">Proveedor</label>
+                              </div>
+                              
+              <div class="input-field col s6">
+               <button type="submit" class="waves-effect waves-light btn-small">Comprar</button>
+                              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="modal-footer">
+        <label for="" id="messageCompras" class="red-text text-darken-4"></label>
+      </div>
     </form>
+    <div class="row">
+      <div class="cols 12" id="test1">
+        <div class="row">
+          <div class="input-field col s12">
+<div class="row">
+  <input type="text" name="Search" placeholder="Buscar Proveedores">
+</div>
+          </div>
+        </div>
+        <ul class="collapsible">
+          <li>
+              <div class="collapsible-header">
+                  <img src="../RESOURCE/IMAGES/Iconos/prove2.png" alt="" class="responsive">Proveedores
+              </div>
+              <div class="collapsible-body">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>
+                                  Foto
+                              </th>
+                              <th>
+                                 Proveedores
+                              </th>
+                              <th>
+                                  Opciones
+                              </th>
+                          </tr>
+                          <tbody id="resultProveedores">
+
+                          </tbody>
+                      </thead>
+                  </table>
+                  <div id="paginadorProveedores">
+
+                  </div>
+              </div>
+          </li>
+      
+      </ul>
+      </div>
+    </div>
   </div>
   

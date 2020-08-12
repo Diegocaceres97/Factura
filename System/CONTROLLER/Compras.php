@@ -17,6 +17,19 @@ class Compras extends Controllers
     }
         
     }
+    public function compras(){
+        $user = Session::getSession("User");
+        if (null!=$user) {//verificamos si se esta logueado
+            if("Admin"==$user["Roles"]){
+            $this->view->render($this,"compras",null);
+        } else {
+            header("Location:".URL."Principal/principal");
+        }
+    }else{
+        header("Location:".URL);
+    }
+        
+    }
 }
 
 ?>
