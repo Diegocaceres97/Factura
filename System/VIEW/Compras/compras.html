@@ -10,14 +10,14 @@
               <div class="card-content white-text">
                 <center>
                   <span class="card-title blue-grey-text">Foto o imagen</span>
-                  <output id="productoCompra">
+                  <output id="imageCompras">
                     <img
                       class="responsive-img"
                       src="../RESOURCE/IMAGES/fotos/Compras/default.png"
                     />
                   </output>
                 </center>
-              </div>
+              
               <div class="card-action">
                 <a>
                   <div class="file-field input-field" id="boton">
@@ -36,6 +36,7 @@
                   <a href="Imagen"></a>
                 </center>
               </div>
+            </div>
             </div>
           </div>
           <div class="row">
@@ -58,8 +59,15 @@
                 <input type="text" name="Proveedor" id="Proveedor" placeholder="Proveedor" required disabled>
                 <label for="Proveedor" class="error">Proveedor</label>
                               </div>
-                              
-              <div class="input-field col s6">
+                              <div class="input-field col s6" style="margin-top:0px">
+                                <p>
+                                  <label>
+                                <input type="checkbox" name="Credito" id="Credito">
+                                <span>Credito</span>
+                              </label>
+                              </p>              
+                              </div>       
+              <div class="input-field col s6" style="margin-top: 0;">
                <button type="submit" class="waves-effect waves-light btn-small">Comprar</button>
                               </div>
             </div>
@@ -75,7 +83,7 @@
         <div class="row">
           <div class="input-field col s12">
 <div class="row">
-  <input type="text" name="Search" placeholder="Buscar Proveedores">
+  <input type="text" name="searchCompra" id="searchCompra" placeholder="Buscar Proveedores">
 </div>
           </div>
         </div>
@@ -98,12 +106,12 @@
                                   Opciones
                               </th>
                           </tr>
-                          <tbody id="resultProveedores">
+                          <tbody id="compraProveedores">
 
                           </tbody>
                       </thead>
                   </table>
-                  <div id="paginadorProveedores">
+                  <div id="paginadorCompras">
 
                   </div>
               </div>

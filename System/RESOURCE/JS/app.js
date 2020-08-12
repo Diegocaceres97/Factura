@@ -108,6 +108,14 @@ $(function(){//capturamos la funcion del evento Usuarios.html al momento de regi
     var exportarTicketProveedores = () =>{
         proveedores.exportarExcel(pageTicketsp,1);
     }
+    //Compras de productos
+    var compras = new Compras();
+    var imageCompras = (evt)=>{
+        compras.archivo(evt, "imageCompras");
+    }
+    var getCompraProveedores = (page) =>{
+compras.getCompraProveedores(page);
+    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL

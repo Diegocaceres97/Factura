@@ -77,6 +77,12 @@ class Principal {
             window.location.href= URL + "Proveedor/proveedor";
           }
           break;
+          case "Comprascompras":
+            new Compras().getProveedores(1);
+            document
+            .getElementById("files")
+            .addEventListener("change", imageCompras, false);
+            break;
       }
    
   }

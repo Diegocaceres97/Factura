@@ -164,6 +164,9 @@ margin-left: 20px;
     
      
 }
+.row{
+    margin-bottom: 0px;
+}
 .modal-footer{
     margin-top: -15px;
 }
