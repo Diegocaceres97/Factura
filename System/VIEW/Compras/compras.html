@@ -51,7 +51,7 @@
                               </div>
                               
               <div class="input-field col s6">
-                <input type="text" name="Precio" id="Precio" placeholder="Precio" required>
+                <input type="text" name="Precio" id="Precio" placeholder="Precio" onkeypress="return filterFloat(event,this);" required>
                 <label for="Precio" class="error">Precio</label>
                               </div>
                               
@@ -68,7 +68,7 @@
                               </p>              
                               </div>       
               <div class="input-field col s6" style="margin-top: 0;">
-               <button type="submit" class="waves-effect waves-light btn-small">Comprar</button>
+               <button type="submit" class="waves-effect waves-light btn-small" id="detallesCompras">Comprar</button>
                               </div>
             </div>
           </div>

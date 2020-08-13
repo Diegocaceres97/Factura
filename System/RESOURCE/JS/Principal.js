@@ -83,6 +83,9 @@ class Principal {
             .getElementById("files")
             .addEventListener("change", imageCompras, false);
             break;
+            case "Comprasdetalles":
+            new Compras().detalles();
+            break;
       }
    
   }

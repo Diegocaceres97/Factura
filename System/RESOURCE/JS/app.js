@@ -116,6 +116,11 @@ $(function(){//capturamos la funcion del evento Usuarios.html al momento de regi
     var getCompraProveedores = (page) =>{
 compras.getCompraProveedores(page);
     }
+    $(function(){
+        $('#detallesCompras').click(function(){
+            return compras.detallesCompras();
+        });
+    })
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL

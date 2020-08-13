@@ -72,5 +72,53 @@ class Compras extends Controllers
             
         }
     }
+    public function detallesCompras(){
+        $user = Session::getSession("User");
+        if (null!=$user) {//verificamos si se esta logueado
+            if("Admin"==$user["Roles"]){
+            if (empty($_POST["Descripcion"])) {
+                echo "El campo descripcion es obligatorio";
+            } else {
+                
+            if (empty($_POST["Precio"])) {
+                echo "El campo Precio es obligatorio";
+            } else {
+            if(isset($_FILES['file'])){
+                $_FILES= $_FILES["file"];
+            }else{
+                $_FILES=NULL;
+            }
+            Session::setSession("Compra",array(
+                0,
+                $_POST["Descripcion"],
+                $_POST["Cantidad"],
+                $_POST["Precio"],
+                0,
+                $_POST["IdProveedor"],
+                $_POST["Proveedor"],
+                $_POST["Email"],
+                $_POST["credito"],
+                0,
+                $_FILES,
+            ));
+            echo 0;
+            }
+            }
+            
+            }
+    }
+}
+public function detalles(){
+    $user = Session::getSession("User");
+    if (null!=$user) {//verificamos si se esta logueado
+        if("Admin"==$user["Roles"]){
+        $this->view->render($this,"detalles",null);
+        }else{
+header("Location:" .URL."Principal/principal");
+        }
+    }else{
+header("Location:".URL);
+        }
+}
 }
 ?>

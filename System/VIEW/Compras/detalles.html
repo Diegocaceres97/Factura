@@ -1,0 +1,89 @@
+<div class="container2">
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <center>
+                    <h5 class="panel-tittle">Detalles de compra</h5>
+                </center>
+            </div>
+            <div class="row">
+                <div class="col s12 m12">
+                    <div id="ImprimirCompra">
+                        <div class="card">
+                            <div class="card-content black-text">
+                                <center>
+                                    <span id="dProveedor" class="card-tittle"></span>
+                                </center>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Producto
+                                            </th>
+                                            <th>
+                                                Precio
+                                            </th>
+                                            <th>
+                                                Cantidad
+                                            </th>
+ 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span id="dProducto"></span>
+                                            </td>
+                                            <td>
+                                                <span id="dPrecio"></span>
+                                            </td>
+                                            <td>
+                                                <span id="dCantidad"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Credito
+                                            </th>
+                                            <th>
+                                                Importe
+                                            </th>
+                                            <th>
+                                                Fecha
+                                            </th>
+ 
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span id="dCredito"></span>
+                                            </td>
+                                            <td>
+                                                <span id="dImporte"></span>
+                                            </td>
+                                            <td>
+                                                <span id="dFecha"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <label id="dMessage" class="red-text text-darken-4"></label>
+                    <div class="row">
+                        <div class="input-field col s4">
+<a class="waves-effect waves-light orange darken-2 btn-small" onclick="printThisDiv('ImprimirCompra');">Imprimir</a>
+                        </div>
+                        <div class="input-field col s4">
+                            <button id="comprar" class="waves-effect waves-light darken-2 btn-small grey darken-3">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
