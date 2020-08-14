@@ -1,8 +1,7 @@
 <?php
 class Clientes extends Controllers
 {
-    private $archivo = null;
-    private $tipo = null;
+  
     function __construct(){
         parent::__construct();
     }

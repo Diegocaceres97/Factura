@@ -50,7 +50,8 @@ data.append('file',file);
         processData: false,
         type: 'POST',
         success: (response) => {
-          if (response==0) {
+         try{
+           let item = JSON.parse(response);
             localStorage.setItem("Compra", JSON.stringify(new Array(
               $('#Descripcion').val(),
               $('#Cantidad').val(),
@@ -58,10 +59,12 @@ data.append('file',file);
               this.data.Proveedor,
               $('#Proveedor').val(),
               this.data.Email,
-              credito
+              credito,
+              item.Codigo,
+              item.results
             )));
             window.location.href = URL + "Compras/detalles";
-          } else {
+          } catch(error) {
             document.getElementById("messageCompras").innerHTML=response;
           }
         }
@@ -79,14 +82,29 @@ data.append('file',file);
         document.getElementById("dProducto").innerHTML=item[0];
         document.getElementById("dPrecio").innerHTML="$" + numberDecimales(item[2]);
         document.getElementById("dCantidad").innerHTML=item[1];
+        var importe =item[2] * item[1];
         if (item[6]) {
           document.getElementById("dCredito").innerHTML = '<span class="green-text text-darken-3">Activo</span>';
+          var deuda = importe + parseFloat(item[8].Deuda.replace("$", "").replace(",",""));
+          $("#deuda").html("$"+numberDecimales(deuda));//numberdecimal convierte a decimal
+          $("#fechadeuda").html(getFechas());
+          $("#pago").html(item[8].Pago);
+          $("#fechapago").html(item[8].FechaPago);
+          $("#ticket").html(item[8].Ticket);
+          $("#proveedorNombre").html("Proveedor: " +item[3]);
         } else {
           document.getElementById("dCredito").innerHTML = '<span class="deep-orange-text text-darken-4">No disponible</span>';
         }
-        var importe =item[2] * item[1];
+        
         document.getElementById("dImporte").innerHTML = "$" + numberDecimales(importe);
         document.getElementById("dFecha").innerHTML = getFechas();
+        document.getElementById("imageDetalles").innerHTML = [
+          '<img class="responsive-img" src="',
+          URL + FOTOS + "Compras/" + item[7] + ".png",
+          '"title="',
+          escape(item[7]),
+          '"/>',
+        ].join("");
       }
       Comprar(){
         $.post(

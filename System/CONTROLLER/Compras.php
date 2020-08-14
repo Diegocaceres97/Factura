@@ -83,8 +83,12 @@ class Compras extends Controllers
             if (empty($_POST["Precio"])) {
                 echo "El campo Precio es obligatorio";
             } else {
-            Session::setSession("Compra",array(
-                0,
+               $archivo = null;
+               $tipo = null;
+                $Codigo = $this->model->getCodigo("compras",$_POST["Email"],);//generamos el codigo (que es un ticket aleatorio)
+                $Proveedor = $this->model->getProveedor($_POST["IdProveedor"],$_POST["Email"]); //pasos para generar el ticket provee cuando se usa credito (relleno)
+               // echo var_dump($Proveedor);
+                Session::setSession("Compra",array(
                 $_POST["Descripcion"],
                 $_POST["Cantidad"],
                 $_POST["Precio"],
@@ -93,9 +97,34 @@ class Compras extends Controllers
                 $_POST["Proveedor"],
                 $_POST["Email"],
                 $_POST["credito"],
-                0
+                0,
+                $Codigo
             ));
-            echo 0;
+            if (is_numeric($Codigo)) {
+               if (is_array($Proveedor)) {
+                if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
+                  $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
+                    $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
+                }
+                $this->image->cargar_imagenSC($tipo,$archivo,$Codigo,"Compras");
+                echo json_encode(array( //mandamos al front
+                    "Codigo" => $Codigo,
+                    "results" => $Proveedor
+                ));
+               } else {
+                   echo $Proveedor;
+               }
+               
+            } else {
+                echo $Codigo;
+            }
+            
+            if(isset($_FILES['file'])){//rectifiamos si file esta definido para saber si se a cargado una imagen
+                $tipo = $_FILES['file']["type"];//obtenemos el tipo de imagen
+                $archivo = $_FILES['file']["tmp_name"];//obtenemos los datos o info temporal de nuestros archivos
+            }
+            $this->image->cargar_imagenSC($tipo,$archivo,$Codigo,"Compras");
+            //echo $Codigo;
             }
             }
             
