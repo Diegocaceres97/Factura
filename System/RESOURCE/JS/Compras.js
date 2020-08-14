@@ -88,4 +88,13 @@ data.append('file',file);
         document.getElementById("dImporte").innerHTML = "$" + numberDecimales(importe);
         document.getElementById("dFecha").innerHTML = getFechas();
       }
+      Comprar(){
+        $.post(
+          URL + "Compras/comprar",
+          {},
+          (response)=>{
+            console.log(response);
+          }
+        );
+      }
 }

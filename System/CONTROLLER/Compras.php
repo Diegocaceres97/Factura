@@ -83,11 +83,6 @@ class Compras extends Controllers
             if (empty($_POST["Precio"])) {
                 echo "El campo Precio es obligatorio";
             } else {
-            if(isset($_FILES['file'])){
-                $_FILES= $_FILES["file"];
-            }else{
-                $_FILES=NULL;
-            }
             Session::setSession("Compra",array(
                 0,
                 $_POST["Descripcion"],
@@ -98,8 +93,7 @@ class Compras extends Controllers
                 $_POST["Proveedor"],
                 $_POST["Email"],
                 $_POST["credito"],
-                0,
-                $_FILES,
+                0
             ));
             echo 0;
             }
@@ -119,6 +113,17 @@ header("Location:" .URL."Principal/principal");
     }else{
 header("Location:".URL);
         }
+}
+public function comprar(){
+    $user = Session::getSession("User");
+    if (null!=$user) {//verificamos si se esta logueado
+        if("Admin"==$user["Roles"]){
+        $this->model->comprar(
+            $this->TCompras(array()),
+            $this->TCompras_temp(Session::getSession("Compra"))
+        );
+        }
+}
 }
 }
 ?>

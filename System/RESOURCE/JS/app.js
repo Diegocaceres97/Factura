@@ -120,6 +120,9 @@ compras.getCompraProveedores(page);
         $('#detallesCompras').click(function(){
             return compras.detallesCompras();
         });
+        $('#comprar').click(function(){
+            return compras.Comprar();
+        });
     })
 //Anonimo
 $().ready(()=>{

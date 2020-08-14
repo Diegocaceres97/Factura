@@ -14,5 +14,8 @@ class Compras_model extends Conexion{
                     //el porque de no colocar en el segundo clientes la c inicial en minuscula es pq llamamos
                     //al metodo pero como ya tiene el get, no es necesario volver a colocar
     }
+    public function comprar($model1,$model2){
+        echo var_dump($model2);
+    }
 }
 ?>

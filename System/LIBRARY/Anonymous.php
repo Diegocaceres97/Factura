@@ -120,5 +120,74 @@ function __construct($array){
         }
         };
 }
+public function TCompras(array $array){
+    return new class($array){
+        var $Descripcion;
+        var $Cantidad;
+        var $Precio;
+        var $Importe;
+        var $IdProveedor;
+        var $Proveedor;
+        var $Email;
+        var $IdUsuario;
+        var $Usuario;
+        var $Role;
+        var $Dia;
+        var $Mes;
+        var $Year;
+        var $Fecha;
+        var $Codigo;
+        var $Credito;
+        function __construct($array){
+            if(0 <count($array)){
+                $this->Descripcion = $array[0];
+                $this->Cantidad = $array[1];
+                $this->Precio = $array[2];
+                $this->Importe = $array[3];
+                $this->IdProveedor = $array[4];
+                $this->Proveedor = $array[5];
+                $this->Email = $array[6];
+                $this->IdUsuario = $array[7];
+                $this->Usuario = $array[8];
+                $this->Role = $array[9];
+                $this->Dia = $array[10];
+                $this->Mes = $array[11];
+                $this->Year = $array[12];
+                $this->Fecha = $array[13];
+                $this->Codigo = $array[14];
+                $this->Credito = $array[15];
+            }
+        }
+    };
+}
+public function TCompras_temp(array $array){
+return new class($array){
+    public $ID;
+    public $Descripcion;
+    public $Cantidad;
+    public $Precio;
+    public $Importe;
+    public $IdProveedor;
+    public $Proveedor;
+    public $Email;
+    public $Credito;
+    public $Fecha;
+    public $Codigo; 
+    function __construct($array){
+        if(0 <count($array)){
+            $this->ID = $array[0];
+            $this->Descripcion = $array[1];
+            $this->Cantidad = $array[2];
+            $this->Precio = $array[3];
+            $this->Importe = $array[4];
+            $this->IdProveedor = $array[5];
+            $this->Proveedor = $array[6];
+            $this->Email = $array[7];
+            $this->Credito = $array[8];
+            $this->Fecha = $array[9];
+            $this->Codigo = $array[10];
+        }} 
+};
+}
 }
 ?>
