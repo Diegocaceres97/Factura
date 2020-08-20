@@ -1,7 +1,7 @@
 <?php
 class QueryManager
 {
-    private $pdo;
+    public $pdo;
     function __construct($USER, $PASS, $DB){
         try {
             $this -> pdo = new PDO('mysql:host=localhost;dbname='.$DB.';charset=utf8',$USER, $PASS,

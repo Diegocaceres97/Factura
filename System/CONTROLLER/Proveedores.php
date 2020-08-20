@@ -250,7 +250,7 @@ echo 1;
                   "$".number_format($deuda),
                   $fechaDeuda,        
                   "$".$pago,
-                  date("d-m-Y"),
+                  date("d/m/Y"),
                   $array["Ticket"],
                   $array["IdProveedor"]
               );
@@ -259,7 +259,7 @@ echo 1;
                   "$".number_format($deuda),
                   $fechaDeuda,
                   "$".$pago,
-                  date("d-m-Y"),
+                  date("d/m/Y"),
                   $array["Ticket"],
                   $array["Email"]
               );

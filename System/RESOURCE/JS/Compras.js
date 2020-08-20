@@ -92,8 +92,12 @@ data.append('file',file);
           $("#fechapago").html(item[8].FechaPago);
           $("#ticket").html(item[8].Ticket);
           $("#proveedorNombre").html("Proveedor: " +item[3]);
+          document.getElementById('tickets').style.display = 'block';
+          document.getElementById('btnTicket').style.display = 'block';
         } else {
           document.getElementById("dCredito").innerHTML = '<span class="deep-orange-text text-darken-4">No disponible</span>';
+          document.getElementById('tickets').style.display = 'none';
+          document.getElementById('btnTicket').style.display = 'none';
         }
         
         document.getElementById("dImporte").innerHTML = "$" + numberDecimales(importe);
