@@ -115,6 +115,11 @@ data.append('file',file);
           URL + "Compras/comprar",
           {},
           (response)=>{
+            if (response == 0) {
+              window.location.href = URL + "Compras/compras";
+            } else {
+              document.getElementById("detallesMessage").innerHTML = response;
+            }
             console.log(response);
           }
         );

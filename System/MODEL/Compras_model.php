@@ -100,7 +100,7 @@ $FechaDeuda = $proveedor["FechaDeuda"];
 $sth = $this->db->pdo->prepare($query4);//con PDO preparamos la query para la inserccion
 $sth->execute($data);
  $this->db->pdo->commit();
-        
+      return 0;  
     } catch (\Throwable $e) {
             $this->db->pdo->rollBack(); //revertimos nuestra BD al estado anterior
             return $e->getMessage();

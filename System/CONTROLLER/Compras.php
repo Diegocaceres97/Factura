@@ -147,7 +147,7 @@ public function comprar(){
     $user = Session::getSession("User");
     if (null!=$user) {//verificamos si se esta logueado
         if("Admin"==$user["Roles"]){
-        $this->model->comprar(
+      echo  $this->model->comprar(
             $this->TCompras(array()),
             $this->TCompras_temp(Session::getSession("Compra"))
         );
