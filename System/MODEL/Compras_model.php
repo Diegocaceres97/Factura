@@ -137,5 +137,12 @@ $sth->execute($data);
             }
             
     }
+    public function getCompras($filter,$page,$model){
+        $where = " WHERE Descripcion LIKE :Descripcion";
+        $array = array(
+            'Descripcion' => '%'.$filter.'%'//aqui filtraremos el dato dependiendo el dato que pasen
+                    );
+                    return $model->paginador("*","compras","Compras",$page,$where,$array);
+    }
 }
 ?>

@@ -7,13 +7,47 @@
 <form asp-action="Index" asp-controller="Compras" asp-area="Compras" method="get">
   <div class="row">
     <div class="input-field col s6">
-<input placeholder="Buscar producto" type="text">
+<input placeholder="Buscar producto" type="text" id="searchCompras">
     </div>
   </div>
 </form>
         </div>
         <a href="compras" class="waves-effect waves-light btn-small">Comprar</a>
+        <a class="waves-effect waves-light btn-small grey darken-3">Export</a>
       </div>
+      <ul class="collapsible">
+<li>
+  <div class="collapsible-header">
+  <img src="../RESOURCE/IMAGES/Iconos/clientes2.png" class="responsive">Compras
+</div>
+<div class="collapsible-body">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>
+        Imagen
+      </th>
+      <th>
+        Descripcion
+      </th>
+      <th>
+        Precio
+      </th>
+      <th>
+        Opciones
+      </th>
+    </tr>
+  </thead>
+  <tbody class="dataFilterCompras">
+
+  </tbody>
+  </table>
+  <div id="paginadorCompras">
+
+  </div>
+</div>
+</li>
+      </ul>
     </div>
   </div>
 </div>

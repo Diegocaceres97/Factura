@@ -124,4 +124,21 @@ data.append('file',file);
           }
         );
       }
+      getCompras(page){
+        $.post(
+          URL + "Compras/getCompras",
+          { search: $("#searchCompras").val(), page: page },
+          (response) => {
+            //console.log(response);
+            try {
+              let item = JSON.parse(response);
+              $(".dataFilterCompras").html(item.dataFilter); //nombre de las propiedades item de Clientes.php obtenidas en la funcion
+              $("#paginadorCompras").html(item.paginador);
+              console.log(item.dataFilter);
+            } catch (error) {
+              $("#paginadorCompras").html(response);
+            }
+          }
+        );
+      }
 }

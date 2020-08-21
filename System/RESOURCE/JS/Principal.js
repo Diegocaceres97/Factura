@@ -86,6 +86,9 @@ class Principal {
             case "Comprasdetalles":
             new Compras().detalles();
             break;
+            case "Comprasproductos":
+            new Compras().getCompras(1);
+            break;
       }
    
   }
