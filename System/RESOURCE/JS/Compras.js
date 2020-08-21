@@ -80,10 +80,14 @@ data.append('file',file);
         var item = JSON.parse(localStorage.getItem("Compra"));
         document.getElementById("dProveedor").innerHTML="Proveedor: " +item[3];
         document.getElementById("dProducto").innerHTML=item[0];
-        document.getElementById("dPrecio").innerHTML="$" + numberDecimales(item[2]);
+        document.getElementById("dPrecio").innerHTML="$" + numberDecimales(item[2].replace("$",""));
         document.getElementById("dCantidad").innerHTML=item[1];
-        var importe =item[2] * item[1];
-        if (item[6]) {
+        var importe =item[2].replace("$","").replace(",","");
+        var percent = (10/10);
+var importe = percent*importe;
+importe = (importe.toFixed(2))*item[1];
+        var precio = item[2].replace("$","").replace(",","");
+        if (item[6] && item[8]!=null) {
           document.getElementById("dCredito").innerHTML = '<span class="green-text text-darken-3">Activo</span>';
           var deuda = importe + parseFloat(item[8].Deuda.replace("$", "").replace(",",""));
           $("#deuda").html("$"+numberDecimales(deuda));//numberdecimal convierte a decimal
@@ -99,7 +103,10 @@ data.append('file',file);
           document.getElementById('tickets').style.display = 'none';
           document.getElementById('btnTicket').style.display = 'none';
         }
-        
+        if(item[8] == null){
+          document.getElementById('tickets').style.display = 'none';
+          document.getElementById('comprar').style.display = 'none';
+        }
         document.getElementById("dImporte").innerHTML = "$" + numberDecimales(importe);
         document.getElementById("dFecha").innerHTML = getFechas();
         document.getElementById("imageDetalles").innerHTML = [
@@ -134,10 +141,34 @@ data.append('file',file);
               let item = JSON.parse(response);
               $(".dataFilterCompras").html(item.dataFilter); //nombre de las propiedades item de Clientes.php obtenidas en la funcion
               $("#paginadorCompras").html(item.paginador);
-              console.log(item.dataFilter);
+              //console.log(item.dataFilter);
             } catch (error) {
               $("#paginadorCompras").html(response);
             }
+          }
+        );
+      }
+      getCompra(data){
+        console.log(data);
+localStorage.setItem("Compra",JSON.stringify(new Array(
+  data.Descripcion,
+  data.Cantidad,
+  data.Precio,
+  data.Proveedor,
+  data.IdProveedor,
+  data.Email,
+  data.Credito,
+  data.Codigo,
+  null
+)));
+window.location.href = URL + "Compras/detalles";
+      }
+      exportarCompras(page){
+        $.post(
+          URL + "Compras/exportarCompras",
+          { search: $("#searchCompras").val(), page: page },
+          (response) => {
+            //console.log(response);
           }
         );
       }

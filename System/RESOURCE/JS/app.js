@@ -109,6 +109,7 @@ $(function(){//capturamos la funcion del evento Usuarios.html al momento de regi
         proveedores.exportarExcel(pageTicketsp,1);
     }
     //Compras de productos
+    var pageCompras = 0;
     var compras = new Compras();
     var imageCompras = (evt)=>{
         compras.archivo(evt, "imageCompras");
@@ -123,7 +124,14 @@ compras.getCompraProveedores(page);
         $('#comprar').click(function(){
             return compras.Comprar();
         });
-    })
+    });
+    var getCompras = (page) =>{
+        pageCompras = page;
+        compras.getCompras(page);
+    }
+    var exportarCompras=()=>{
+compras.exportarCompras(pageCompras);
+    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL

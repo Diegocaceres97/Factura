@@ -7,13 +7,13 @@
 <form asp-action="Index" asp-controller="Compras" asp-area="Compras" method="get">
   <div class="row">
     <div class="input-field col s6">
-<input placeholder="Buscar producto" type="text" id="searchCompras">
+<input placeholder="Buscar producto" type="text" id="searchCompras" onkeyup="getCompras(1);">
     </div>
   </div>
 </form>
         </div>
         <a href="compras" class="waves-effect waves-light btn-small">Comprar</a>
-        <a class="waves-effect waves-light btn-small grey darken-3">Export</a>
+        <a class="waves-effect waves-light btn-small grey darken-3" onclick="exportarCompras();">Export</a>
       </div>
       <ul class="collapsible">
 <li>

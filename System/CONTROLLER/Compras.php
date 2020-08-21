@@ -178,7 +178,7 @@ public function getCompras(){
                 "<td>".$value["Descripcion"]."</td>".
                 "<td>".$value["Precio"]."</td>".
                 "<td>".
-                "<a onclick='compras.getCompra(".$dataCompra .")' class='btn-small'>Registrar</a>".               
+                "<a onclick='compras.getCompra(".$dataCompra .")' class='btn-small'>Detalles</a>".               
                 "</td>". 
                 "</tr>";
                 $count++;
@@ -192,6 +192,18 @@ public function getCompras(){
             echo $data;
         }
         
+    }
+}
+public function exportarCompras(){
+    $user = Session::getSession("User");//verificamos que sea un usuario logeado como metodo de seguridad
+    if(null != $user){
+        $data = $this->model->getCompras($_POST["search"],$_POST["page"],$this->page);
+    if (is_array($data)) {
+        $this->export->exportarExcel($data["results"],"Compras.xls","Compras");
+    } else {
+        return $data;
+    }
+    
     }
 }
 }
