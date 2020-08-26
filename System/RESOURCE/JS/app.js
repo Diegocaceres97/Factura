@@ -132,6 +132,11 @@ compras.getCompraProveedores(page);
     var exportarCompras=()=>{
 compras.exportarCompras(pageCompras);
     }
+    /*Registro de productos*/
+    var productos = new Productos();
+    var getCompraTempo = (page)=>{
+        productos.getCompras(page);
+    }
 //Anonimo
 $().ready(()=>{
     let URLactual = window.location.pathname;//variable local con la que capturaremos lo que pase por el URL

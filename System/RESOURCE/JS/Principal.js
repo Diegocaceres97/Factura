@@ -89,7 +89,18 @@ class Principal {
             case "Comprasproductos":
             new Compras().getCompras(1);
             break;
-      }
+            case "Productosproductos":
+              new Productos().getCompras(1);
+              break;
+              case "Productosregistrar":
+                var IdTemp = getParameterByName('IdTemp');
+                if (IdTemp !=null && IdTemp !="") {
+                  new Productos().dataProducto(IdTemp);
+                } else {
+                  
+                }
+              break;
+          }
    
   }
 }

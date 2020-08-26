@@ -106,9 +106,11 @@ importe = (importe.toFixed(2))*item[1];
         if(item[8] == null){
           document.getElementById('tickets').style.display = 'none';
           document.getElementById('comprar').style.display = 'none';
+          document.getElementById('dFecha').innerHTML=item[9];
+        }else{
+          document.getElementById('dFecha').innerHTML=getFechas();
         }
         document.getElementById("dImporte").innerHTML = "$" + numberDecimales(importe);
-        document.getElementById("dFecha").innerHTML = getFechas();
         document.getElementById("imageDetalles").innerHTML = [
           '<img class="responsive-img" src="',
           URL + FOTOS + "Compras/" + item[7] + ".png",
@@ -159,7 +161,8 @@ localStorage.setItem("Compra",JSON.stringify(new Array(
   data.Email,
   data.Credito,
   data.Codigo,
-  null
+  null,
+  data.Fecha
 )));
 window.location.href = URL + "Compras/detalles";
       }

@@ -141,6 +141,15 @@ padding: 1px;
    .container6 .row .row{
     margin-left: 150px;
    }
+   .container6 #arreglar{
+margin-top: -420px;
+margin-left: 150px;
+width: 50vw;
+   }
+   .container6 #imprimirCompra .card{
+       margin-top: 200px;
+       width: 70vw;
+   }
     .otro{
         width: 75%;
         margin: -300px 702px 0px;
@@ -155,7 +164,7 @@ padding: 1px;
         margin-left: -44px;
     }
     #reporT{
-margin-left: 20px;
+margin-left: 70px;
     }
     .container6 .row .card {
         margin-left: 10px;
@@ -165,8 +174,12 @@ margin-left: 20px;
     .container6 .card-action #boton{
         margin-top: 35px;
      }
-    
-     
+    .container2 .row{
+        margin-left: -70px;
+    }
+     #pagoM{
+         margin-left: 60px;
+     }
 }
 .row{
     margin-bottom: 0px;

@@ -21,7 +21,7 @@ class Compras_model extends Conexion{
         try {
             $this->db->pdo->beginTransaction();
             $user = Session::getSession("User");
-        $importe = "$".number_format($model2->Precio * $model2 ->Cantidad);
+        $importe = "$".number_format($model2->Precio * $model2->Cantidad);
         $model1->Descripcion = $model2->Descripcion; //invocamos propiedades y se la asignamos (inicilizandolos)
         $model1->Cantidad = $model2->Cantidad;
         $model1->Precio ="$".number_format($model2->Precio);
