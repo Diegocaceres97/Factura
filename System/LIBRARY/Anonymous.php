@@ -187,5 +187,35 @@ return new class($array){
         }} 
 };
 }
+public function TProductos(array $array){
+    return new class($array){
+    public $Codigo;
+    public $Descripcion;
+    public $Precio;
+    public $Departamento;
+    public $Categoria;
+    public $Descuento;
+    public $Dia;
+    public $Mes;
+    public $Year;
+    public $Fecha; 
+    public $Compra; 
+    public $Image; 
+function __construct($array){
+    $this->Codigo = $array[0];
+    $this->Descripcion = $array[1];
+    $this->Precio = $array[2];
+    $this->Departamento = $array[3];
+    $this->Categoria = $array[4];
+    $this->Descuento = $array[5];
+    $this->Dia = $array[6];
+    $this->Mes = $array[7];
+    $this->Year = $array[8];
+    $this->Fecha = $array[9]; 
+    $this->Compra = $array[10]; 
+    $this->Image = $array[11];  
+}    
+};
+}
 }
 ?>

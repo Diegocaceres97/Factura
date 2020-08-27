@@ -1,5 +1,5 @@
 <div class="container6">
-    <form method="post">
+    <form method="post" id="validate" class="registrarProducto">
         <div class="modal-content">
             <center>
             <h5>Registro de productos</h5>
@@ -40,8 +40,11 @@
                         <input type="text" name="Categoria" id="Categoria" placeholder="Categoria" required>
                         <label for="Categoria" class="error">Categoria</label>
                             </div>
+                            <div class="hidenn">
+                                <input type="text" required>
+                            </div>
                             <div class="input-field col s4">
-<button type="submit" class="waves-effect waves-light btn-small grey darken-3">Registrar</button>
+<button type="submit" onclick="productos.Registrar();" class="waves-effect waves-light btn-small grey darken-3">Registrar</button>
                             </div>
     </div>
     <label id="messageProductos" class="red-text text-darken-4"></label>

@@ -75,7 +75,49 @@ public function getCompras(){
             }
         }
     }
-
+public function registrarProducto(){
+    $user = Session::getSession("User");
+    if(null != $user){
+        if("Admin"==$user["Roles"]){
+        if(empty($_POST["Descripcion"])){
+            echo "el campo Descripcion es obligatorio";
+        }else{
+            if(empty($_POST["Precio"])){
+                echo "el campo Precio es obligatorio";
+            }else{
+                if(empty($_POST["Departamento"])){
+                    echo "el campo Departamento es obligatorio";
+                }else{
+                    if(empty($_POST["Categoria"])){
+                        echo "el campo Categoria es obligatorio";
+                    }else{
+                        $codigoCompra = Session::getSession("compras_temp");
+                        $img = file_get_contents(RQ."images/fotos/Compras/".$codigoCompra.".png");//con este metodo obtenemos una imagen dependiendo del directorio
+                    //le proporcionamos la informacion a la clase anonima para poder manejarla de esa manera
+                    $model = $this->TProductos(array(
+                        $this->model->getCodigo(),//Obtenemos el codigo del producto
+                        $_POST["Descripcion"],
+                        "$".number_format($_POST["Precio"]),
+                        $_POST["Departamento"],
+                        $_POST["Categoria"],
+                        "%0.00",
+                        date("d"),
+                        date("m"),
+                        date("y"),
+                        date("d/m/y"),
+                        $codigoCompra,
+                        base64_encode($img)//convertimos a base64 para poder almacenar nuestra imagen en la BD
+                    ));
+                    echo var_dump($model);
+                    } 
+                }
+            }
+        }
+        }else{
+echo "no tiene autorizacion";
+        }
+}
+}
 }
 
 ?>

@@ -24,35 +24,6 @@ class Productos{
             URL + "Productos/getProducto",
             { IdTemp: IdTemp },
             (response) => {
-         /*     switch(response){
-                case "1":
-                  window.location.href = URL;
-                  break;
-                  case "2":
-                    window.location.href = URL + "Proveedores/proveedores";
-                    break;
-                  default:
-                    try {
-                      let item =JSON.parse(response);
-                      this.Funcion=1;
-                      this.IdProveedor = item.results[0].IdProveedor;
-                      this.Imagen = item.results[0].Email;
-                      document.getElementById("fotoProveedor").innerHTML = [
-                        '<img class="responsive-img " src="',
-                        URL + FOTOS + "proveedores/" + item.results[0].Email+".png",
-                        '" title="',
-                        escape(item.results[0].Email),
-                        '"/>',
-                      ].join("");
-                      document.getElementById("proveedor").value = item.results[0].Proveedor; //dejaremos las entradas en blanco para cuando acabemos de resgistrar
-                      document.getElementById("telefono").value = item.results[0].Telefono;
-                      document.getElementById("email").value = item.results[0].Email;
-                      document.getElementById("direccion").value = item.results[0].Direccion;
-                    } catch (error) {
-                      $('MessageProveedor').html("MAL");
-                    }
-                    break;
-              }*/
               try {
                 let item =JSON.parse(response);
                 document.getElementById("productoCompraImg").innerHTML = [
@@ -76,11 +47,26 @@ class Productos{
                       }
                       document.getElementById("productImporte").innerHTML = item[0].Importe;
                       document.getElementById("productFecha").innerHTML = item[0].Fecha;
+                      $(".barcode").barcode(item[1],"code128");
               } catch (error) {
+                $('#messageProductos').html(response);
               
               }
               
             }
             );
+    }
+    Registrar(){
+     $.post(
+       "registrarProducto",
+       $('.registrarProducto').serialize(),
+       (response)=>{
+         if (response==1) {
+           console.log(response);
+         } else {
+          $('#messageProductos').html(response);
+         }
+       }
+     )
     }
 }

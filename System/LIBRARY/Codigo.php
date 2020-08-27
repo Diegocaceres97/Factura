@@ -58,5 +58,32 @@ switch ($table) {
 }
 
 }
+public static function getCodeBarra($db,$table){
+    $count = 0;
+    $Codigo = null;
+    $numCodi = 0;
+  
+            do{
+                $arrayCodigo=range(1,rand(1,10));
+                foreach($arrayCodigo as $val){
+                    $numCodi .= $val;
+                }
+                $where = " WHERE Codigo = :Codigo";
+                $response = $db->select1("Codigo","compras_temp",$where,array('Codigo' => (string)$numCodi));
+                if (is_array($response)) {
+                    $response = $response['results'];
+                    if (0 < count($response)) {
+                        $count = count($response);
+                    }else{
+                        $count=0;
+                        return $numCodi;
+                    }
+                } else {
+                $count=0;
+                    return $response;
+                }
+                    }while(0 < $count); 
+                }
+            
 }
 ?>

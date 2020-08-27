@@ -18,10 +18,20 @@ public function getProducto($idTemp){
                 );
                 $Producto = $this->db->select1("*","compras_temp",$where,$array);
 if(is_array($Producto)){
-    return $Producto["results"];
+    $data = $Producto["results"];
+    $codigo = Codigo::getCodeBarra($this->db,"productos");
+    if (is_numeric($codigo)) {
+        Session::setSession("compras_temp",$data[0]["Codigo"]);//almacenamos el codigo de barra (compra) del producto
+        return array($data[0],$codigo);
+    }else{
+        return $codigo;
+    }
 }else{
     return $Producto;
 }                
+}
+public function getCodigo(){
+    return Codigo::getCodeBarra($this->db,"productos");
 }
 }
 ?>
