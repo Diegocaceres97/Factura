@@ -37,7 +37,7 @@ public function getCompras(){
                 </ul>
                 </td>".
                 "<td>".$value["Descripcion"]."</td>".
-                "<td>".$value["Precio"]."</td>".
+                "<td>$".number_format($value["Precio"], 0,"",'.')."</td>".
                 "<td>".
                 "<a href='".URL."/Productos/registrar?IdTemp=".$value["IdTemp"]."' class='btn modal-trigger'>Registrar</a>".               
                 "</td>". 
@@ -91,24 +91,43 @@ public function registrarProducto(){
                     if(empty($_POST["Categoria"])){
                         echo "el campo Categoria es obligatorio";
                     }else{
-                        $codigoCompra = Session::getSession("compras_temp");
-                        $img = file_get_contents(RQ."images/fotos/Compras/".$codigoCompra.".png");//con este metodo obtenemos una imagen dependiendo del directorio
-                    //le proporcionamos la informacion a la clase anonima para poder manejarla de esa manera
-                    $model = $this->TProductos(array(
-                        $this->model->getCodigo(),//Obtenemos el codigo del producto
-                        $_POST["Descripcion"],
-                        "$".number_format($_POST["Precio"]),
-                        $_POST["Departamento"],
-                        $_POST["Categoria"],
-                        "%0.00",
-                        date("d"),
-                        date("m"),
-                        date("y"),
-                        date("d/m/y"),
-                        $codigoCompra,
-                        base64_encode($img)//convertimos a base64 para poder almacenar nuestra imagen en la BD
-                    ));
-                    echo var_dump($model);
+                        $compras_temp = Session::getSession("compras_temp");
+                        $precio1 = (float)str_replace("$","",str_replace(",","",
+                        $compras_temp["Precio"]));
+                        $precio2=(float)$_POST["Precio"];
+                        
+                        if($precio2 > $precio1){
+                            $codigoBarra = $this->model->getCodigo();
+                            $img = file_get_contents(RQ."images/fotos/Compras/".$compras_temp["Codigo"].".png");//con este metodo obtenemos una imagen dependiendo del directorio
+                            //le proporcionamos la informacion a la clase anonima para poder manejarla de esa manera
+                            $model1 = $this->TProductos(array(
+                                $codigoBarra,//Obtenemos el codigo del producto
+                                $_POST["Descripcion"],
+                                "$".number_format($precio2),
+                                $_POST["Departamento"],
+                                $_POST["Categoria"],
+                                "%0.00",
+                                date("d"),
+                                date("m"),
+                                date("y"),
+                                date("d/m/y"),
+                                $compras_temp["Codigo"],
+                                base64_encode($img)//convertimos a base64 para poder almacenar nuestra imagen en la BD
+                            ));
+                            $model2 = $this->TBodega(array(
+                                $codigoBarra,
+                                $compras_temp["Cantidad"],
+                                date("d"),
+                                date("m"),
+                                date("Y"),
+                                date("d/m/Y")
+                            ));
+                        //    echo var_dump($model);
+                    echo $this->model->registrarProducto($model1,$model2);                        }else{
+                            echo "el precio debe ser mayor al precio de compra";
+                        }
+                        }
+                       
                     } 
                 }
             }
@@ -118,6 +137,6 @@ echo "no tiene autorizacion";
         }
 }
 }
-}
+
 
 ?>

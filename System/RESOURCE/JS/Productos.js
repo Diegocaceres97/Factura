@@ -33,10 +33,12 @@ class Productos{
                   escape(item[0].Codigo),
                   '"/>',
                 ].join("");
+               
+var importe = this.humanizeNumber(item[0].Precio);
                 document.getElementById("Descripcion").value = item[0].Descripcion; //dejaremos las entradas en blanco para cuando acabemos de resgistrar
                       document.getElementById("productProveedor").value = item[0].Proveedor;
                       document.getElementById("productDescrip").innerHTML = item[0].Descripcion;
-                      document.getElementById("productPrecio").innerHTML = item[0].Precio;
+                      document.getElementById("productPrecio").innerHTML = `$${importe}`;
                       document.getElementById("productCantidad").innerHTML = item[0].Cantidad;
                       if(item[0].Credito){
                         document.getElementById("productCredito").innerHTML 
@@ -45,6 +47,7 @@ class Productos{
                         document.getElementById("productCredito").innerHTML 
                         = "<span class='deep-orange-text text-darken-4'>No disponible</span>";
                       }
+                   
                       document.getElementById("productImporte").innerHTML = item[0].Importe;
                       document.getElementById("productFecha").innerHTML = item[0].Fecha;
                       $(".barcode").barcode(item[1],"code128");
@@ -61,12 +64,22 @@ class Productos{
        "registrarProducto",
        $('.registrarProducto').serialize(),
        (response)=>{
-         if (response==1) {
-           console.log(response);
+         if (response==0) {
+          window.location.href = URL + "Productos/productos";
+
          } else {
           $('#messageProductos').html(response);
          }
        }
      )
+    }
+   humanizeNumber(n) { //funcion para separar miles
+      n = n.toString()
+      while (true) {
+        var n2 = n.replace(/(\d)(\d{3})($|,|\.)/g, '$1,$2$3')
+        if (n == n2) break
+        n = n2
+      }
+      return n
     }
 }

@@ -217,5 +217,23 @@ function __construct($array){
 }    
 };
 }
+public function TBodega(array $array){
+return new class($array){
+public $Codigo;
+public $Existencia;
+public $Dia;
+public $Mes;
+public $Year;
+public $Fecha;
+function __construct($array){
+    $this->Codigo = $array[0];
+    $this->Existencia = $array[1];
+    $this->Dia = $array[2];
+    $this->Mes = $array[3];
+    $this->Year = $array[4];
+    $this->Fecha = $array[5];
+}
+};
+}
 }
 ?>
